@@ -61,7 +61,13 @@
 		    <artifactId>javax.servlet-api</artifactId>
 		    <version>4.0.0-b01</version>
 		</dependency>
-  
+	  	<!-- https://mvnrepository.com/artifact/com.vaadin/vaadin -->
+	<dependency>
+	    <groupId>com.vaadin</groupId>
+	    <artifactId>vaadin</artifactId>
+	    <version>6.8.17</version>
+	</dependency>
+  	
   </dependencies>
   
   <build>

@@ -4,10 +4,12 @@ package com.rean.spring.hibernate.entities;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -22,6 +24,16 @@ public class Import {
 	private int imId;
 	private Date impDate;
 	private BigDecimal impAmount;
+	
+	@OneToOne(mappedBy="imported", cascade = CascadeType.ALL)
+	private ImportDetail importDetail;
+	
+	public ImportDetail getImportDetail() {
+		return importDetail;
+	}
+	public void setImportDetail(ImportDetail importDetail) {
+		this.importDetail = importDetail;
+	}
 	public int getImId() {
 		return imId;
 	}

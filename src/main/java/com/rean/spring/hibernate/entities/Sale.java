@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -22,6 +24,16 @@ public class Sale {
 	private Date saleDate;
 	private BigDecimal totalAmoount;
 	private int saleDetailId;
+	
+	@OneToOne(mappedBy="sale")
+	private SaleDetail saleDetail;
+	
+	public SaleDetail getSaleDetail() {
+		return saleDetail;
+	}
+	public void setSaleDetail(SaleDetail saleDetail) {
+		this.saleDetail = saleDetail;
+	}
 	public int getSaleId() {
 		return saleId;
 	}

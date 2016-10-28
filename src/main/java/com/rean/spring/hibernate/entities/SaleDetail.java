@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -22,6 +24,16 @@ public class SaleDetail {
 	private int proQty;
 	private String proComment;
 	private BigDecimal pro_unit_price;
+	
+	@OneToOne
+	@JoinColumn(name="saleId")
+	private Sale sale;
+	public Sale getSale() {
+		return sale;
+	}
+	public void setSale(Sale sale) {
+		this.sale = sale;
+	}
 	public int getSaleDetId() {
 		return saleDetId;
 	}

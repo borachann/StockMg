@@ -2,11 +2,13 @@ package com.rean.spring.hibernate.entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -21,9 +23,17 @@ public class Expense {
 	private int expId;
 	
 	@Column(name="description")
-	private String description;
-	
+	private String description;	
 	private Date expDate;
+	@OneToOne(mappedBy="expense", cascade = CascadeType.ALL)
+	private ExpenseDetail expenseDetail;
+	
+	public ExpenseDetail getExpenseDetail() {
+		return expenseDetail;
+	}
+	public void setExpenseDetail(ExpenseDetail expenseDetail) {
+		this.expenseDetail = expenseDetail;
+	}
 	public int getExpId() {
 		return expId;
 	}

@@ -38,7 +38,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter{
 	@Bean
 	public DataSource dataSource(){
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setUrl("jdbc:postgresql://localhost:5432/My_Server");
+		dataSource.setUrl("jdbc:postgresql://localhost:5432/Ravuth_Server");
 		dataSource.setDriverClassName("org.postgresql.Driver");
 		dataSource.setUsername("postgres");
 		dataSource.setPassword("postgres");

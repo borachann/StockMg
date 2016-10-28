@@ -1,10 +1,15 @@
 package com.rean.spring.hibernate.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -24,6 +29,9 @@ public class Customer {
 	
 	@Column(name="address")
 	private String Address;
+	
+	@OneToMany(mappedBy="customer", cascade=CascadeType.ALL)
+	private List<OwedCustomer> owedCustomer = new ArrayList<OwedCustomer>();
 
 	public int getCusId() {
 		return cusId;

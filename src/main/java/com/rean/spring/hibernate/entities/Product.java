@@ -2,7 +2,6 @@ package com.rean.spring.hibernate.entities;
 
 import java.math.BigDecimal;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,8 +30,19 @@ public class Product {
 	@JoinColumn(name="catId")
 	private Category category;
 	
-	private int unitId;
+	//private int unitId;
+	@ManyToOne
+	@JoinColumn(name="unitId")
+	private Unit unit;
 	
+	public Unit getUnit() {
+		return unit;
+	}
+
+	public void setUnit(Unit unit) {
+		this.unit = unit;
+	}
+
 	@Column
 	private BigDecimal proQty;
 	
@@ -120,11 +130,5 @@ public class Product {
 
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
-	}public int getUnitId() {
-		return unitId;
-	}
-
-	public void setUnitId(int unitId) {
-		this.unitId = unitId;
-	}
+	} 
 }
