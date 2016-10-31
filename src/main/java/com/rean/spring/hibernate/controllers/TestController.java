@@ -26,7 +26,7 @@ public class TestController {
 	@Autowired 
 	private CategoryService categoryService;
 	
-	@RequestMapping(value="/", method = RequestMethod.GET)
+	@RequestMapping(value="/test", method = RequestMethod.GET)
 	public String homePage(){
 		return "home";
 	}

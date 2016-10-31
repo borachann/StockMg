@@ -33,6 +33,14 @@ public class Category {
 	@OneToMany(mappedBy="category", cascade = CascadeType.ALL)
 	private List<Product> listOfProduct = new ArrayList<Product>();
 
+	public List<Product> getListOfProduct() {
+		return listOfProduct;
+	}
+
+	public void setListOfProduct(List<Product> listOfProduct) {
+		this.listOfProduct = listOfProduct;
+	}
+
 	public int getCatId() {
 		return catId;
 	}

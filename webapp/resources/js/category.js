@@ -1,5 +1,6 @@
+
 $(document).ready(function(){
-	
+	$("#sideBarCategory").addClass("active");
 	// add new category
    $("#btnCatAdd").click(function(){
 	   var json = {
