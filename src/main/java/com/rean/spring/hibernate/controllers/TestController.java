@@ -85,4 +85,8 @@ public class TestController {
 		return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/error")
+	public String getError(){
+		return "error/404";
+	}
 }
