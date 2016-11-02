@@ -21,6 +21,7 @@
 	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery-1.11.2.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery.form.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery.tmpl.min.js"></script>
 	<title>Dashboard Admin</title>
 </head>
 <body>

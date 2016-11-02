@@ -1,16 +1,31 @@
 
 $(document).ready(function(){
+	// List All Category
+	getAllCategroy();
+	
+	// add class for left side bar
 	$("#sideBarCategory").addClass("active");
+	
+	// pop up for add category
+	$("#catAddNew").click(function(){
+		$('#form_add_category').modal({
+			"backdrop" : "static"
+		});
+	});
+	
+	// btncancel to close the form add category pop up
+	$("#btn_cancel").click(function() {
+		$('#form_add_category').modal('hide');
+	});
+	
 	// add new category
    $("#btnCatAdd").click(function(){
 	   var json = {
 			   "catName" : $("#catName").val(),
 			   "status" : true
 	   }
-	   
-	   console.log(json);
 	   $.ajax({
-		  url : baseUrl + "/insertcategory",
+		  url : baseUrl + "/admin/categorymg/insertcategory",
 		  type: "POST",
 		  data: JSON.stringify(json),
 		  beforeSend: function(xhr) {
@@ -18,7 +33,12 @@ $(document).ready(function(){
               xhr.setRequestHeader("Content-Type", "application/json");
           },
           success: function(data) {
-        	  console.log(data);
+        	  if(data){
+        		  alert("បង្កើត ប្រភេទទំនិញថ្មី បានជោគជ័យ។");
+        		  $("#catName").val("");
+        	  }else{
+        		  alert("បង្កើត ប្រភេទទំនិញថ្មី មិនបានជោគជ័យ។");
+        	  }
           },
           error: function(data, status, er){
         	  console.log("error : " + data + " status : " + status + " er : " + er );
@@ -29,7 +49,7 @@ $(document).ready(function(){
    // delete category
    $("#btnCatDelete").click(function(){
 	   $.ajax({
-		  url : baseUrl + "/deletecategory/" + $("#catId").val(),
+		  url : baseUrl + "/admin/categorymg/deletecategory/" + $("#catId").val(),
 		  type: "GET",
 		  beforeSend: function(xhr){
 			  xhr.setRequestHeader("Accept", "application/json");
@@ -47,7 +67,7 @@ $(document).ready(function(){
    // search category
    $("#btnCatSearch").click(function(){
 	   $.ajax({
-		  url : baseUrl + "/searchcategory/" + $("#catId").val(),
+		  url : baseUrl + "/admin/categorymg/searchcategory/" + $("#catId").val(),
 		  type: "GET",
 		  beforeSend: function(xhr){
 			  xhr.setRequestHeader("Accept", "application/json");
@@ -69,7 +89,7 @@ $(document).ready(function(){
 			   "status" : false
 	   }
 	  $.ajax({
-		  url : baseUrl + "/updatacategory/" +  $("#catId").val(),
+		  url : baseUrl + "/admin/categorymg/updatacategory/" +  $("#catId").val(),
 		  type: "POST",
 		  data: JSON.stringify(json),
 		  beforeSend: function(xhr){
@@ -84,5 +104,17 @@ $(document).ready(function(){
 		  }
 	  }) 
    });
-   
+// list all category
+	function getAllCategroy(){
+		$.ajax({
+			url : baseUrl + "/admin/categorymg/listcategory",
+			type: "GET",
+			success: function(data) {
+				$("#tblCatListTem").tmpl(data.allCategory).appendTo("#tblCatList");
+	          },
+	          error: function(data, status, er){
+	        	  console.log("error : " + data + " status : " + status + " er : " + er );
+	          }
+		});
+	}
 });
