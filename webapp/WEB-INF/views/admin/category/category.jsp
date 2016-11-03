@@ -2,8 +2,16 @@
 <%@ include file="../includes/header.jsp" %>
 <%@ include file="../includes/sidebar.jsp" %>
 	<div class="row page-header">
-		<div class="col-md-6"><h3>ប្រភេទ ទំនិញ</h3></div>
-		<div class="col-md-6 text-right"><button class="btn btn-success" id="catAddNew">បង្កើតថ្មី</button></div>
+		<div class="col-md-6">
+			<h3>ប្រភេទ ទំនិញ</h3>
+		</div>
+		<div class="col-md-6">
+			<span for="schCatName" class="control-label col-lg-2">ស្វែងរក</span>
+			<div class="col-lg-10">
+				<input class=" form-control" id="schCatName" name="schCatName" type="text">
+			</div>
+			<button class="btn btn-success pull-right" id="catAddNew">បង្កើតថ្មី</button>
+		</div>
 	</div>
           <div class="table-responsive">
             <table class="table table-striped">
