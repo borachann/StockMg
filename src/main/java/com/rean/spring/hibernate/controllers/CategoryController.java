@@ -1,6 +1,7 @@
 package com.rean.spring.hibernate.controllers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rean.spring.hibernate.entities.Category;
+import com.rean.spring.hibernate.entities.Pagination;
 import com.rean.spring.hibernate.service.CategoryService;
 
 @Controller
@@ -27,12 +29,16 @@ public class CategoryController {
 	public String productAdmin(){
 		return "admin/category/category";
 	}
-	// Hibernate for selecting all category
+	// Hibernate for selecting all category return json
 		@RequestMapping(value="/listcategory", method = RequestMethod.GET)
 		@ResponseBody
-		public ResponseEntity<Map<String, Object>> listCategory(){
+		public ResponseEntity<Map<String, Object>> listCategory(Pagination pagination){
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("allCategory", categoryService.getAllCategory());
+			map.put("allCategory", categoryService.getAllCategory(pagination, true));
+			List<Category> totalRecord = categoryService.getAllCategory(pagination, false);
+			pagination.setTotalCount(Long.parseLong(totalRecord.size() + ""));
+			pagination.setTotalPages(pagination.totalPages());
+			map.put("pagination", pagination);
 			return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
 		}
 		

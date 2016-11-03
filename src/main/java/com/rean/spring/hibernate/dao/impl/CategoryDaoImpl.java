@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rean.spring.hibernate.dao.CategoryDao;
 import com.rean.spring.hibernate.entities.Category;
+import com.rean.spring.hibernate.entities.Pagination;
 
 @Repository
 public class CategoryDaoImpl implements CategoryDao{
@@ -23,19 +24,29 @@ public class CategoryDaoImpl implements CategoryDao{
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public List<Category> getAllCategory() {
+	public List<Category> getAllCategory(Pagination pagination, boolean isPagignation) {
 		
 	//createQuery
 		//return session.getCurrentSession().createQuery("from Category").list(); 
 		
 	//createCriteria
 		/*Criteria criteria = session.getCurrentSession().createCriteria(Category.class);
+		if(isPagignation){
+			criteria.setFirstResult(pagination.offset());
+			criteria.setMaxResults(pagination.getPerPage());
+		}
+		
 		criteria.addOrder(Order.desc("catName"));
 		List<Category> category = criteria.list();
-		return category;*/
 		
+		return category;
+		*/
 	//creaetSQLQuery
 		SQLQuery query = session.getCurrentSession().createSQLQuery("select * from category");
+		if(isPagignation){
+			query.setFirstResult(pagination.offset());
+			query.setMaxResults(pagination.getPerPage());
+		}
 		query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
 		List<Category> category = query.list();
 		return category;

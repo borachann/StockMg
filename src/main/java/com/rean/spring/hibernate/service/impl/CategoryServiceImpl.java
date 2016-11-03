@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rean.spring.hibernate.dao.CategoryDao;
 import com.rean.spring.hibernate.entities.Category;
+import com.rean.spring.hibernate.entities.Pagination;
 import com.rean.spring.hibernate.service.CategoryService;
 
 @Service
@@ -18,10 +19,10 @@ public class CategoryServiceImpl implements CategoryService{
 
 	@Override
 	@Transactional
-	public List<Category> getAllCategory() {
+	public List<Category> getAllCategory(Pagination pagination, boolean isPagination) {
 		// TODO Auto-generated method stub
 		
-		return categoryDao.getAllCategory();
+		return categoryDao.getAllCategory(pagination, isPagination);
 	}
 
 	@Override
