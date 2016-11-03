@@ -2,6 +2,7 @@
 $(document).ready(function(){
 	var check = true;
 	var b = true;
+	
 	// List All Category
 	getAllCategroy(1);
 	
@@ -135,7 +136,7 @@ $(document).ready(function(){
 			success: function(data) {
 				if(data.allCategory.length >0){
 					$("#tblCatList").html("");
-					setOrderList(data);
+					setOrderList(data, data.allCategory);
 					$("#tblCatListTem").tmpl(data.allCategory).appendTo("#tblCatList");
 				}else{
 	                $("tbody#CONTENTS").html('<tr>NO CONTENTS</tr>');
@@ -173,16 +174,18 @@ $(document).ready(function(){
 			getAllCategroy(currentPage);
 		});
 	};
-// sert order list #	
-	function setOrderList(value){
-		if (b) {
-			order = value.pagination.perPage * (value.pagination.currentPage - 1);
-			j = order + 1;
-			value["order"] = j;
-			b = false;
-		} else
-			value["order"] = ++j;
-		console.log(value);
+// set order list #	
+	function setOrderList(data,value){
+		for(i=0; i<value.length; i++){
+			if (b) {
+				order = data.pagination.perPage * (data.pagination.currentPage - 1);
+				j = order + 1;
+				value[i]["order"] = j;
+				b = false;
+			} else
+				value[i]["order"] = ++j;
+			}
+		b = true;
 	}
 });
 
