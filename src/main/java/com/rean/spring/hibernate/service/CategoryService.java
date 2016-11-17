@@ -7,7 +7,7 @@ import com.rean.spring.hibernate.entities.Pagination;
 
 public interface CategoryService {
 
-	public List<Category> getAllCategory(Pagination pagination, boolean isPagination);
+	public List<Category> getAllCategory(Pagination pagination, String schCatName, boolean isPagination);
 	public boolean insertCategory(Category category);
 	public boolean deleteCategory(int catId);
 	public boolean updateCategory(Category category, int catId);

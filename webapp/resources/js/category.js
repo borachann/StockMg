@@ -2,6 +2,7 @@
 $(document).ready(function(){
 	var check = true;
 	var b = true;
+	var s = false;
 	
 	// List All Category
 	getAllCategroy(1);
@@ -16,6 +17,13 @@ $(document).ready(function(){
 		});
 	});
 	
+	// pop up for update category btnCatEdit
+	$("#btnCatEdit").click(function(){alert();
+		$('#form_add_category').modal({
+			"backdrop" : "static"
+		});
+	});
+	
 	// btncancel to close the form add category pop up
 	$("#btn_cancel").click(function() {
 		$('#form_add_category').modal('hide');
@@ -23,7 +31,7 @@ $(document).ready(function(){
 	
 	// on close of the popup
 	$('#form_add_category').on('hidden.bs.modal', function(event) {
-					location.href = baseUrl + "/admin/categorymg";
+			if(s) location.href = baseUrl + "/admin/categorymg";
 			});
 	
 	// pagination change
@@ -32,8 +40,22 @@ $(document).ready(function(){
 		getAllCategroy(1);
 	});
 	
+	// search category name
+	$("#btnSchCatName").click(function(){
+		check = true;
+		getAllCategroy(1);
+	});
+	$("#schCatName").keypress(function(e){
+		if (e.keyCode == 13) {
+			check = true;
+			getAllCategroy(1);
+	    }
+	});
+	
+	
 	// add new category
    $("#btnCatAdd").click(function(){
+	   s = true;
 	   var json = {
 			   "catName" : $("#catName").val(),
 			   "status" : true
@@ -78,24 +100,6 @@ $(document).ready(function(){
 	   });
    });
    
-   // search category
-   $("#btnCatSearch").click(function(){
-	   $.ajax({
-		  url : baseUrl + "/admin/categorymg/searchcategory/" + $("#catId").val(),
-		  type: "GET",
-		  beforeSend: function(xhr){
-			  xhr.setRequestHeader("Accept", "application/json");
-			  xhr.setRequestHeader("Content-Type", "application/json");
-		  },
-		  success: function(data){
-			  console.log(data);
-		  },
-		  error: function(data, status, er){
-			console.log("error : " + data + " status : " + status + " er " + er);  
-		  }
-	   });
-   });
-   
    // update category
    $("#btnCatUpdate").click(function(){
 	   var json = {
@@ -118,9 +122,10 @@ $(document).ready(function(){
 		  }
 	  }) 
    });
-// list all category
+// list all category and search
 	function getAllCategroy(currentPage){
 		var json = {
+				"schCatName" : $("#schCatName").val(),
 		        "currentPage": currentPage,
 		        "perPage": $("#PER_PAGE").val()
 		    };
@@ -139,7 +144,8 @@ $(document).ready(function(){
 					setOrderList(data, data.allCategory);
 					$("#tblCatListTem").tmpl(data.allCategory).appendTo("#tblCatList");
 				}else{
-	                $("tbody#CONTENTS").html('<tr>NO CONTENTS</tr>');
+	                $("#tblCatList").html("<tr><td colspan='4' class='text-center'>គ្មានទិន្ន័យ</td</tr>");
+	                data.pagination.totalPages = 1;
 				}
 				if(check) {
                     setPagination(data.pagination.totalPages, 1);

@@ -24,7 +24,7 @@ public class CategoryDaoImpl implements CategoryDao{
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public List<Category> getAllCategory(Pagination pagination, boolean isPagignation) {
+	public List<Category> getAllCategory(Pagination pagination, String schCatName, boolean isPagignation) {
 		
 	//createQuery
 		//return session.getCurrentSession().createQuery("from Category").list(); 
@@ -42,7 +42,7 @@ public class CategoryDaoImpl implements CategoryDao{
 		return category;
 		*/
 	//creaetSQLQuery
-		SQLQuery query = session.getCurrentSession().createSQLQuery("select * from category");
+		SQLQuery query = session.getCurrentSession().createSQLQuery("select * from category where catname like '%" + schCatName + "%'");
 		if(isPagignation){
 			query.setFirstResult(pagination.offset());
 			query.setMaxResults(pagination.getPerPage());

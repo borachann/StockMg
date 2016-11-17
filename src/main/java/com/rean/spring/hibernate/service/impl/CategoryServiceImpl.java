@@ -19,10 +19,10 @@ public class CategoryServiceImpl implements CategoryService{
 
 	@Override
 	@Transactional
-	public List<Category> getAllCategory(Pagination pagination, boolean isPagination) {
+	public List<Category> getAllCategory(Pagination pagination, String schCatName, boolean isPagination) {
 		// TODO Auto-generated method stub
 		
-		return categoryDao.getAllCategory(pagination, isPagination);
+		return categoryDao.getAllCategory(pagination, schCatName, isPagination);
 	}
 
 	@Override

@@ -14,4 +14,5 @@ public class AppConfiguration {
 		resolver.setSuffix(".jsp");
 		return resolver;
 	}
+	
 }

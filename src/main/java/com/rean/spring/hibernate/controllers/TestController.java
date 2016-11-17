@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rean.spring.hibernate.entities.Category;
@@ -44,9 +45,9 @@ public class TestController {
 	// Hibernate for selecting all category
 	@RequestMapping(value="/listcategory", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> listCategory(Pagination pagination){
+	public ResponseEntity<Map<String, Object>> listCategory(Pagination pagination, @RequestParam("schCatname") String schCatName){
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("allCategory", categoryService.getAllCategory(pagination, true));
+		map.put("allCategory", categoryService.getAllCategory(pagination, schCatName, true));
 		return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
 	}
 	
