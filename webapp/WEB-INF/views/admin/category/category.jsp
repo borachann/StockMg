@@ -2,7 +2,7 @@
 <%@ include file="../includes/header.jsp" %>
 <%@ include file="../includes/sidebar.jsp" %>
 	<h3 class="page-header">ប្រភេទ ទំនិញ</h3>
-	<div class="row form-horizontal page-header">
+	<div class="row form-horizontal">
 		<span for="schCatName" class="control-label col-md-2">ស្វែងរក ប្រភពទំនិញ :</span>
 		<div class="col-lg-3">
 			<input class=" form-control" id="schCatName" name="schCatName" type="text">
@@ -11,7 +11,7 @@
 			<button class="btn btn-primary" id="btnSchCatName">ស្វែងរក</button>
 			<button class="btn btn-success pull-right" id="catAddNew">បង្កើតថ្មី</button>
 		</div>
-	</div>
+	</div><br>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -44,8 +44,8 @@
 		<td>{{= order}}</td>
 		<td>{{= catname}}</td>
 		<td class="text-center">
-			<a class="on-default edit-row" href="${baseUrl}/admin/product/{{= productId}}" id="btnUpdate" data-id="{{= productId}}"><i class="fa fa-pencil"></i></a>
-			| <a class="on-default edit-row" href="${baseUrl}/admin/product/{{= productId}}" id="btnUpdate" data-id="{{= productId}}"><i class="fa fa-trash "></i></a>
+			<a class="on-default edit-row" href="${baseUrl}/admin/categorymg/showCategory/{{= catid}}" id="btnUpdate" data-id="{{= catid}}"><i class="fa fa-pencil"></i></a>
+			| <a class="on-default edit-row" href="${baseUrl}/admin/product/{{= catid}}" id="btnUpdate" data-id="{{= catid}}"><i class="fa fa-trash "></i></a>
 		
 		</td>
 	</tr> 

@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,5 +80,12 @@ public class CategoryController {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("updateCategory", categoryService.updateCategory(category, catId));
 			return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
+		}
+		
+		// open view for update category
+		@RequestMapping(value = "/showCategory/{catId}", method = RequestMethod.GET)
+		public String showCategory(Model model, @PathVariable("catId") int catId){
+			model.addAttribute("category", categoryService.searchCategory(catId));
+			return "admin/category/editCategory";
 		}
 }
