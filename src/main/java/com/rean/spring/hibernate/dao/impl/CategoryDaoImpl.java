@@ -42,7 +42,7 @@ public class CategoryDaoImpl implements CategoryDao{
 		return category;
 		*/
 	//creaetSQLQuery
-		SQLQuery query = session.getCurrentSession().createSQLQuery("select * from category where catname like '%" + schCatName + "%'");
+		SQLQuery query = session.getCurrentSession().createSQLQuery("select * from category where status ='t' and catname like '%" + schCatName + "%' ORDER BY catname DESC");
 		if(isPagignation){
 			query.setFirstResult(pagination.offset());
 			query.setMaxResults(pagination.getPerPage());
@@ -69,8 +69,12 @@ public class CategoryDaoImpl implements CategoryDao{
 	public boolean deleteCategory(int catId) {
 		// TODO Auto-generated method stub
 		try{
-			Category category = session.getCurrentSession().get(Category.class, catId);
-			session.getCurrentSession().delete(category);
+			/*Category category = session.getCurrentSession().get(Category.class, catId);
+			session.getCurrentSession().delete(category);*/
+			SQLQuery query = session.getCurrentSession().createSQLQuery("update category set status ='f' where catId = " + catId);
+			query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
+			query.executeUpdate();
+			
 			return true;
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());

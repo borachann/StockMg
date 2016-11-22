@@ -17,13 +17,6 @@ $(document).ready(function(){
 		});
 	});
 	
-	// pop up for update category btnCatEdit
-	$("#btnCatEdit").click(function(){alert();
-		$('#form_add_category').modal({
-			"backdrop" : "static"
-		});
-	});
-	
 	// btncancel to close the form add category pop up
 	$("#btn_cancel").click(function() {
 		$('#form_add_category').modal('hide');
@@ -83,16 +76,20 @@ $(document).ready(function(){
    });
    
    // delete category
-   $("#btnCatDelete").click(function(){
+  // $("#btnCatDelete").on("click", function(){alert();
+   $(document).on('click','#btnCatDelete',function(){
+	  if(!confirm("តើលោកអ្នក ពិតជាចង់លុបប្រភេទទំនិញនេះមែនទេ?"))
+		  return;
 	   $.ajax({
-		  url : baseUrl + "/admin/categorymg/deletecategory/" + $("#catId").val(),
+		  url : baseUrl + "/admin/categorymg/deletecategory/" + $(this).data("id"),
 		  type: "GET",
+		  dataType: 'JSON',
 		  beforeSend: function(xhr){
 			  xhr.setRequestHeader("Accept", "application/json");
 			  xhr.setRequestHeader("Content-Type", "application/json");
 		  },
 		  success: function(data){
-			  console.log(data);
+			  location.href = baseUrl + "/admin/categorymg";
 		  },
 		  error: function(data, status, er){
 			console.log("error : " + data + " status : " + status + " er " + er);  

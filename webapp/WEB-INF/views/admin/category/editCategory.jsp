@@ -6,12 +6,12 @@
 	
 					<form class="cmxform form-horizontal tasi-form" id="frmAddCategory"	method="POST" action="#">
 						<div class="form-group ">
-							<span for="catName" class="control-label col-lg-2">ឈ្មោះ ប្រភេទទំនិញ *</span>
-							 	<c:forEach items="${categoryList}" var="category">
+							<span for="catName" class="control-label col-lg-2">ឈ្មោះ ប្រភេទទំនិញ * :</span>
+							 	 
 									<div class="col-lg-10">
-										<input class=" form-control" id="catName" name="catName" type="text" value="${category}">
+										<input type='hidden' id="catId" value="${category.catId}">
+										<input class=" form-control" id="catName" name="catName" type="text" value="${category.catName}">
 									</div>
- 								</c:forEach>
 						</div>
 					
 						<div class="form-group">

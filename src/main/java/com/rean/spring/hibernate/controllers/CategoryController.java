@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.rean.spring.hibernate.entities.Category;
 import com.rean.spring.hibernate.entities.Pagination;
@@ -51,16 +52,14 @@ public class CategoryController {
 		@ResponseBody
 		public Boolean insertCategory(@RequestBody Category category){
 			
-			System.out.println("cateogry1 " + category.getCatName());
 			return categoryService.insertCategory(category);
 			
 		}
 		// Hibernate for delecting category
 		@RequestMapping(value="/deletecategory/{catId}", method= RequestMethod.GET)
 		@ResponseBody
-		public Boolean deleteCategory(@PathVariable("catId") int catId){
+		public boolean deleteCategory(@PathVariable("catId") int catId){
 			return categoryService.deleteCategory(catId);
-			
 		}
 		
 		// Hibernate for searching category
