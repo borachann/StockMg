@@ -27,17 +27,7 @@ $(document).ready(function(){
 	});
 	
 	
-	// search category name
-	$("#btnSchStrName").click(function(){
-		check = true;
-		getAllCurrentObject(1);
-	});
-	$("#schStrName").keypress(function(e){
-		if (e.keyCode == 13) {
-			check = true;
-			getAllCurrentObject(1);
-	    }
-	});
+
 	
 	
 	// add new category

@@ -73,7 +73,19 @@
 		});
 	};
 	// pagination change
-	$("#PER_PAGE").change(function() {
+	$(document).on('click','#PER_PAGE', function(){
 		check = true;
 		getAllCurrentObject(1);
+	});
+	
+	// search category name
+	$(document).on("click","#btnSchStrName", function(){
+		check = true;
+		getAllCurrentObject(1);
+	});
+	$(document).on("keypress","#schStrName", function(e){
+		if (e.keyCode == 13) {
+			check = true;
+			getAllCurrentObject(1);
+	    }
 	});
