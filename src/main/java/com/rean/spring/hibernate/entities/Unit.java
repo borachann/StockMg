@@ -26,9 +26,22 @@ public class Unit {
 	private String unitName;
 	private String convertTo;
 	
+	private boolean status;
+	
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
 	@OneToMany(mappedBy="unit", cascade=CascadeType.ALL)
 	private List<Product> products = new ArrayList<Product>();
 	
+	@Override
+	public String toString() {
+		return "Unit [unitId=" + unitId + ", qty=" + qty + ", unitName=" + unitName + ", convertTo=" + convertTo
+				+ ", status=" + status + ", products=" + products + "]";
+	}
 	public List<Product> getProducts() {
 		return products;
 	}

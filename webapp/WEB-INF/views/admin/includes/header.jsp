@@ -2,7 +2,9 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%-- <%
+	String _sLocalTime_comm = DateTime.getInstance().getDate("yyyymmddhh24mi");
+%> --%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +26,8 @@
 	<script src="${pageContext.request.contextPath}/resources/js/lib/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery.bootpag.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery.tmpl.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/lib/moment.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/lib/include.js"></script>
 	
 	<title>Dashboard Admin</title>
 </head>
