@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 <!-- Modal -->
-<div class="modal fade" id="form_add_category" role="dialog ">
+<div class="modal fade" id="form_add" role="dialog ">
 	<div class="modal-dialog modal-lg" style="width: 80%">
 		<div class="modal-content">
 			<div class="modal-header">

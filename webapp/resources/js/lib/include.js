@@ -73,7 +73,7 @@
 		});
 	};
 	// pagination change
-	$(document).on('click','#PER_PAGE', function(){
+	$(document).on('change','#PER_PAGE', function(){
 		check = true;
 		getAllCurrentObject(1);
 	});
@@ -89,3 +89,15 @@
 			getAllCurrentObject(1);
 	    }
 	});
+	// pop up for add unit
+	$(document).on("click","#popUpAddNew", function(){
+		$('#form_add').modal({
+			"backdrop" : "static"
+		});
+	});
+	
+	// btncancel to close the form add unit pop up
+	$(document).on("click","#btn_cancel", function() {
+		$('#form_add').modal('hide');
+	});
+	

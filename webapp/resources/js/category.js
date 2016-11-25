@@ -8,27 +8,11 @@ $(document).ready(function(){
 	
 	// List All Category
 	getAllCurrentObject(1);
-	
-	// pop up for add category
-	$("#popUpAddNew").click(function(){
-		$('#form_add_category').modal({
-			"backdrop" : "static"
-		});
-	});
-	
-	// btncancel to close the form add category pop up
-	$("#btn_cancel").click(function() {
-		$('#form_add_category').modal('hide');
-	});
-	
+		
 	// on close of the popup
-	$('#form_add_category').on('hidden.bs.modal', function(event) {
+	$('#form_add').on('hidden.bs.modal', function(event) {
 			if(s) location.href = baseUrl + "/admin/categorymg";
 	});
-	
-	
-
-	
 	
 	// add new category
    $("#btnCatAdd").click(function(){
