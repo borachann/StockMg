@@ -21,6 +21,7 @@ $(document).ready(function(){
 			   "catName" : $("#catName").val(),
 			   "status" : true
 	   }
+	    // like this send as json
 	   $.ajax({
 		  url : baseUrl + "/admin/categorymg/insertcategory",
 		  type: "POST",

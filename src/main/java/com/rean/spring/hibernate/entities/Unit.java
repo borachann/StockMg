@@ -26,7 +26,7 @@ public class Unit {
 	private String unitName;
 	private String convertTo;
 	
-	private boolean status;
+	private boolean status; // pass from form is string not boolean hehe so it should 0 ,1 right?
 	
 	public boolean isStatus() {
 		return status;

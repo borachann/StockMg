@@ -43,7 +43,9 @@ public class UnitController {
 	
 	@RequestMapping(value="/insertunit", method= RequestMethod.POST)
 	@ResponseBody
-	public boolean insertUnit(@RequestBody Unit unit){
-		return unitService.insertUnit(unit);
+	public ResponseEntity<Map<String, Object>> insertUnit(@RequestBody Map<String, Object> reqInput){
+		//return unitService.insertUnit(unit);
+		System.out.println(reqInput);
+		return new ResponseEntity<Map<String,Object>>(reqInput, HttpStatus.OK);
 	}
 }
