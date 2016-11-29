@@ -1,18 +1,21 @@
 
 $(document).ready(function(){
 
-	$("#sideBarCategory").addClass("active");
+	$("#sideBarUnit").addClass("active");
 	
 	$("#btn_cancel").click(function(){
-		location.href = baseUrl + "/admin/categorymg";
+		location.href = baseUrl + "/admin/unitmg";
 	});
-	$("#btnCatAdd").click(function(){
+	$("#btnUpdate").click(function(){
 		   var json = {
-				   "catName" : $("#catName").val(),
-				   "status" : true
+				   "unitId" : $("#unitId").val(),
+				   "unitName" : $("#unitName").val(),
+					"qty" : $("#qty").val(),
+					"convertTo" : $("#convertTo").val(),
+					"status" : true
 		   }
 		   $.ajax({
-			  url : baseUrl + "/admin/categorymg/updatacategory/" + $("#catId").val(),
+			  url : baseUrl + "/admin/unitmg/updateunit/",
 			  type: "POST",
 			  data: JSON.stringify(json),
 			  beforeSend: function(xhr) {
@@ -21,10 +24,10 @@ $(document).ready(function(){
 	          },
 	          success: function(data) {
 	        	  if(data){
-	        		  alert("កែប្រែ ប្រភេទទំនិញ បានជោគជ័យ។");
-	        		  location.href = baseUrl + "/admin/categorymg";
+	        		  alert("កែប្រែ ប្រភេទឯកតា បានជោគជ័យ។");
+	        		  location.href = baseUrl + "/admin/unitmg";
 	        	  }else{
-	        		  alert("កែប្រែ ប្រភេទទំនិញ មិនបានជោគជ័យ។");
+	        		  alert("កែប្រែ ប្រភេទឯកតាមិនបានជោគជ័យ។");
 	        	  }
 	          },
 	          error: function(data, status, er){

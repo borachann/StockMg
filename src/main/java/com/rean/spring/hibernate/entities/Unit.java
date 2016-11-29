@@ -25,13 +25,12 @@ public class Unit {
 	private BigDecimal qty;
 	private String unitName;
 	private String convertTo;
+	private Boolean status; // pass from form is string not boolean hehe so it should 0 ,1 right?
 	
-	private boolean status; // pass from form is string not boolean hehe so it should 0 ,1 right?
-	
-	public boolean isStatus() {
+	public Boolean isStatus() {
 		return status;
 	}
-	public void setStatus(boolean status) {
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
 	@OneToMany(mappedBy="unit", cascade=CascadeType.ALL)

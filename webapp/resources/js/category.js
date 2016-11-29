@@ -45,7 +45,6 @@ $(document).ready(function(){
    });
    
    // delete category
-  // $("#btnCatDelete").on("click", function(){alert();
    $(document).on('click','#btnCatDelete',function(){
 	  if(!confirm("តើលោកអ្នក ពិតជាចង់លុបប្រភេទទំនិញនេះមែនទេ?"))
 		  return;

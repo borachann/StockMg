@@ -12,11 +12,10 @@
 			</div>
 			<div class="modal-body">
 				<div class="form">
-					<form class="cmxform form-horizontal tasi-form" id="frmAddUnit"	method="POST" action="#">
+					<form class="cmxform form-horizontal tasi-form" id="frmAddUnit"	method="POST" action="">
 						<div class="form-group ">
 							<span for="unitName" class="control-label col-lg-2">ឈ្មោះ ប្រភេទឯកតា *</span>
 							<div class="col-lg-10">
-							<input class=" form-control" id="unitId" name="unitId" type="hidden" value="0">
 								<input class=" form-control" id="unitName" name="unitName" type="text" required="required">
 							</div>
 						</div>
@@ -29,13 +28,12 @@
 						<div class="form-group ">
 							<span for="convertto" class="control-label col-lg-2">ខ្នាត *</span>
 							<div class="col-lg-10">
-								<input class=" form-control" id="convertto" name="convertto" type="text" required="required">
+								<input class=" form-control" id="convertTo" name="convertTo" type="text" required="required">
 							</div>
 						</div>
-						<input type="hidden" name="status" value="true">
 						<div class="form-group">
 							<div class="col-lg-offset-2 col-lg-10">
-								<button class="btn btn-success waves-effect waves-light" type="submit" id="btnUnitAdd">រក្សាទុក</button>
+								<button class="btn btn-success waves-effect waves-light" type="button" id="btnUnitAdd">រក្សាទុក</button>
 								<button class="btn btn-default waves-effect" type="button" id="btn_cancel">បោះបង់</button>
 							</div>
 						</div>

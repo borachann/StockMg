@@ -50,6 +50,8 @@ public class UnitDaoImpl implements UnitDao{
 		// TODO Auto-generated method stub
 		try{
 			SQLQuery query = session.getCurrentSession().createSQLQuery("update unit set status = 'f' where unitid = " + unitId);
+			query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
+			query.executeUpdate();
 			return true;
 		}catch(Exception ex){
 			System.out.println();
@@ -58,11 +60,12 @@ public class UnitDaoImpl implements UnitDao{
 	}
 
 	@Override
-	public boolean updateUnit(Unit unit, int unitId) {
+	public boolean updateUnit(Unit unit) {
 		// TODO Auto-generated method stub
 		System.out.println("unit object has " + unit.toString());
 		try{
 			session.getCurrentSession().update(unit);
+			return true;
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());
 			ex.printStackTrace();

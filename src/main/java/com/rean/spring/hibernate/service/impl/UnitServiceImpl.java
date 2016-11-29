@@ -39,9 +39,9 @@ public class UnitServiceImpl implements UnitService{
 
 	@Override
 	@Transactional
-	public boolean updateUnit(Unit unit, int unitId) {
+	public boolean updateUnit(Unit unit) {
 		// TODO Auto-generated method stub
-		return unitDao.updateUnit(unit, unitId);
+		return unitDao.updateUnit(unit);
 	}
 
 	@Override

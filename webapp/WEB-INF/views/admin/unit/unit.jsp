@@ -30,8 +30,8 @@
 		<td>{{= qty}}</td>
 		<td>{{= convertto}}</td>
 		<td class="text-center">
-			<a class="on-default edit-row" href="${baseUrl}/admin/categorymg/showCategory/{{= catid}}" id="btnUpdate" data-id="{{= catid}}"><i class="fa fa-pencil"></i></a>
-			| <a class="on-default edit-row" href="javascript:void(0)" id="btnCatDelete" data-id="{{= catid}}"><i class="fa fa-trash "></i></a>
+			<a class="on-default edit-row" href="${baseUrl}/admin/unitmg/showunit/{{= unitid}}" id="btnUpdate" data-id="{{= catid}}"><i class="fa fa-pencil"></i></a>
+			| <a class="on-default edit-row" href="javascript:void(0)" id="btnDelete" data-id="{{= unitid}}"><i class="fa fa-trash "></i></a>
 		
 		</td>
 	</tr> 
