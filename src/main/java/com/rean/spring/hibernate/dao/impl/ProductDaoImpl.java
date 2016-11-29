@@ -18,7 +18,7 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public List<Product> getAllProduct() {
 		// TODO Auto-generated method stub
-		return sessionFactory.getCurrentSession().createQuery("from Product").list(); // sam ah sam ey?
+		return sessionFactory.getCurrentSession().createQuery("from Product").getResultList(); // sam ah sam ey? query product 
 		 
 	}
 

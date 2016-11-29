@@ -19,7 +19,6 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	@Transactional
 	public List<Product> getAllProduct() {
-		// TODO Auto-generated method stub
 		return productDao.getAllProduct();
 	}
 

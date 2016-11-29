@@ -1,5 +1,6 @@
 package com.rean.spring.hibernate.entities;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="unit")
-public class Unit {
+public class Unit implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="unit_seq_id")
@@ -36,11 +37,7 @@ public class Unit {
 	@OneToMany(mappedBy="unit", cascade=CascadeType.ALL)
 	private List<Product> products = new ArrayList<Product>();
 	
-	@Override
-	public String toString() {
-		return "Unit [unitId=" + unitId + ", qty=" + qty + ", unitName=" + unitName + ", convertTo=" + convertTo
-				+ ", status=" + status + ", products=" + products + "]";
-	}
+ 
 	public List<Product> getProducts() {
 		return products;
 	}

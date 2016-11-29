@@ -1,5 +1,6 @@
 package com.rean.spring.hibernate.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Category")
-public class Category {
+public class Category implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="category_seq_id")
