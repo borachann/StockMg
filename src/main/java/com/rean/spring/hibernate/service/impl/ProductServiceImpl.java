@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.rean.spring.hibernate.dao.ProductDao;
+import com.rean.spring.hibernate.entities.Pagination;
 import com.rean.spring.hibernate.entities.Product;
 import com.rean.spring.hibernate.service.ProductService;
 
@@ -18,8 +19,33 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	@Transactional
-	public List<Product> getAllProduct() {
-		return productDao.getAllProduct();
+	public List<Product> getAllProduct(Pagination pagination, String schStrName, boolean ispaging) {
+		return productDao.getAllProduct(pagination, schStrName, ispaging);
+	}
+
+	@Override
+	public Boolean addProduct(Product product) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean deleteProduct(int proId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean editProduct(int proId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	@Transactional
+	public Product showProduct(int proId) {
+		// TODO Auto-generated method stub
+		return productDao.showProduct(proId);
 	}
 
 }

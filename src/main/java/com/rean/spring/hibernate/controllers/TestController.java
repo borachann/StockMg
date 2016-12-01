@@ -33,13 +33,13 @@ public class TestController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/listproduct", method = RequestMethod.GET)
+/*	@RequestMapping(value="/listproduct", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> listProduct(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("allStudent", productService.getAllProduct());
 		return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
-	}
+	}*/
 	
 	
 	// Hibernate for selecting all category

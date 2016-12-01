@@ -37,7 +37,6 @@ public class CategoryController {
 		@RequestMapping(value="/listcategory", method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
 		@ResponseBody
 		public ResponseEntity<Map<String, Object>> listCategory(Pagination pagination, @RequestParam("schStrName") String schCatName){
-			System.out.println("dddddddd " + schCatName);
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("allObject", categoryService.getAllCategory(pagination, schCatName , true));
 			List<Category> totalRecord = categoryService.getAllCategory(pagination,schCatName, false);

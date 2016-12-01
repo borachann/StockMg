@@ -56,6 +56,17 @@ public class Product {
 	private BigDecimal unitPrice;
 	
 	@Column
+	private Boolean currentcy;
+	
+	public Boolean getCurrentcy() {
+		return currentcy;
+	}
+
+	public void setCurrentcy(Boolean currentcy) {
+		this.currentcy = currentcy;
+	}
+
+	@Column
 	private String imgUrl;
 	
 	private Boolean status; 

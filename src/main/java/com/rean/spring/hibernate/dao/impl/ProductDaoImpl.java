@@ -2,11 +2,15 @@ package com.rean.spring.hibernate.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
+import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.rean.spring.hibernate.dao.ProductDao;
+import com.rean.spring.hibernate.entities.Pagination;
 import com.rean.spring.hibernate.entities.Product;
 
 @Repository
@@ -16,10 +20,49 @@ public class ProductDaoImpl implements ProductDao {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public List<Product> getAllProduct() {
+	public List<Product> getAllProduct(Pagination pagination, String schStrName, boolean isPagination) {
 		// TODO Auto-generated method stub
-		return sessionFactory.getCurrentSession().createQuery("from Product").getResultList(); // sam ah sam ey? query product 
-		 
+		
+		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery("select " 
+        + "pro.proId, pro.catId, pro.costPrice, pro.imgUrl, pro.proName, pro.proQty, pro.salePrice, pro.status, pro.unitId, pro.unitPrice," 
+        + " cat.catName, unit.convertTo, unit.qty, unit.unitName" 
+        + " from products pro left outer join Category cat on pro.catId=cat.catId left outer join unit unit on pro.unitId=unit.unitId where pro.status = 't' and pro.proname like '%" + schStrName + "%'");
+		if(isPagination){
+			query.setFirstResult(pagination.offset());
+			query.setMaxResults(pagination.getPerPage());
+		}
+		query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
+		List<Product> product = query.list(); 
+		return product;
+		/*Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Product.class);
+		List<Product> product = criteria.list();
+		session.flush();
+		return product;*/
 	}
 
+	@Override
+	public Boolean addProduct(Product product) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean deleteProduct(int proId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean editProduct(int proId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Product showProduct(int proId) {
+		// TODO Auto-generated method stub
+		
+		return sessionFactory.getCurrentSession().get(Product.class, proId);
+	}
 }
