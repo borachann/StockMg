@@ -45,6 +45,15 @@ public class UnitController {
 		return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
 	}
 	
+	// get all unit for setting auto complete
+	@RequestMapping(value="/getallunit")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> getAllUnit(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("unit", unitService.getAllUnit(null, "", false));
+		return new ResponseEntity<>(map, HttpStatus.OK);
+	}
+	
 	// insert unit return as boolean
 	@RequestMapping(value="/insertunit", method= RequestMethod.POST)
 	@ResponseBody

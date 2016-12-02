@@ -46,6 +46,15 @@ public class CategoryController {
 			return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
 		}
 		
+		// getAllCategory for set autocomplete
+		@RequestMapping(value="/getallcategory")
+		@ResponseBody
+		public ResponseEntity<Map<String, Object>> getAllCategory(){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("category", categoryService.getAllCategory(null,"", false));
+			return new ResponseEntity<>(map, HttpStatus.OK);
+		}
+		
 		// Hibernate for inserting category
 		@RequestMapping(value="/insertcategory", method= RequestMethod.POST)
 		@ResponseBody

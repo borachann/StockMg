@@ -26,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Boolean addProduct(Product product) {
 		// TODO Auto-generated method stub
-		return null;
+		 return productDao.addProduct(product);
 	}
 
 	@Override

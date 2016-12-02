@@ -19,6 +19,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dashboard.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-awesome/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui.css">
 	
 	<script>var baseUrl = "${pageContext.request.contextPath}"</script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery-1.11.2.min.js"></script>
@@ -27,6 +28,8 @@
 	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery.bootpag.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery.tmpl.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/moment.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery-ui.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery.ui.autocomplete.scroll.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/include.js"></script>
 	
 	<title>Dashboard Admin</title>

@@ -44,7 +44,13 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public Boolean addProduct(Product product) {
 		// TODO Auto-generated method stub
-		return null;
+		try{
+			sessionFactory.getCurrentSession().save(product);
+			return true;
+		}catch(Exception ex){
+			System.out.println("Error Message: " + ex.getMessage());
+		}
+		return false;
 	}
 
 	@Override

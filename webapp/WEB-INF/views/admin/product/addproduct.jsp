@@ -61,10 +61,10 @@
 							<span for="currentcy" class="control-label col-lg-2">ប្រភេទលុយ</span>
 							<div class="col-lg-10">
 								<label class="radio-inline">
-							      	<input type="radio" name="currentcy" checked="true">ប្រាក់ដុល្លារ
+							      	<input type="radio" name="currentcy" value=true checked="true">ប្រាក់ដុល្លារ
 							    </label>
 								<label class="radio-inline">
-								    <input type="radio" name="currentcy">ប្រាក់រៀល
+								    <input type="radio" name="currentcy" value=false>ប្រាក់រៀល
 								</label>
 							</div>
 						</div>

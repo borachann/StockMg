@@ -65,7 +65,7 @@ public class ProductController {
 	@RequestMapping(value="/addproduct", method = RequestMethod.POST)
 	@ResponseBody
 	public Boolean addProduct(@RequestBody Product product){
-		return null;
+		return productService.addProduct(product);
 		
 	}
 }
