@@ -36,7 +36,7 @@ $(document).ready(function(){
 			"proName" : $("#proname").val(),
 			"catId" : $("#catId").val(),
 			"unitId" : $("#unitId").val(),
-			"proQty" : $("#proqty").val() || 0,
+			"proQty" : ($("#proqty").val() * $("#unitQty").val()) || 0,
 			"costPrice" : $("#costprice").val() || 0,
 			"unitPrice" : $("#unitprice").val() || 0,
 			"salePrice" : $("#saleprice").val() || 0,
@@ -125,12 +125,14 @@ $(document).ready(function(){
 			    	   availableTags[i]= 
 						         {
 						         	"label": data.unit[i].unitname,
-									"dataid": data.unit[i].unitid 
+									"dataid": data.unit[i].unitid,
+									"dataqty": data.unit[i].qty
 						         };
 						}
 			       $("#unitname" ).autocomplete({
 			    	   select: function(event, ui){
 			    		   $("#unitId").val(ui.item.dataid);
+			    		   $("#unitQty").val(ui.item.dataqty);
 			    	   },
 			    	   maxShowItems: 8,
 			           source: availableTags

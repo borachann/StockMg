@@ -31,6 +31,7 @@
 							<div class="col-lg-10">
 								<input class=" form-control" id="unitname" name="unitname" type="text" required="required">
 								<input type="hidden" id="unitId" name="unitId">
+								<input type="hidden" id="unitQty" name="unitQty">
 							</div>
 						</div>
 						<div class="form-group ">
@@ -77,8 +78,8 @@
 						<div class="form-group">
 							<div class="col-lg-offset-2 col-lg-10">
 								<button class="btn btn-success waves-effect waves-light"
-									type="button" id="btnSubmit">Save</button>
-								<button class="btn btn-default waves-effect" type="button" id="btn_cancel">Cancel</button>
+									type="button" id="btnSubmit">រក្សាទុក</button>
+								<button class="btn btn-default waves-effect" type="button" id="btn_cancel">បោះបង់</button>
 							</div>
 						</div>
 					</form>

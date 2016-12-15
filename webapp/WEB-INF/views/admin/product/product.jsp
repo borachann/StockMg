@@ -27,7 +27,7 @@
 		<td class="hide">{{= proid}}</td>
 		<td>{{= order}}</td>
 		<td>{{= proname}}</td>
-		<td>{{= proqty}}</td>
+		<td>{{= Math.floor(proqty/qty)}} {{= unitname}} , {{= proqty%qty}} {{= convertto}}</td>
 		<td>{{= catname}}</td>
 		<td>{{= costprice}}</td>
 		<td>{{= unitprice}}</td>
