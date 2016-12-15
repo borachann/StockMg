@@ -4,19 +4,45 @@ $(document).ready(function(){
 	 col = 9;
 	 
 	 getAllCurrentObject(1); 
+	
+	//on close of the popup
+	$('#form_add').on('hidden.bs.modal', function(event) {
+				if(s) location.href = baseUrl + "/admin/productmg";
+	});
 	 
 	 $(document).on("click","#btnSubmit", function(){
+		 
+		 if($("#proname").val() == ""){
+			 alert("សូមបញ្ចូល ឈ្មោះទំនិញ។");
+			 return;
+		 }
+		 if($("#catName").val() == ""){
+			 alert("សូមបញ្ចូល ប្រភេទទំនិញ។");
+			 return;
+		 }
+		 if($("#catId").val() == ""){
+			 alert("ឈ្មោះប្រភេទទំនិញ មិនត្រឹមត្រូវ។");
+			 return;
+		 }
+		 if($("#unitname").val() == ""){
+			 alert("សូមបញ្ចូល ប្រភេទឯកតា។");
+			 return;
+		 }
+		 if($("#unitId").val() == ""){
+			 alert("ឈ្មោះប្រភេទឯកតា មិនត្រឹមត្រូវ។");
+			 return;
+		 }
 		 var json = {
-			"proname" : $("#proname").val(),
-			"catid" : $("#catid").val(),
-			"catunit" : $("#catunit").val(),
-			"proqty" : $("#proqty").val() || 0,
-			"costprice" : $("#costprice").val() || 0,
-			"unitprice" : $("#unitprice").val() || 0,
-			"saleprice" : $("#saleprice").val() || 0,
-			"currentcy" : $("input[name='currentcy']:checked"). val(),
+			"proName" : $("#proname").val(),
+			"catId" : $("#catId").val(),
+			"unitId" : $("#unitId").val(),
+			"proQty" : $("#proqty").val() || 0,
+			"costPrice" : $("#costprice").val() || 0,
+			"unitPrice" : $("#unitprice").val() || 0,
+			"salePrice" : $("#saleprice").val() || 0,
+			"currentcy" : ($("input[name='currentcy']:checked").val() == "true")? true : false,
 			"status" : true,
-			"imgurl" : ""
+			"imgUrl" : ""
 		 };
 		 $.ajax({
 			url : baseUrl + "/admin/productmg/addproduct",
@@ -27,7 +53,15 @@ $(document).ready(function(){
 				xhr.setRequestHeader("Content-Type", "application/json");
 			},
 			success: function(data){
-				console.log(data);
+				s = true;
+				if(data){
+	        		  alert("បង្កើត មុខទំនិញថ្មី បានជោគជ័យ។");
+	        		  $("#frmAdd").find("input:text").val('');
+	        		  $("#imgurl").val("");
+	        		  $("#dollar").attr("checked","checked");
+	        	  }else{
+	        		  alert("បង្កើត មុខទំនិញថ្មី មិនបានជោគជ័យ។");
+	        	  }
 			},
 			Error : function(data, status, error){
 				console.log("data " , data, " status ", status , " error " , error);

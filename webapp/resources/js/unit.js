@@ -11,6 +11,18 @@ $(document).ready(function(){
 	});
 	
 	$(document).on("click","#btnUnitAdd",function(e){
+		if($("#unitName").val() == ""){
+			alert("សូមបញ្ចូល ឈ្មោះ ប្រភេទឯកតា។");
+			return;
+		}
+		if($("#qty").val() == ""){
+			alert("សូមបញ្ចូល ចំនួន។");
+			return;
+		}
+		if($("#convertTo").val() == ""){
+			alert("សូមបញ្ចូល ឈ្មោះ ខ្នាត។");
+			return;
+		}
 		var json = {
 				"unitName" : $("#unitName").val(),
 				"qty" : $("#qty").val(),

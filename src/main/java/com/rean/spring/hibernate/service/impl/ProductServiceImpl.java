@@ -24,6 +24,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	@Transactional
 	public Boolean addProduct(Product product) {
 		// TODO Auto-generated method stub
 		 return productDao.addProduct(product);

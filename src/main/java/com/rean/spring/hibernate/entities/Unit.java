@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +23,7 @@ public class Unit implements Serializable{
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="unit_seq_id")
 	@SequenceGenerator(name="unit_seq_id", sequenceName="unit_seq_id", allocationSize=1, initialValue=1)
 	
+	@Column(name="unitId")
 	private int unitId;
 	private BigDecimal qty;
 	private String unitName;

@@ -22,7 +22,7 @@ public class Category implements Serializable{
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="category_seq_id")
 	@SequenceGenerator(name="category_seq_id", sequenceName="category_seq_id", allocationSize=1, initialValue=1)
 	
-	@Column
+	@Column(name="catId")
 	private int catId;
 	
 	@Column

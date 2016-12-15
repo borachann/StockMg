@@ -16,7 +16,7 @@
 						<div class="form-group ">
 							<span for="catName" class="control-label col-lg-2">ឈ្មោះ ប្រភេទទំនិញ *</span>
 							<div class="col-lg-10">
-								<input class=" form-control" id="catName" name="catName" type="text" required="required">
+								<input class=" form-control notEmpty" id="catName" name="catName" type="text">
 							</div>
 						</div>
 					

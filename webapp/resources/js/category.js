@@ -16,7 +16,11 @@ $(document).ready(function(){
 	
 	// add new category
    $("#btnCatAdd").click(function(){
-	   s = true;
+	   if($("#catName").val() == ""){
+		   alert("សូមបញ្ចូល ឈ្មោះប្រភេទទំនិញ។");
+		   return;
+		   $("#catName").focus();
+	   }
 	   var json = {
 			   "catName" : $("#catName").val(),
 			   "status" : true
@@ -32,6 +36,7 @@ $(document).ready(function(){
           },
           success: function(data) {
         	  if(data){
+        		  s = true;
         		  alert("បង្កើត ប្រភេទទំនិញថ្មី បានជោគជ័យ។");
         		  $("#catName").val("");
         	  }else{

@@ -22,7 +22,7 @@
 						<div class="form-group ">
 							<span for="qty" class="control-label col-lg-2">ចំនួន *</span>
 							<div class="col-lg-10">
-								<input class=" form-control" id="qty" name="qty" type="text" required="required">
+								<input class=" form-control numOnly" id="qty" name="qty" type="text" required="required">
 							</div>
 						</div>
 						<div class="form-group ">

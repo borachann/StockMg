@@ -36,35 +36,35 @@
 						<div class="form-group ">
 							<span for="proqty" class="control-label col-lg-2">ចំនួន</span>
 							<div class="col-lg-10">
-								<input class=" form-control" id="proqty" name="proqty" type="text" required="required">
+								<input class=" form-control numOnly" id="proqty" name="proqty" type="text" required="required">
 							</div>
 						</div>
 						<div class="form-group ">
 							<span for="costprice" class="control-label col-lg-2">តំលៃដើម</span>
 							<div class="col-lg-10">
-								<input class=" form-control" id="costprice" name="costprice" type="text" required="required">
+								<input class=" form-control numOnly" id="costprice" name="costprice" type="text" required="required">
 							</div>
 						</div>
 						<div class="form-group ">
 							<span for="unitprice" class="control-label col-lg-2">តំលៃលក់ដុំ</span>
 							<div class="col-lg-10">
-								<input class=" form-control" id="unitprice" name="unitprice" type="text" required="required">
+								<input class=" form-control numOnly" id="unitprice" name="unitprice" type="text" required="required">
 							</div>
 						</div>
 						<div class="form-group ">
 							<span for="saleprice" class="control-label col-lg-2">តំលៃលក់រាយ</span>
 							<div class="col-lg-10">
-								<input class=" form-control" id="saleprice" name="saleprice" type="text" required="required">
+								<input class=" form-control numOnly" id="saleprice" name="saleprice" type="text" required="required">
 							</div>
 						</div>
 						<div class="form-group ">
 							<span for="currentcy" class="control-label col-lg-2">ប្រភេទលុយ</span>
 							<div class="col-lg-10">
 								<label class="radio-inline">
-							      	<input type="radio" name="currentcy" value=true checked="true">ប្រាក់ដុល្លារ
+							      	<input type="radio" name="currentcy" id="dollar" value="true" checked="checked">ប្រាក់ដុល្លារ
 							    </label>
 								<label class="radio-inline">
-								    <input type="radio" name="currentcy" value=false>ប្រាក់រៀល
+								    <input type="radio" name="currentcy" id="reil" value="false">ប្រាក់រៀល
 								</label>
 							</div>
 						</div>

@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.rean.spring.hibernate.entities.Category;
 import com.rean.spring.hibernate.entities.Pagination;
 import com.rean.spring.hibernate.entities.Product;
+import com.rean.spring.hibernate.entities.Unit;
+import com.rean.spring.hibernate.form.FormProduct;
 import com.rean.spring.hibernate.service.ProductService;
 
 @Controller
@@ -64,8 +67,24 @@ public class ProductController {
 	}
 	@RequestMapping(value="/addproduct", method = RequestMethod.POST)
 	@ResponseBody
-	public Boolean addProduct(@RequestBody Product product){
-		return productService.addProduct(product);
+	public Boolean addProduct(@RequestBody FormProduct product){
+		Category category = new Category();
+		Unit unit = new Unit();
+		Product pro = new Product();
+		category.setCatId(product.getCatId());
+		unit.setUnitId(product.getUnitId());
+		pro.setCategory(category);
+		pro.setUnit(unit);
+		pro.setProName(product.getProName());
+		pro.setProQty(product.getProQty());
+		pro.setCostPrice(product.getCostPrice());
+		pro.setUnitPrice(product.getUnitPrice());
+		pro.setSalePrice(product.getSalePrice());
+		pro.setCurrentcy(product.getCurrentcy());
+		pro.setStatus(product.getStatus());
+		pro.setImgUrl(product.getImgUrl());
+		
+		return productService.addProduct(pro);
 		
 	}
 }
