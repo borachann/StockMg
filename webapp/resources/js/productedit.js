@@ -1,0 +1,1 @@
+$("#sideBarProduct").addClass("active");
