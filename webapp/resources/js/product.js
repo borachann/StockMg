@@ -9,7 +9,8 @@ $(document).ready(function(){
 	$('#form_add').on('hidden.bs.modal', function(event) {
 				if(s) location.href = baseUrl + "/admin/productmg";
 	});
-	 
+	
+	//add new product
 	 $(document).on("click","#btnSubmit", function(){
 		 
 		 if($("#proname").val() == ""){
@@ -68,11 +69,14 @@ $(document).ready(function(){
 			}
 		 });
 	 });
+	 
+	 // to data for auto complete
 	 $("#popUpAddNew").click(function(){
 		 setAutoCompleteCategory();
 		 setAutoCompleteUnit();
 	 });
 	 
+	 // get all object of category
 	 function setAutoCompleteCategory(){
 		 $.ajax({ 
 			    url: baseUrl + "/admin/categorymg/getallcategory", 
@@ -109,6 +113,7 @@ $(document).ready(function(){
 			return ;
 		} 
 	 
+	 // get all objects of unit
 	 function setAutoCompleteUnit(){
 		 $.ajax({ 
 			    url: baseUrl + "/admin/unitmg/getallunit", 
@@ -146,4 +151,25 @@ $(document).ready(function(){
 			});
 			return ;
 	 }
+	 $("#imgurl").change(function(){		
+			$("#frmAdd").ajaxSubmit({
+				url: baseUrl + "/admin/fileupload/images",
+				dataType: 'JSON', 
+				type: 'POST',
+				success: function(data) { 
+					console.log(data);
+			        if(data){
+			        	$("#images_sample").attr("src", baseUrl + "/resources/images/products/"+data.IMAGE);
+			        	$("#images_sample").show();
+			        	$("#image").val(data.IMAGE);
+			        	//alert('YOU HAVE BEEN INSERTED SUCCESSFULLY.');
+			        }else{
+			        	//alert('YOU HAVE ERRORS WHEN INSERT NEW PRODUCT.');
+			        }
+			    },
+			    error:function(data,status,er) { 
+			        console.log("error: "+data+" status: "+status+" er:"+er);
+			    }
+			});
+		});
 });

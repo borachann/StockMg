@@ -12,7 +12,7 @@
 			</div>
 			<div class="modal-body">
 				<div class=" form">
-					<form class="cmxform form-horizontal tasi-form" id="frmAdd"	method="POST" action="#">
+					<form class="cmxform form-horizontal tasi-form" id="frmAdd"	method="POST" action="#" enctype="multipart/form-data">
 						<div class="form-group ">
 							<span for="proname" class="control-label col-lg-2">ឈ្មោះទំនិញ *</span>
 							<div class="col-lg-10">
@@ -72,7 +72,8 @@
 						<div class="form-group ">
 							<span for="imgurl" class="control-label col-lg-2">រូបភាព</span>
 							<div class="col-lg-10">
-								<input class=" form-control" id="imgurl" name="categoryName" type="file">
+								<input class=" form-control" id="imgurl" name="imgurl" type="file">
+								<input type="hidden" id="image" name="image" /> <img src="" id="images_sample" name="images_sample" class="img-thumbnail" style="display: none; width: 200px; height: 200px;">
 							</div>
 						</div>
 						<div class="form-group">

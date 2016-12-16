@@ -19,9 +19,11 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
@@ -75,6 +77,14 @@ public class WebConfiguration extends WebMvcConfigurerAdapter{
 		
 		return s;
 	}
+	
+	@Bean(name = "multipartResolver")
+    public MultipartResolver multipartResolver() {
+        org.springframework.web.multipart.commons.CommonsMultipartResolver multipartResolver = new org.springframework.web.multipart.commons.CommonsMultipartResolver();
+        //multipartResolver.setMaxUploadSize(2097152);
+        multipartResolver.setMaxUploadSize(5242880);
+        return multipartResolver;
+    }
 	
 	@Override
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {

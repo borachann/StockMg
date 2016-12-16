@@ -35,7 +35,7 @@
 		<td>{{= imgurl}}</td>
 		<td class="text-center">
 			<a class="on-default edit-row" href="${baseUrl}/admin/productmg/showproduct/{{= proid}}" id="btnUpdate" data-id="{{= proid}}"><i class="fa fa-pencil"></i></a>
-			| <a class="on-default edit-row" href="javascript:void(0)" id="btnDelete" data-id="{{= proid}}">ឈប់លក់</a>
+			| <a class="on-default edit-row" href="javascript:void(0)" id="btnDelete" data-id="{{= proid}}">{{if status}}ឈប់លក់{{else}}មានលក់{{/if}}</a>
 		
 		</td>
 	</tr> 
