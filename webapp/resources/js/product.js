@@ -43,7 +43,7 @@ $(document).ready(function(){
 			"salePrice" : $("#saleprice").val() || 0,
 			"currentcy" : ($("input[name='currentcy']:checked").val() == "true")? true : false,
 			"status" : true,
-			"imgUrl" : ""
+			"imgUrl" : $("#image").val()
 		 };
 		 $.ajax({
 			url : baseUrl + "/admin/productmg/addproduct",
@@ -59,7 +59,9 @@ $(document).ready(function(){
 	        		  alert("បង្កើត មុខទំនិញថ្មី បានជោគជ័យ។");
 	        		  $("#frmAdd").find("input:text").val('');
 	        		  $("#imgurl").val("");
-	        		  $("#dollar").attr("checked","checked");
+	        		  $("#image").val("");
+	        		  $("#images_sample").hide();
+	        		  $("#dollar").prop("checked",true);
 	        	  }else{
 	        		  alert("បង្កើត មុខទំនិញថ្មី មិនបានជោគជ័យ។");
 	        	  }

@@ -14,7 +14,7 @@
                   <th>តំលៃដើម</th>
                   <th>តំលែលក់ដុំ</th>
                   <th>តំលែលក់រាយ</th>
-                  <th>រូបភាព</th>
+                  <!-- <th>រូបភាព</th> -->
                   <th class="text-center">កែប្រែ</th>
                 </tr>
               </thead>
@@ -22,6 +22,7 @@
               </tbody>
             </table>
           </div>
+<%-- <td><img src= "${baseUrl}/resources/images/products/{{= imgurl}}" height="32" width="32"></td> --%>
 <script id="tblListTem" type="text/x-jquery-tmpl">
    	<tr>
 		<td class="hide">{{= proid}}</td>
@@ -32,11 +33,9 @@
 		<td>{{= costprice}}</td>
 		<td>{{= unitprice}}</td>
 		<td>{{= saleprice}}</td>
-		<td>{{= imgurl}}</td>
 		<td class="text-center">
 			<a class="on-default edit-row" href="${baseUrl}/admin/productmg/showproduct/{{= proid}}" id="btnUpdate" data-id="{{= proid}}"><i class="fa fa-pencil"></i></a>
 			| <a class="on-default edit-row" href="javascript:void(0)" id="btnDelete" data-id="{{= proid}}">{{if status}}ឈប់លក់{{else}}មានលក់{{/if}}</a>
-		
 		</td>
 	</tr> 
 </script>
