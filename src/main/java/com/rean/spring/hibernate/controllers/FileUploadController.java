@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping(value="admin/fileupload")
 public class FileUploadController {
 	@RequestMapping(value="/images", method = RequestMethod.POST)
-	public ResponseEntity<Map<String, Object>> addNewImages(@RequestParam("imgurl") MultipartFile file, HttpServletRequest request){
+	public ResponseEntity<Map<String, Object>> addNewImages(@RequestParam("imgUrl") MultipartFile file, HttpServletRequest request){
 		
 		String filename = "";
 		Map<String, Object> map = new HashMap<String, Object>();

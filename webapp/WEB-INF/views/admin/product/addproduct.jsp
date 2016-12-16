@@ -72,7 +72,7 @@
 						<div class="form-group ">
 							<span for="imgurl" class="control-label col-lg-2">រូបភាព</span>
 							<div class="col-lg-10">
-								<input class=" form-control" id="imgurl" name="imgurl" type="file">
+								<input class=" form-control" id="imgurl" name="imgUrl" type="file">
 								<input type="hidden" id="image" name="image" /> <img src="" id="images_sample" name="images_sample" class="img-thumbnail" style="display: none; width: 200px; height: 200px;">
 							</div>
 						</div>
