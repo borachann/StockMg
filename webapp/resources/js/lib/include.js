@@ -106,12 +106,13 @@
 
 		if((e.keyCode == 8) || (e.keyCode == 46) || ((e.keyCode >=37) && (e.keyCode <= 40)))
 			return ;
-		
 		var data = String.fromCharCode(e.which);	
-			var reg = new RegExp('^[0-9]+$');
-    	    if(!reg.test(data)){
-    	    	e.preventDefault();
-			}
+		if(e.keyCode == 44)
+			$(this).val($(this).val() + ".");
+		var reg = new RegExp('^[0-9]+$');
+	    if(!reg.test(data)){
+	    	e.preventDefault();
+		}
 	});	
 	
 	// validate not empty

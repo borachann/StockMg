@@ -78,8 +78,8 @@ public class ProductController {
 	}
 	@RequestMapping(value="/deleteproduct/{proId}")
 	@ResponseBody
-	public Boolean deleteProduct(@PathVariable("proId") int proId){
-		return productService.deleteProduct(proId);
+	public Boolean deleteProduct(@PathVariable("proId") int proId, @RequestParam("status") Boolean status){
+		return productService.deleteProduct(proId, status);
 	}
 	@RequestMapping(value="/addproduct", method = RequestMethod.POST)
 	@ResponseBody

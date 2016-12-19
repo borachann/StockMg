@@ -155,7 +155,7 @@ $(document).ready(function(){
 						{							
 			    	   availableTags[i]= 
 						         {
-						         	"label": data.unit[i].unitname,
+						         	"label": data.unit[i].unitname + " (" + data.unit[i].qty + " " + data.unit[i].convertto + ")",
 									"dataid": data.unit[i].unitid,
 									"dataqty": data.unit[i].qty
 						         };

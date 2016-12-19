@@ -62,6 +62,7 @@ $(document).ready(function(){
 	        		  $("#image").val("");
 	        		  $("#images_sample").hide();
 	        		  $("#dollar").prop("checked",true);
+	        		  $("#proname").focus();
 	        	  }else{
 	        		  alert("បង្កើត មុខទំនិញថ្មី មិនបានជោគជ័យ។");
 	        	  }
@@ -75,20 +76,39 @@ $(document).ready(function(){
 	 // delete product
 	 
 	 $(document).on("click", "#btnDelete", function(){
-		 if(!confirm("លោកអ្នកពិតជា ចង់ឈប់លក់ទំនិញនេះពិតមែន?"))
-			 return
-		$.ajax({
-			url: baseUrl + "/admin/productmg/deleteproduct/" + $(this).data("id"),
-			type: "GET",
-			dataType: "JSON",
-			success: function(data){
-				console.log(data);
-				location.href = baseUrl + "/admin/productmg";
-			},
-			error: function(data, error, status){
-				console.log("data ", data , " error ", error, " status ", status);
-			}
-		}); 
+		 if($(this).text()=="ឈប់លក់"){
+			 if(!confirm("លោកអ្នកពិតជា ចង់ឈប់លក់ទំនិញនេះពិតមែន?"))
+				 return
+			 $.ajax({
+					url: baseUrl + "/admin/productmg/deleteproduct/" + $(this).data("id"),
+					type: "GET",
+					dataType: "JSON",
+					data: {"status" : false},
+					success: function(data){
+						console.log(data);
+						location.href = baseUrl + "/admin/productmg";
+					},
+					error: function(data, error, status){
+						console.log("data ", data , " error ", error, " status ", status);
+					}
+				}); 
+		 }else{
+			 if(!confirm("លោកអ្នកពិតជា លក់ទំនិញនេះឡើងវីញ?"))
+				 return
+			 $.ajax({
+					url: baseUrl + "/admin/productmg/deleteproduct/" + $(this).data("id"),
+					type: "GET",
+					dataType: "JSON",
+					data: {"status" : true},
+					success: function(data){
+						console.log(data);
+						location.href = baseUrl + "/admin/productmg";
+					},
+					error: function(data, error, status){
+						console.log("data ", data , " error ", error, " status ", status);
+					}
+				}); 
+		 }
 	 });
 	 
 	 // to data for auto complete
@@ -150,7 +170,7 @@ $(document).ready(function(){
 						{							
 			    	   availableTags[i]= 
 						         {
-						         	"label": data.unit[i].unitname,
+						         	"label": data.unit[i].unitname + " (" + data.unit[i].qty + " " + data.unit[i].convertto + ")",
 									"dataid": data.unit[i].unitid,
 									"dataqty": data.unit[i].qty
 						         };

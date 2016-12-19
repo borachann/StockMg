@@ -9,7 +9,7 @@ public interface ProductService {
 
 	public List<Product> getAllProduct(Pagination pagination, String schStrName, boolean ispaging);
 	public Boolean addProduct(Product product);
-	public Boolean deleteProduct(int proId);
+	public Boolean deleteProduct(int proId, Boolean isSale);
 	public Boolean editProduct(Product product);
 	public Product showProduct(int proId);
 }

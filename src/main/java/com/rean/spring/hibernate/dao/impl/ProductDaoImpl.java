@@ -55,10 +55,10 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public Boolean deleteProduct(int proId) {
+	public Boolean deleteProduct(int proId, Boolean status) {
 		// TODO Auto-generated method stub
 		try{
-			sessionFactory.getCurrentSession().createSQLQuery("update products set status = false where proid =" + proId).executeUpdate();
+			sessionFactory.getCurrentSession().createSQLQuery("update products set status = " + status + " where proid =" + proId).executeUpdate();
 			return true;
 		}catch(Exception ex){
 			ex.printStackTrace();

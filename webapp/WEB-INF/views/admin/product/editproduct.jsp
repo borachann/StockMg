@@ -22,7 +22,7 @@
 						<div class="form-group ">
 							<span for="unitname" class="control-label col-lg-2">ប្រភេទឯកតា *</span>
 							<div class="col-lg-10">
-								<input class=" form-control" id="unitname" name="unitName" type="text" value="${product.unit.unitName}">
+								<input class=" form-control" id="unitname" name="unitName" type="text" value="${product.unit.unitName} (${product.unit.qty} ${product.unit.convertTo})">
 								<input type="hidden" id="unitId" name="unitId" value="${product.unit.unitId}">
 								<input type="hidden" id="unitQty" name="unitQty" value="${product.unit.qty}">
 							</div>
