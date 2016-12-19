@@ -10,6 +10,13 @@ public class FormProduct {
 	private BigDecimal costPrice;
 	private int unitId;
 	private int catId;
+	private int proId;
+	public int getProId() {
+		return proId;
+	}
+	public void setProId(int proId) {
+		this.proId = proId;
+	}
 	private Boolean status;
 	private Boolean currentcy;
 	private String imgUrl;

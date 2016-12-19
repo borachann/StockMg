@@ -37,9 +37,10 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Boolean editProduct(int proId) {
+	@Transactional
+	public Boolean editProduct(Product product) {
 		// TODO Auto-generated method stub
-		return null;
+		return productDao.editProduct(product);
 	}
 
 	@Override

@@ -47,10 +47,26 @@ public class ProductController {
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/updateproduct")
+	@RequestMapping(value="/updateproduct", method = RequestMethod.POST)
 	@ResponseBody
-	public Boolean updateProduct(@RequestBody Product product){
-		return null;
+	public Boolean updateProduct(@RequestBody FormProduct product){
+		Category category = new Category();
+		Unit unit = new Unit();
+		Product pro = new Product();
+		category.setCatId(product.getCatId());
+		unit.setUnitId(product.getUnitId());
+		pro.setProId(product.getProId());
+		pro.setProName(product.getProName());
+		pro.setCategory(category);
+		pro.setUnit(unit);
+		pro.setProQty(product.getProQty());
+		pro.setCostPrice(product.getCostPrice());
+		pro.setUnitPrice(product.getUnitPrice());
+		pro.setSalePrice(product.getSalePrice());
+		pro.setCurrentcy(product.getCurrentcy());
+		pro.setImgUrl(product.getImgUrl());
+		
+		return productService.editProduct(pro);
 		
 	}
 	@RequestMapping(value="/showproduct/{proId}")

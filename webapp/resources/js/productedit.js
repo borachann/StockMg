@@ -5,35 +5,40 @@ $(document).ready(function(){
 		location.href = baseUrl + "/admin/productmg";
 	});
 	
-	$("#frmAdd").submit(function(){
-		alert();
-		/*   var json = {
-				   "unitId" : $("#unitId").val(),
-				   "unitName" : $("#unitName").val(),
-					"qty" : $("#qty").val(),
-					"convertTo" : $("#convertTo").val(),
-					"status" : true
-		   }
-		   $.ajax({
-			  url : baseUrl + "/admin/unitmg/updateunit/",
-			  type: "POST",
-			  data: JSON.stringify(json),
-			  beforeSend: function(xhr) {
-	              xhr.setRequestHeader("Accept", "application/json");
-	              xhr.setRequestHeader("Content-Type", "application/json");
-	          },
-	          success: function(data) {
-	        	  if(data){
-	        		  alert("កែប្រែ ប្រភេទឯកតា បានជោគជ័យ។");
-	        		  location.href = baseUrl + "/admin/unitmg";
-	        	  }else{
-	        		  alert("កែប្រែ ប្រភេទឯកតាមិនបានជោគជ័យ។");
-	        	  }
-	          },
-	          error: function(data, status, er){
-	        	  console.log("error : " + data + " status : " + status + " er : " + er );
-	          }
-		   });*/
+	$("#frmAdd").submit(function(e){
+		e.preventDefault();
+		if($("#proname").val() == ""){
+			 alert("សូមបញ្ចូល ឈ្មោះទំនិញ។");
+			 return;
+		 }
+		 if($("#catName").val() == ""){
+			 alert("សូមបញ្ចូល ប្រភេទទំនិញ។");
+			 return;
+		 }
+		 if($("#catId").val() == ""){
+			 alert("ឈ្មោះប្រភេទទំនិញ មិនត្រឹមត្រូវ។");
+			 return;
+		 }
+		 if($("#unitname").val() == ""){
+			 alert("សូមបញ្ចូល ប្រភេទឯកតា។");
+			 return;
+		 }
+		 if($("#unitId").val() == ""){
+			 alert("ឈ្មោះប្រភេទឯកតា មិនត្រឹមត្រូវ។");
+			 return;
+		 }
+		 
+		$("#frmAdd").ajaxSubmit({
+			url: "${baseUrl}/admin/productmg/updateproduct",
+			dataType: "JSON",
+			type: "POST",
+			success: function(data){
+				console.log(data);
+			},
+			error: function(err){
+				console.log("error: ", err);
+			}
+		});
 	});
 	
 	$("#imgurl").change(function(){	

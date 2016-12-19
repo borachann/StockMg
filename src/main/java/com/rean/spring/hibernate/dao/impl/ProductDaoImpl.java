@@ -60,8 +60,15 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public Boolean editProduct(int proId) {
+	public Boolean editProduct(Product product) {
 		// TODO Auto-generated method stub
+		try{
+			sessionFactory.getCurrentSession().update(product);getClass();
+			return true;
+		}catch(Exception ex){
+			ex.printStackTrace();
+			System.out.println("error message: " + ex.getMessage());
+		}
 		return null;
 	}
 
