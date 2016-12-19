@@ -72,6 +72,25 @@ $(document).ready(function(){
 		 });
 	 });
 	 
+	 // delete product
+	 
+	 $(document).on("click", "#btnDelete", function(){
+		 if(!confirm("លោកអ្នកពិតជា ចង់ឈប់លក់ទំនិញនេះពិតមែន?"))
+			 return
+		$.ajax({
+			url: baseUrl + "/admin/productmg/deleteproduct/" + $(this).data("id"),
+			type: "GET",
+			dataType: "JSON",
+			success: function(data){
+				console.log(data);
+				location.href = baseUrl + "/admin/productmg";
+			},
+			error: function(data, error, status){
+				console.log("data ", data , " error ", error, " status ", status);
+			}
+		}); 
+	 });
+	 
 	 // to data for auto complete
 	 $("#popUpAddNew").click(function(){
 		 setAutoCompleteCategory();
@@ -153,6 +172,8 @@ $(document).ready(function(){
 			});
 			return ;
 	 }
+	 
+	 // image upload
 	 $("#imgurl").change(function(){		
 			$("#frmAdd").ajaxSubmit({
 				url: baseUrl + "/admin/fileupload/images",

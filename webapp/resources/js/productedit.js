@@ -1,5 +1,7 @@
 $(document).ready(function(){
 	$("#sideBarProduct").addClass("active");
+	setAutoCompleteCategory();
+	setAutoCompleteUnit();
 
 	$("#btn_cancel").click(function(){
 		location.href = baseUrl + "/admin/productmg";
@@ -51,7 +53,7 @@ $(document).ready(function(){
 					success: function(data){
 						if(data){
 			        		  alert("កែប្រែ មុខទំនិញ បានជោគជ័យ។");
-			        		  //location.href = baseUrl + "/admin/productmg";
+			        		  location.href = baseUrl + "/admin/productmg";
 			        	  }else{
 			        		  alert("កែប្រែ មុខទំនិញ មិនបានជោគជ័យ។");
 			        	  }
@@ -99,4 +101,80 @@ $(document).ready(function(){
 		    }
 		});
 	});
+	
+	// get all object of category
+	 function setAutoCompleteCategory(){
+		 $.ajax({ 
+			    url: baseUrl + "/admin/categorymg/getallcategory", 
+			    type: 'GET', 
+			    beforeSend: function(xhr) {
+                xhr.setRequestHeader("Accept", "application/json");
+                xhr.setRequestHeader("Content-Type", "application/json");
+            },
+			    success: function(data) { 
+			       console.log(data); 
+			       var availableTags=[];
+			       for(i=0; i<data.category.length; i++)
+						{							
+			    	   availableTags[i]= 
+						         {
+						         	"label": data.category[i].catname,
+									"dataid": data.category[i].catid 
+						         };
+						}
+			       $("#catName" ).autocomplete({
+			    	   select: function(event, ui){
+			    		   $("#catId").val(ui.item.dataid);
+			    	   },
+			    	   maxShowItems: 8,
+			           source: availableTags
+			       });
+			       $(".ui-autocomplete").css("position", "absolute");
+				   $(".ui-autocomplete").css("z-index", "2147483647");
+			    },
+			    error:function(data,status,er) { 
+			        console.log("error: "+data+" status: "+status+" er:"+er);
+			    }
+			});
+			return ;
+		} 
+	 
+	 // get all objects of unit
+	 function setAutoCompleteUnit(){
+		 $.ajax({ 
+			    url: baseUrl + "/admin/unitmg/getallunit", 
+			    type: 'GET', 
+			    beforeSend: function(xhr) {
+             xhr.setRequestHeader("Accept", "application/json");
+             xhr.setRequestHeader("Content-Type", "application/json");
+         },
+			    success: function(data) { 
+			       console.log(data); 
+			       var availableTags=[];
+			       for(i=0; i<data.unit.length; i++)
+						{							
+			    	   availableTags[i]= 
+						         {
+						         	"label": data.unit[i].unitname,
+									"dataid": data.unit[i].unitid,
+									"dataqty": data.unit[i].qty
+						         };
+						}
+			       $("#unitname" ).autocomplete({
+			    	   select: function(event, ui){
+			    		   $("#unitId").val(ui.item.dataid);
+			    		   $("#unitQty").val(ui.item.dataqty);
+			    	   },
+			    	   maxShowItems: 8,
+			           source: availableTags
+			       });
+			       $(".ui-autocomplete").css("position", "absolute");
+				   $(".ui-autocomplete").css("z-index", "2147483647");
+			    },
+			    error:function(data,status,er) { 
+			        console.log("error: "+data+" status: "+status+" er:"+er);
+			    }
+			});
+			return ;
+	 }
 });

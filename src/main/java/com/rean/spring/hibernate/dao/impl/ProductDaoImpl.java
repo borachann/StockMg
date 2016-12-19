@@ -1,6 +1,7 @@
 package com.rean.spring.hibernate.dao.impl;
 
 import java.util.List;
+import java.util.concurrent.Exchanger;
 
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
@@ -24,7 +25,7 @@ public class ProductDaoImpl implements ProductDao {
 		// TODO Auto-generated method stub
 		
 		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery("select " 
-        + "pro.proId, pro.catId, pro.costPrice, pro.imgUrl, pro.proName, pro.proQty, pro.salePrice, pro.status, pro.unitId, pro.unitPrice," 
+        + "pro.proId, pro.currentcy, pro.catId, pro.costPrice, pro.imgUrl, pro.proName, pro.proQty, pro.salePrice, pro.status, pro.unitId, pro.unitPrice," 
         + " cat.catName, unit.convertTo, unit.qty, unit.unitName" 
         + " from products pro left outer join Category cat on pro.catId=cat.catId left outer join unit unit on pro.unitId=unit.unitId where pro.proname like '%" + schStrName + "%' ORDER BY pro.status DESC, pro.proname");
 		if(isPagination){
@@ -56,7 +57,14 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public Boolean deleteProduct(int proId) {
 		// TODO Auto-generated method stub
-		return null;
+		try{
+			sessionFactory.getCurrentSession().createSQLQuery("update products set status = false where proid =" + proId).executeUpdate();
+			return true;
+		}catch(Exception ex){
+			ex.printStackTrace();
+			System.out.println("Error meassage: " + ex.getMessage());
+		}
+		return false;
 	}
 
 	@Override
