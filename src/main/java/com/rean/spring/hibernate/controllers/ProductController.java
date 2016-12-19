@@ -47,7 +47,7 @@ public class ProductController {
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/updateproduct", method = RequestMethod.POST)
+	@RequestMapping(value="/updateproduct", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Boolean updateProduct(@RequestBody FormProduct product){
 		Category category = new Category();
@@ -64,6 +64,7 @@ public class ProductController {
 		pro.setUnitPrice(product.getUnitPrice());
 		pro.setSalePrice(product.getSalePrice());
 		pro.setCurrentcy(product.getCurrentcy());
+		pro.setStatus(product.getStatus());
 		pro.setImgUrl(product.getImgUrl());
 		
 		return productService.editProduct(pro);

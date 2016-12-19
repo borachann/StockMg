@@ -4,7 +4,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<h3 class="page-header">កែប្រែ ទំនិញ</h3>
 	
-					<form class="cmxform form-horizontal tasi-form" id="frmAdd"	method="POST" action="${baseUrl}/admin/productmg/updateproduct" enctype="multipart/form-data">
+					<form class="cmxform form-horizontal tasi-form" id="frmAdd"	method="POST" action="#" enctype="multipart/form-data">
 						<input type="hidden" id="proId" name="proId" value="${product.proId}">
 						<div class="form-group ">
 							<span for="proname" class="control-label col-lg-2">ឈ្មោះទំនិញ *</span>

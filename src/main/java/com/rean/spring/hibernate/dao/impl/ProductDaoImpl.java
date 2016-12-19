@@ -63,7 +63,7 @@ public class ProductDaoImpl implements ProductDao {
 	public Boolean editProduct(Product product) {
 		// TODO Auto-generated method stub
 		try{
-			sessionFactory.getCurrentSession().update(product);getClass();
+			sessionFactory.getCurrentSession().update(product);
 			return true;
 		}catch(Exception ex){
 			ex.printStackTrace();

@@ -11,12 +11,7 @@ public class FormProduct {
 	private int unitId;
 	private int catId;
 	private int proId;
-	public int getProId() {
-		return proId;
-	}
-	public void setProId(int proId) {
-		this.proId = proId;
-	}
+	private String image;
 	private Boolean status;
 	private Boolean currentcy;
 	private String imgUrl;
@@ -79,5 +74,18 @@ public class FormProduct {
 	}
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
+	}
+
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public int getProId() {
+		return proId;
+	}
+	public void setProId(int proId) {
+		this.proId = proId;
 	}
 }
