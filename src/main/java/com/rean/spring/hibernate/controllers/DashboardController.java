@@ -30,8 +30,8 @@ public class DashboardController {
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> getStockProduct(){
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("stockProduct", dashboardService.getStockProduct());
-		
+		map.put("dollar", dashboardService.getStockProduct(true));
+		map.put("reil", dashboardService.getStockProduct(false));
 		return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
 	}
 	

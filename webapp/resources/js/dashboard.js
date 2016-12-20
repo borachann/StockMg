@@ -36,6 +36,8 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	// get amount in product
 	function getStockProduct(){
 		$.ajax({
 			url: baseUrl + "/admin/dashboard/getstockproduct",
@@ -49,6 +51,7 @@ $(document).ready(function(){
 		});
 	}
 	
+	// get get rate money
 	function getRate(){
 		$.ajax({
 			url: baseUrl + "/admin/dashboard/getrate",
@@ -68,6 +71,7 @@ $(document).ready(function(){
 		});
 	}
 	
+	// create rate money
 	function createRate(){
 		$.ajax({
 			url: baseUrl + "/admin/ratemg/createrate",

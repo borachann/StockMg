@@ -17,9 +17,9 @@ public class DashboardServiceImpl implements DashboardService {
 
 	@Override
 	@Transactional
-	public List<Long> getStockProduct() {
+	public List<Long> getStockProduct(Boolean isCurrentcy) {
 		// TODO Auto-generated method stub
-		return dashboarDao.getStockProduct();
+		return dashboarDao.getStockProduct(isCurrentcy);
 	}
 
 	@Override

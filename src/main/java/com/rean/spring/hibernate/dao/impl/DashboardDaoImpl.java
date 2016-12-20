@@ -18,10 +18,11 @@ public class DashboardDaoImpl implements DashboardDao {
 	private SessionFactory sessionFactory;
 	
 	@Override
-	public List<Long> getStockProduct() {
+	public List<Long> getStockProduct(Boolean isCurrentcy) {
 		// TODO Auto-generated method stub
 		try{
-			SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery("select sum(unitprice) as amount from products group by currentcy order by currentcy");
+			SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery("SELECT  pro.unitprice,pro.proqty , uni.qty, pro.saleprice " +
+						"from products pro INNER JOIN unit uni ON pro.unitid = uni.unitid WHERE pro.currentcy =" + isCurrentcy);
 			query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
 			return query.list();
 		}catch(Exception ex){
