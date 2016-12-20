@@ -110,3 +110,6 @@ a.glyphicon:hover{
 	color: DarkGrey;
 	text-decoration: none;
 }
+.imghover:hover{
+	cursor: pointer;
+}
