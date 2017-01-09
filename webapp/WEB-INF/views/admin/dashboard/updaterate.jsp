@@ -16,7 +16,7 @@
 						<div class="form-group ">
 							<span for="newRate" class="control-label col-lg-2">អត្រាប្រាក់ *</span>
 							<div class="col-lg-10">
-								<input class=" form-control notEmpty" id="newRate" name="newRate" type="text">
+								<input class=" form-control numOnly" id="newRate" name="newRate" type="text">
 							</div>
 						</div>
 					

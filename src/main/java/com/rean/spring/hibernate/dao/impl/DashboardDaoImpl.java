@@ -21,7 +21,7 @@ public class DashboardDaoImpl implements DashboardDao {
 	public List<Long> getStockProduct(Boolean isCurrentcy) {
 		// TODO Auto-generated method stub
 		try{
-			SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery("SELECT  pro.unitprice,pro.proqty , uni.qty, pro.saleprice " +
+			SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery("SELECT sum((pro.proqty/uni.qty)*pro.costprice) as amount  " +
 						"from products pro INNER JOIN unit uni ON pro.unitid = uni.unitid WHERE pro.currentcy =" + isCurrentcy);
 			query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
 			return query.list();

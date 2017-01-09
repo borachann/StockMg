@@ -12,6 +12,11 @@ $(document).ready(function(){
 	
 	// update rate money
 	$(document).on("click", "#btnupdate", function(){
+		if($("#newRate").val() == ""){
+			alert("សូមបញ្ចូល អត្រាប្រាក់");
+			$("#newRate").focus();
+			return;
+		}
 		var json = {
 				"rateId" : $("#rateId").val(),
 				"rateMoney": $("#newRate").val()
@@ -27,8 +32,9 @@ $(document).ready(function(){
 	          },
 			success: function(data){
 				if(data){
-					$("#rate").text($("#newRate").val());
+					$("#rate").text(numeral($("#newRate").val()).format('0,0'));
 					alert("ការកែប្រែ អត្រាប្រាក់បានជោគជ័យ");
+					$("#form_add").modal('hide');
 				}
 			},
 			error: function(data, error, status){
@@ -42,8 +48,8 @@ $(document).ready(function(){
 		$.ajax({
 			url: baseUrl + "/admin/dashboard/getstockproduct",
 			type: "GET",
-			success: function(data){
-				$("#productStock").text(data.stockProduct[1].amount + " $, " + data.stockProduct[0].amount + " ៛");
+			success: function(data){console.log(data);
+				$("#productStock").text(numeral(data.dollar[0].amount).format('0,0') + " $ - " + numeral(data.reil[0].amount).format('0,0') + " ៛");
 			},
 			error: function(data, error, status){
 				console.log("data: " , data, " error: ", error, " status: ", status );
@@ -60,7 +66,7 @@ $(document).ready(function(){
 				if(data.rate == null){
 					createRate();
 				}else{
-					$("#rate").text(data.rate.rateMoney);
+					$("#rate").text(numeral(data.rate.rateMoney).format('0,0'));
 					$("#newRate").val(data.rate.rateMoney);
 					$("#rateId").val(data.rate.rateId);
 				}

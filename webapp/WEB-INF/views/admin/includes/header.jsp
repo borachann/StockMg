@@ -1,10 +1,15 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%-- <%
-	String _sLocalTime_comm = DateTime.getInstance().getDate("yyyymmddhh24mi");
-%> --%>
+<%
+	DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+	Date dateobj = new Date();
+	String _sLocalTime = df.format(dateobj);
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,8 +35,9 @@
 	<script src="${pageContext.request.contextPath}/resources/js/lib/moment.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery-ui.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery.ui.autocomplete.scroll.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/lib/include.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/xregexp-all.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/lib/numeral.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/lib/include.js"></script>
 	<title>Dashboard Admin</title>
 </head>
 <body>
