@@ -32,7 +32,7 @@ $(document).ready(function(){
 	          },
 			success: function(data){
 				if(data){
-					$("#rate").text(numeral($("#newRate").val()).format('0,0'));
+					$("#rate").text(numberWithCommas($("#newRate").val()));
 					alert("ការកែប្រែ អត្រាប្រាក់បានជោគជ័យ");
 					$("#form_add").modal('hide');
 				}
@@ -49,7 +49,7 @@ $(document).ready(function(){
 			url: baseUrl + "/admin/dashboard/getstockproduct",
 			type: "GET",
 			success: function(data){console.log(data);
-				$("#productStock").text(numeral(data.dollar[0].amount).format('0,0') + " $ - " + numeral(data.reil[0].amount).format('0,0') + " ៛");
+				$("#productStock").text(numberWithCommas(data.dollar[0].amount) + " $ - " + numberWithCommas(data.reil[0].amount) + " ៛");
 			},
 			error: function(data, error, status){
 				console.log("data: " , data, " error: ", error, " status: ", status );
@@ -66,7 +66,7 @@ $(document).ready(function(){
 				if(data.rate == null){
 					createRate();
 				}else{
-					$("#rate").text(numeral(data.rate.rateMoney).format('0,0'));
+					$("#rate").text(numberWithCommas(data.rate.rateMoney));
 					$("#newRate").val(data.rate.rateMoney);
 					$("#rateId").val(data.rate.rateId);
 				}

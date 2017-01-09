@@ -38,7 +38,7 @@
 	<script src="${pageContext.request.contextPath}/resources/js/lib/xregexp-all.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/numeral.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/datepicker.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/lib/include.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/lib/include.js?<%=_sLocalTime%>"></script>
 	<title>Dashboard Admin</title>
 </head>
 <body>

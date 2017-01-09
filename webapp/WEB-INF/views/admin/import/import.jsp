@@ -28,5 +28,6 @@
 	</tr> 
 </script>
 <%@ include file="../includes/pagination.jsp" %>
+<%@ include file="addimport.jsp" %>
 <script src="${baseUrl}/resources/js/import.js?<%=_sLocalTime%>"></script>	
 <%@ include file="../includes/footer.jsp" %>

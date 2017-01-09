@@ -50,6 +50,10 @@
 			}
 		b = true;
 	}
+	function numberWithCommas(numberToFormat){
+		if(numberToFormat == null || numberToFormat == "") return "";
+		return numberToFormat.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 	// function for set pagination
 	setPagination = function(totalPage, currentPage) {
 		$('#PAGINATION').bootpag({
