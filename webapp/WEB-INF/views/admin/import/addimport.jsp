@@ -50,6 +50,7 @@
 										<th>ឈ្មោះទំនិញ</th>
 										<th style="text-align: center;">ចំនួន</th>
 										<th style="text-align: center;">តំលៃដើម</th>
+										<th style="text-align: center;">សរុប</th>
 										<th style="text-align: center;">កែប្រែ</th>
 									</tr>
 								</thead>
@@ -60,6 +61,13 @@
 						</div>
 					</div>
 					<div class="form-group" align="right">
+						<div class="form-group ">
+							<span for="costprice" class="control-label col-lg-2">តំលៃដើម *</span>
+							<div class="col-lg-10">
+								<input class=" form-control numOnly" id="costprice" name="costprice" type="text" required="required">
+							</div>
+						</div>
+						
 						<button class="btn btn-success waves-effect waves-light" id="savebtn" type="button">រក្សាទុក</button>
 						<button class="btn btn-default waves-effect" id="cencelBtn" type="button">បោះបង់</button>
 					</div>
