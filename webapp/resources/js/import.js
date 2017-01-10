@@ -1,15 +1,179 @@
 $(document).ready(function(){
 	$("#sideBarImport").addClass("active");
 	
+	var _thisRow;
+	
 	// set calendar
 	setCalendar();
 	
 	// add import list to temporary 
 	$(document).on("click","#btnadd", function(){
+		var _isExist = false;
+		if(validationInput())
+			return;
+		$("#tbllistimport tr").each(function(){
+			if($(this).find("td").eq(0).text() == $("#proid").val()){
+				alert("អ្នកបានបញ្ចូល ឈ្មោះទំនិញនេះម្តងរូចហើយ។");
+				$("#proname").focus();
+				_isExist = true;
+				return;
+			}
+		});
+		if(_isExist) return;
+		var st = "";
+		st += "<tr><td style='display: none;'>" + $('#proid').val() +"</td>";
+		st += "<td>" + ($("#tbllistimport tr").length + 1) +"</td>"; 
+		st += "<td>" + $("#proname").val() +"</td>";
+		st += "<td>" + numberWithCommas($("#proqty").val()) +"</td>";
+		st += "<td>" + numberWithCommas($("#costprice").val()) +"</td>";
+		st += "<td class='text-center'><a href= 'javascript:;' id='btnedit'>កែប្រែ</a> | <a href='javascript:;' id='btndelete'>លុប</a></td>";
+		st += "<td style='display: none;'>" + $('#unitQty').val() +"</td></tr>";
+		$("#frmAdd").find("input:text").val('');
+		$("#frmAdd").find("input:hidden").val('');
+		
+		$("#tbllistimport").append(st);
+	});
+	
+	// edit import product
+	$(document).on("click","#btnedit", function(){
+		_thisRow = $(this).closest("tr");
+		$("#proid").val($(this).closest("tr").children().eq(0).text());
+		$("#proname").val($(this).closest("tr").children().eq(2).text());
+		$("#proqty").val($(this).closest("tr").children().eq(3).text());
+		$("#costprice").val($(this).closest("tr").children().eq(4).text());
+		$("#unitQty").val($(this).closest("tr").children().eq(6).text());
+		$("#btnadd").attr("id","btnaddupdate");
+	});
+	
+	// update import product
+	$(document).on("click","#btnaddupdate", function(){
+		if(validationInput())
+			return;
+		_thisRow.children().eq(0).html($("#proid").val());
+		_thisRow.children().eq(2).html($("#proname").val());
+		_thisRow.children().eq(3).html($("#proqty").val());
+		_thisRow.children().eq(4).html($("#costprice").val());
+		_thisRow.children().eq(6).html($("#unitQty").val());
+		$("#frmAdd").find("input:text").val('');
+		$("#frmAdd").find("input:hidden").val('');
+		$("#btnaddupdate").attr("id","btnadd");
+	});
+	
+	// delete import product
+	$(document).on("click","#btndelete", function(){
+		if(confirm("លោកអ្នក ពិតជាចង់លុបទំនិញនេះចេញវិញ?")){}
+			$(this).closest("tr").remove();
+	});
+	
+	// cancel import list
+	$(document).on("click","#cencelBtn", function(){
+		if(confirm("លោកអ្នក ពិតជាចង់លុបចោលនៃការនាំទំនិញនេះ?")){
+			$("#tbllistimport").html("");
+			$('#form_add_category').modal('hide');
+		}
+	});
+	
+	// save import 
+	$(document).on("click","#savebtn", function(){
+		if($("#tbllistimport tr").length == 0){
+			alert("លោកមិនមាន ទំនិញសំរាប់រក្សាទុកទេ");
+			return;
+		}
+		var importDetail = [];
+		$("#tbllistimport tr").each(function(){
+			json = {
+					"proId" : ($(this).find("td").eq(0).text()),
+					"proQty": ($(this).find("td").eq(3).text()),
+					"costPrice": ($(this).find("td").eq(4).text()),
+					"unitQty" : ($(this).find("td").eq(4).text())
+			};
+			importDetail.push(json);
+		});
+		$.ajax({
+			url: baseUrl + "/admin/importmg/saveimportpro",
+			type: "POST",
+			dataType: "JSON",
+			data: JSON.stringify(importDetail),
+			beforeSend: function(xhr) {
+		            xhr.setRequestHeader("Accept", "application/json");
+		            xhr.setRequestHeader("Content-Type", "application/json");
+	        },
+	        success: function(data){
+				console.log(data);
+				if(data==true){
+					alert(" Successfully Added");
+				}else{
+					alert("Please try to insert again!");
+				}
+	        },
+			error:function(data, status,er){
+				console.log("error: " + data + "status: " + status + "er: ");
+			}
+		});
+	});
+	
+	// clear input text
+	$(document).on("click","#canceladd", function(){
+		$("#frmAdd").find("input:text").val('');
+		$("#proname").focus();
+		$("#btnaddupdate").attr("id","btnadd");
+	});
+	
+	// open popup for set auto complete
+	$("#popUpAddNew").click(function(){
+		setAutoCompleteProduct();
+	});
+	
+	
+	
+	
+	
+	
+	// get all product for set auto completed
+	function setAutoCompleteProduct(){
+		 $.ajax({ 
+			    url: baseUrl + "/admin/productmg/listproductsautocomplete", 
+			    type: 'GET', 
+			    beforeSend: function(xhr) {
+             xhr.setRequestHeader("Accept", "application/json");
+             xhr.setRequestHeader("Content-Type", "application/json");
+         },
+			    success: function(data) {
+			       console.log(data); 
+			       var availableTags=[];
+			       for(i=0; i<data.allObject.length; i++)
+						{							
+			    	   availableTags[i]= 
+						         {
+						         	"label": data.allObject[i].proname,
+									"dataid": data.allObject[i].proid,
+									"dataqty": data.allObject[i].qty
+						         };
+						}
+			       $("#proname" ).autocomplete({
+			    	   select: function(event, ui){
+			    		   $("#proid").val(ui.item.dataid);
+			    		   $("#unitQty").val(ui.item.dataqty);
+			    	   },
+			    	   maxShowItems: 8,
+			           source: availableTags
+			       });
+			       $(".ui-autocomplete").css("position", "absolute");
+				   $(".ui-autocomplete").css("z-index", "2147483647");
+			    },
+			    error:function(data,status,er) {
+			        console.log("error: "+data+" status: "+status+" er:"+er);
+			    }
+			});
+			return ;
+	 }
+	
+	// validation not empty data
+	function validationInput() {
 		if($("#proname").val() == ""){
 			alert("សូមបញ្ចូល ឈ្មោះទំនិញ។");
 			$("#proname").focus();
-			return;
+			return true;
 		}
 		/*if($("#proid").val() == ""){
 			alert("ឈ្មោះទំនិញ មិនត្រឹមត្រូវ។");
@@ -18,58 +182,17 @@ $(document).ready(function(){
 		if($("#proqty").val() == ""){
 			alert("សូមបញ្ចូល ចំនួនទំនិញ។");
 			$("#proqty").focus();
-			return;
+			return true;
 		}
 		if($("#costprice").val() == ""){
 			alert("សូមបញ្ចូល តំលៃដើម។");
 			$("#costprice").focus();
-			return;
+			return true;
 		}
-		var st = "";
-		st += "<tr><td style='display: none;'>" + $('#proid').val() +"</td>";
-		st += "<td>" + ($("#tbllistimport tr").length + 1) +"</td>"; 
-		st += "<td>" + $("#proname").val() +"</td>";
-		st += "<td>" + numberWithCommas($("#proqty").val()) +"</td>";
-		st += "<td>" + numberWithCommas($("#costprice").val()) +"</td>";
-		st += "<td class='text-center'><a href= 'javascript:;' id='btnedit'>Edit</a> | <a href='javascript:;' id='btndelete'>Delete</a></td></tr>";
-		$("#frmAdd").find("input:text").val('');
-		$("#tbllistimport").append(st);
-	});
+		return false;
+	}
 	
-	// edit import product
-	$(document).on("click","#btnedit", function(){alert(parent().children().eq(0).text());
-		$("#proid").val($(this).parent().children().eq(0).text());
-		$("#proname").val($(this).parent().children().eq(2).text());
-		$("#proqty").val($(this).parent().children().eq(3).text());
-		$("#costprice").val($(this).parent().children().eq(4).text());
-	});
-	
-	
-	// save import 
-	$(document).on("click","#savebtn", function(){
-		
-	});
-	
-	// clear input text
-	$(document).on("click","#canceladd", function(){
-		$("#frmAdd").find("input:text").val('');
-		$("#proname").focus();
-	});
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// set Calendar
 	function setCalendar(){
 		$("#sDate").datepicker({
 			setDate: new Date(),

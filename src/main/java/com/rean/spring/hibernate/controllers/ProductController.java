@@ -30,11 +30,14 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+	
+	// return product view
 	@RequestMapping(value="")
 	public String productAdmin(){
 		return "admin/product/product";
 	}
 	
+	// get all product for admin
 	@RequestMapping(value="/listproducts", method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> getAllProducts(Pagination pagination, @RequestParam("schStrName") String schStrName){
@@ -47,6 +50,16 @@ public class ProductController {
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 	}
 	
+	// get all product for auto complete
+	@RequestMapping(value="/listproductsautocomplete", method=RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> getAllProductsAutoComplete(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("allObject", productService.getAllProduct(null, "", false));
+		return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
+	}
+	
+	// update product
 	@RequestMapping(value="/updateproduct", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Boolean updateProduct(@RequestBody FormProduct product){
@@ -66,21 +79,24 @@ public class ProductController {
 		pro.setCurrentcy(product.getCurrentcy());
 		pro.setStatus(product.getStatus());
 		pro.setImgUrl(product.getImgUrl());
-		
 		return productService.editProduct(pro);
-		
 	}
+	
+	// open view for update product
 	@RequestMapping(value="/showproduct/{proId}")
 	public String showProduct(Model model, @PathVariable("proId") int proId){
 		model.addAttribute("product", productService.showProduct(proId));
 		return "admin/product/editproduct";
-		
 	}
+	
+	// update product status (delete)
 	@RequestMapping(value="/deleteproduct/{proId}")
 	@ResponseBody
 	public Boolean deleteProduct(@PathVariable("proId") int proId, @RequestParam("status") Boolean status){
 		return productService.deleteProduct(proId, status);
 	}
+	
+	// save product
 	@RequestMapping(value="/addproduct", method = RequestMethod.POST)
 	@ResponseBody
 	public Boolean addProduct(@RequestBody FormProduct product){

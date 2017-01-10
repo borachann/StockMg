@@ -3,13 +3,16 @@ package com.rean.spring.hibernate.entities;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -20,25 +23,27 @@ public class Import {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="imp_seq_id")
 	@SequenceGenerator(name="imp_seq_id", sequenceName="imp_seq_id", allocationSize=1, initialValue=1)
+	@Column(name="impid")
 	
-	private int imId;
+	private int impId;
 	private Date impDate;
 	private BigDecimal impAmount;
 	
-	@OneToOne(mappedBy="imported", cascade = CascadeType.ALL)
-	private ImportDetail importDetail;
+	@OneToMany(mappedBy = "pk1.importProduct", cascade = CascadeType.ALL)
+	private Set<ImportDetail> importDetail = new HashSet<ImportDetail>();
 	
-	public ImportDetail getImportDetail() {
+	
+	public Set<ImportDetail> getImportDetail() {
 		return importDetail;
 	}
-	public void setImportDetail(ImportDetail importDetail) {
+	public void setImportDetail(Set<ImportDetail> importDetail) {
 		this.importDetail = importDetail;
 	}
-	public int getImId() {
-		return imId;
+	public int getImpId() {
+		return impId;
 	}
-	public void setImId(int imId) {
-		this.imId = imId;
+	public void setImpId(int impId) {
+		this.impId = impId;
 	}
 	public Date getImpDate() {
 		return impDate;

@@ -18,6 +18,7 @@
 							<div class="col-lg-10">
 								<input class=" form-control" id="proname" name="proname" type="text" required="required">
 								<input class=" form-control" id="proid" name="proid" type="hidden" required="required">
+								<input class=" form-control" id="unitQty" name="unitQty" type="hidden" required="required">
 							</div>
 						</div>
 						<div class="form-group ">
