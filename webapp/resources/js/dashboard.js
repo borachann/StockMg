@@ -49,7 +49,7 @@ $(document).ready(function(){
 			url: baseUrl + "/admin/dashboard/getstockproduct",
 			type: "GET",
 			success: function(data){console.log(data);
-				$("#productStock").text(numberWithCommas(data.dollar[0].amount) + " $ - " + numberWithCommas(data.reil[0].amount) + " ៛");
+				$("#productStock").text(numberWithCommas(data.dollar[0].amount.toFixed(2)) + " $ - " + numberWithCommas(data.reil[0].amount.toFixed(0)) + " ៛");
 			},
 			error: function(data, error, status){
 				console.log("data: " , data, " error: ", error, " status: ", status );
