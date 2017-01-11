@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.rean.spring.hibernate.dao.ImportDao;
+import com.rean.spring.hibernate.entities.Import;
 import com.rean.spring.hibernate.form.FormProduct;
 import com.rean.spring.hibernate.service.ImportService;
 
@@ -20,6 +21,13 @@ public class ImportServiceImpl implements ImportService {
 	public Boolean saveImportPro(List<FormProduct> formProduct) {
 		// TODO Auto-generated method stub
 		return importDao.saveImportPro(formProduct);
+	}
+
+	@Override
+	@Transactional
+	public List<Import> getImportPro(String startDate, String endDate) {
+		// TODO Auto-generated method stub
+		return importDao.getImportPro(startDate, endDate);
 	}
 
 }

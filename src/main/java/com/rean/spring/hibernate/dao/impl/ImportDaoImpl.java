@@ -61,4 +61,10 @@ public class ImportDaoImpl implements ImportDao {
 		return false;
 	}
 
+	@Override
+	public List<Import> getImportPro(String startDate, String endDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
