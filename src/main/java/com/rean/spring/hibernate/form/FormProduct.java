@@ -9,6 +9,7 @@ public class FormProduct {
 	private BigDecimal unitPrice;
 	private BigDecimal costPrice;
 	private BigDecimal unitQty;
+	private BigDecimal totalAmount;
 	private int unitId;
 	private int catId;
 	private int proId;
@@ -94,5 +95,11 @@ public class FormProduct {
 	}
 	public void setUnitQty(BigDecimal unitQty) {
 		this.unitQty = unitQty;
+	}
+	public BigDecimal getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(BigDecimal totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 }

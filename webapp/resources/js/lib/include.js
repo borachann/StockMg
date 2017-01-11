@@ -3,6 +3,23 @@
 	var b = true;
 	var s = false;
 	
+	//get globalRate;
+	function getGlobalRate(){
+		$.ajax({
+			url: baseUrl + "/admin/dashboard/getrate",
+			type: "GET",
+			success: function(data){
+				if(data.rate != undefined){
+					$("#globalRate").val(data.rate.rateMoney);
+				}
+			},
+			error: function(data, error, status){
+				console.log("data: " , data, " error: ", error, " status: ", status );
+			}
+		});
+	}
+	
+	// set all object to tmpl
 	function getAllCurrentObject(currentPage){
 		var json ={
 				"schStrName" : $("#schStrName").val(),
@@ -38,6 +55,7 @@
 		});
 	}
 	
+	//set order list of table
 	function setOrderList(data,value){
 		for(i=0; i<value.length; i++){
 			if (b) {
@@ -50,10 +68,13 @@
 			}
 		b = true;
 	}
+	
+	// formate number with commar
 	function numberWithCommas(numberToFormat){
 		if(numberToFormat == null || numberToFormat == "") return "";
 		return numberToFormat.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
+	
 	// function for set pagination
 	setPagination = function(totalPage, currentPage) {
 		$('#PAGINATION').bootpag({
@@ -119,12 +140,7 @@
 		}
 	});	
 	
-	// validate not empty
-	/*function notEmpty(){
-		$('.notEmpty').each(function(){
-		    if($(this).val() == ""){
-		    	return false;
-		    }
-		});
-		return true;
-	}*/
+	// removeCommar
+	function removeCommar(str){		
+		return str.replace(/,/g,"");
+	}

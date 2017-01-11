@@ -25,7 +25,7 @@ public class ImportDaoImpl implements ImportDao {
 	@Override
 	public Boolean saveImportPro(List<FormProduct> formProduct) {
 		// TODO Auto-generated method stub
-		BigDecimal impAmount = new BigDecimal('0');
+//		BigDecimal impAmount = new BigDecimal('0');
 		try{
 		Import importPro = new Import(); 
 		importPro.setImpDate(new Date());
@@ -49,10 +49,10 @@ public class ImportDaoImpl implements ImportDao {
 			
 			importPro.getImportDetail().add(importDetail);
 			
-			impAmount = impAmount.add((formProduct.get(i).getProQty()).multiply(formProduct.get(i).getCostPrice()));
+//			impAmount = impAmount.add((formProduct.get(i).getProQty()).multiply(formProduct.get(i).getCostPrice()));
 		}
 		
-		importPro.setImpAmount(impAmount);
+		importPro.setImpAmount(formProduct.get(0).getTotalAmount());
 		sessionFactory.getCurrentSession().save(importPro);
 		return true;
 		}catch(Exception ex){

@@ -43,7 +43,7 @@
 </head>
 <body>
 	<c:set var="baseUrl" value="${pageContext.request.contextPath}"></c:set>
-
+	<input type="hidden" id="globalRate">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">

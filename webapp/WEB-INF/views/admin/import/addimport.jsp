@@ -8,33 +8,36 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">បង្កើតទំនិញ ថ្មី</h4>
+				<h4 class="modal-title">នាំទំនិញ ចូល</h4>
 			</div>
 			<div class="modal-body">
 				<div class=" form">
 					<form class="cmxform form-horizontal tasi-form" id="frmAdd"	method="POST" action="#" enctype="multipart/form-data">
 						<div class="form-group ">
-							<span for="proname" class="control-label col-lg-2">ឈ្មោះទំនិញ *</span>
-							<div class="col-lg-10">
-								<input class=" form-control" id="proname" name="proname" type="text" required="required">
-								<input class=" form-control" id="proid" name="proid" type="hidden" required="required">
-								<input class=" form-control" id="unitQty" name="unitQty" type="hidden" required="required">
+							<span for="proname" class="control-label col-md-2">ឈ្មោះទំនិញ *</span>
+							<div class="col-md-10">
+								<input class="form-control" id="proname" name="proname" type="text" required="required">
+								<input class="form-control" id="proid" name="proid" type="hidden" required="required">
+								<input class="form-control" id="unitQty" name="unitQty" type="hidden" required="required">
+								<input class="form-control" id="unitname" type="hidden" required="required">
 							</div>
 						</div>
 						<div class="form-group ">
-							<span for="proqty" class="control-label col-lg-2">ចំនួន *</span>
-							<div class="col-lg-10">
-								<input class=" form-control numOnly" id="proqty" name="proqty" type="text" required="required">
+							<span for="proqty" class="control-label col-md-2">ចំនួន *</span>
+							<div class="col-md-8">
+								<input class="form-control numOnly" id="proqty" name="proqty" type="text" required="required">
 							</div>
+							<span id="lblunitname" class="control-label col-md-2" style="text-align:left"></span>
 						</div>
 						<div class="form-group ">
-							<span for="costprice" class="control-label col-lg-2">តំលៃដើម *</span>
-							<div class="col-lg-10">
-								<input class=" form-control numOnly" id="costprice" name="costprice" type="text" required="required">
+							<span for="costprice" class="control-label col-md-2">តំលៃដើម *</span>
+							<div class="col-md-8">
+								<input class="form-control numOnly" id="costprice" name="costprice" type="text" required="required">
 							</div>
+							<span id="lblcurrency" class="control-label col-md-2" style="text-align:left"></span>
 						</div>
 						<div class="form-group">
-							<div class="col-lg-offset-2 col-lg-10 text-right">
+							<div class="col-md-offset-2 col-md-10 text-right">
 								<button class="btn btn-success waves-effect waves-light" type="button" id="btnadd">ផ្ទុកទុក</button>
 								<button class="btn btn-default waves-effect" type="button" id="canceladd">លុបចោល</button>
 							</div>
@@ -60,17 +63,36 @@
 							</table>
 						</div>
 					</div>
-					<div class="form-group" align="right">
-						<div class="form-group ">
-							<span for="costprice" class="control-label col-lg-2">តំលៃដើម *</span>
-							<div class="col-lg-10">
-								<input class=" form-control numOnly" id="costprice" name="costprice" type="text" required="required">
+					<div class="form-horizontal">
+						<div class="form-group">
+							<div class="col-md-offset-6">
+								<div class="col-md-6">
+									<span for="totalAmountIndollar" class="control-label col-md-6">ប្រាក់សរុប (ដុល្លារ): </span>
+									<div class="col-md-6">
+										<input class="form-control" readonly="readonly" id="totalAmountIndollar" name="totalAmountIndollar" type="text">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<span for="totalAmountInreil" class="control-label col-md-6">ប្រាក់សរុប (រៀល): </span>
+									<div class="col-md-6">
+										<input class="form-control" readonly="readonly" name="totalAmountInreil" type="text" id="totalAmountInreil">
+									</div>
+								</div>
 							</div>
 						</div>
-						
-						<button class="btn btn-success waves-effect waves-light" id="savebtn" type="button">រក្សាទុក</button>
-						<button class="btn btn-default waves-effect" id="cencelBtn" type="button">បោះបង់</button>
-					</div>
+						<div class="form-group">
+							<div class="col-md-offset-6">
+								<span for="impRate" class="control-label col-md-3">អត្រាប្រាក់: </span>
+								<div class="col-md-5">
+									<input class="form-control" readonly="readonly" id="impRate" name="impRate" type="text">
+								</div>
+								<div class="col-md-4 text-right">
+									<button class="btn btn-success waves-effect waves-light" id="savebtn" type="button">រក្សាទុក</button>
+									<button class="btn btn-default waves-effect" id="cencelBtn" type="button">បោះបង់</button>
+								</div>
+							</div>
+						</div>
+					 </div>
 				</div>
 			</div>
 			<div class="modal-footer">
