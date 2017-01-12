@@ -28,6 +28,7 @@ public class Import {
 	private int impId;
 	private Date impDate;
 	private BigDecimal impAmount;
+	private BigDecimal impRate;
 	
 	@OneToMany(mappedBy = "pk1.importProduct", cascade = CascadeType.ALL)
 	private Set<ImportDetail> importDetail = new HashSet<ImportDetail>();
@@ -56,5 +57,11 @@ public class Import {
 	}
 	public void setImpAmount(BigDecimal impAmount) {
 		this.impAmount = impAmount;
+	}
+	public BigDecimal getImpRate() {
+		return impRate;
+	}
+	public void setImpRate(BigDecimal impRate) {
+		this.impRate = impRate;
 	}
 }

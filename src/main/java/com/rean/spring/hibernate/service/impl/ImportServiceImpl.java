@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rean.spring.hibernate.dao.ImportDao;
 import com.rean.spring.hibernate.entities.Import;
+import com.rean.spring.hibernate.entities.ImportDetail;
+import com.rean.spring.hibernate.entities.Pagination;
 import com.rean.spring.hibernate.form.FormProduct;
 import com.rean.spring.hibernate.service.ImportService;
 
@@ -25,9 +27,16 @@ public class ImportServiceImpl implements ImportService {
 
 	@Override
 	@Transactional
-	public List<Import> getImportPro(String startDate, String endDate) {
+	public List<Import> getImportPro(Pagination pagination, String startDate, String endDate, boolean isPagaination) {
 		// TODO Auto-generated method stub
-		return importDao.getImportPro(startDate, endDate);
+		return importDao.getImportPro(pagination,startDate, endDate, isPagaination);
+	}
+
+	@Override
+	@Transactional
+	public List<ImportDetail> getImportDetail(String impId) {
+		// TODO Auto-generated method stub
+		return importDao.getImportDetail(impId);
 	}
 
 }

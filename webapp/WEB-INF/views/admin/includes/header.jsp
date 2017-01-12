@@ -22,7 +22,7 @@
 	<link rel="icon" href="">
 	
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dashboard.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dashboard.css?<%=_sLocalTime%>">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-awesome/css/font-awesome.min.css"/>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui.css">
 	

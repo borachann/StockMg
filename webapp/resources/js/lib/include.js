@@ -22,10 +22,13 @@
 	// set all object to tmpl
 	function getAllCurrentObject(currentPage){
 		var json ={
-				"schStrName" : $("#schStrName").val(),
+				"schStrName" : $("#schStrName").val() || "",
 				"currentPage": currentPage,
+				"startDate": $("#sDate").val() || "",
+				"endDate": $("#eDate").val() || "",
 				"perPage": $("#PER_PAGE").val()
 		};
+		console.log(json);
 		$.ajax({
 			url: baseUrl + url,
 			type: "GET",

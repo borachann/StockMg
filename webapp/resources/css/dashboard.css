@@ -113,3 +113,8 @@ a.glyphicon:hover{
 .imghover:hover{
 	cursor: pointer;
 }
+.tdhover:hover{
+	color: #6495ED;
+	cursor: pointer;
+}
+}

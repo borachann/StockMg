@@ -1,7 +1,8 @@
 $(document).ready(function(){
 	
 	$("#sideBarImport").addClass("active");
-	
+	url = "/admin/importmg/getimportpro";
+	col = 4;
 	// get global rate
 	getGlobalRate();
 	
@@ -11,6 +12,9 @@ $(document).ready(function(){
 	
 	// set calendar
 	setCalendar();
+	
+	// get import products
+	getAllCurrentObject(1);
 	
 	// add import list to temporary 
 	$(document).on("click","#btnadd", function(){
@@ -41,7 +45,8 @@ $(document).ready(function(){
 			st += "<td><span>" + numberWithCommas(subTotal.toFixed(2)) + "</span><span class='pull-right'>"+ $("#lblcurrency").text() + "</span>" +"</td>";
 		else
 			st += "<td><span>" + numberWithCommas(subTotal.toFixed(0)) + "</span><span class='pull-right'>"+ $("#lblcurrency").text() + "</span>" +"</td>";
-		st += "<td class='text-center'><a href= 'javascript:;' id='btnedit'>កែប្រែ</a> | <a href='javascript:;' id='btndelete'>លុប</a></td>";
+		st += "<td class='text-center'><a class='on-default edit-row' href= 'javascript:;' id='btnedit'><i class='fa fa-pencil'></i></a> | " +
+				"<a href='javascript:;' class='on-default edit-row' id='btndelete'><i class='fa fa-trash '></i></a></td>";
 		st += "<td style='display: none;'>" + $('#unitQty').val() +"</td></tr>";
 		
 		if($("#lblcurrency").attr("var") == "true"){
@@ -80,7 +85,7 @@ $(document).ready(function(){
 		else{
 			$("#lblcurrency").attr("var","false");
 		}
-		_tempmoney = removeCommar($(this).closest("tr").children().eq(5).find("span:first-child").text()); alert(_tempmoney);
+		_tempmoney = removeCommar($(this).closest("tr").children().eq(5).find("span:first-child").text()); 
 		$("#lblcurrency").text(lblcurrency);
 		$("#lblunitname").text($(this).closest("tr").children().eq(3).find("span:last-child").text());
 		
@@ -118,8 +123,19 @@ $(document).ready(function(){
 	
 	// delete import product
 	$(document).on("click","#btndelete", function(){
-		if(confirm("លោកអ្នក ពិតជាចង់លុបទំនិញនេះចេញវិញ?")){}
+		if(confirm("លោកអ្នក ពិតជាចង់លុបទំនិញនេះចេញវិញ?")){
+			if($(this).closest("tr").children().eq(4).find("span:last-child").text() == "ដុល្លារ"){
+				var totalAmountIndollar = Number(removeCommar($("#totalAmountIndollar").val())) - Number(removeCommar($(this).closest("tr").children().eq(5).find("span:first-child").text()));
+				
+				$("#totalAmountIndollar").val(numberWithCommas(totalAmountIndollar.toFixed(2)));
+				$("#totalAmountInreil").val((totalAmountIndollar * removeCommar($("#impRate").val())).toFixed(0));
+			}else{
+				var totalAmountInreil = Number(removeCommar($("#totalAmountInreil").val())) - Number(removeCommar($(this).closest("tr").children().eq(5).find("span:first-child").text()));
+				$("#totalAmountIndollar").val(numberWithCommas((totalAmountInreil / removeCommar($("#impRate").val())).toFixed(2)));
+				$("#totalAmountInreil").val(numberWithCommas(totalAmountInreil.toFixed(0)));
+			}
 			$(this).closest("tr").remove();
+		}
 	});
 	
 	// cancel import list
@@ -145,10 +161,11 @@ $(document).ready(function(){
 		$("#tbllistimport tr").each(function(){
 			json = {
 					"proId" : ($(this).find("td").eq(0).text()),
-					"proQty": ($(this).find("td").eq(3).find("span:first-child").text()),
-					"costPrice": ($(this).find("td").eq(4).find("span:first-child").text()),
-					"unitQty" : ($(this).find("td").eq(7).text()),
-					"totalAmount" : removeCommar($("#totalAmountIndollar").val())
+					"proQty": removeCommar($(this).find("td").eq(3).find("span:first-child").text()),
+					"costPrice": removeCommar($(this).find("td").eq(4).find("span:first-child").text()),
+					"unitQty" : removeCommar($(this).find("td").eq(7).text()),
+					"totalAmount" : removeCommar($("#totalAmountIndollar").val()),
+					"impRate" : removeCommar($("#impRate").val())
 			};
 			importDetail.push(json);
 		});
@@ -164,14 +181,50 @@ $(document).ready(function(){
 	        success: function(data){
 				console.log(data);
 				if(data==true){
-					alert(" Successfully Added");
+					alert("ការនាំ ទំនិញចូលបានជោគជ័យ។");
 				}else{
-					alert("Please try to insert again!");
+					alert("ការនាំ ទំនិញចូលមិនបានជោគជ័យ។ សូមព្យាយាមម្តងទៀត");
 				}
 	        },
 			error:function(data, status,er){
 				console.log("error: " + data + "status: " + status + "er: ");
 			}
+		});
+	});
+	
+	//get import detail 
+	$(document).on("click","#tdimpdate",function(){
+		var impId = $(this).parent().children().eq(0).text();
+		var json = {"impId" : impId};
+		$.ajax({
+			url: baseUrl + "/admin/importmg/getimportdetail",
+			type: "GET",
+			data: json,
+			beforeSend: function(xhr) {
+		            xhr.setRequestHeader("Accept", "application/json");
+		            xhr.setRequestHeader("Content-Type", "application/json");
+	        },
+	        success: function(data){
+	        	for(i = 0; i< data.importDetail.length; i++){
+	        		data.importDetail[i]["order"] = i + 1;
+	        		data.importDetail[i]["proqty"] = numberWithCommas(data.importDetail[i]["proqty"]);
+	        		data.importDetail[i]["unitprice"] = numberWithCommas(data.importDetail[i]["unitprice"]);
+	        		data.importDetail[i]["total_amount"] = numberWithCommas(data.importDetail[i]["total_amount"]);
+	        	}
+	        	$("#tblimportdetail").html("");
+	        	$("#tblListDetail").tmpl(data.importDetail).appendTo("#tblimportdetail");
+	        	$("#totalAmountDetailIndollar").val(numberWithCommas(data.importDetail[0].impamount));
+	        	$("#totalAmountDetailInreil").val(numberWithCommas((data.importDetail[0].impamount * data.importDetail[0].imprate).toFixed(0)));
+	        	$("#impDetailRate").val(numberWithCommas(data.importDetail[0].imprate));
+	        	
+	        },
+			error:function(data, status,er){
+				console.log("error: " + data + "status: " + status + "er: ");
+			}
+		});
+		
+		$('#form_detail').modal({
+			"backdrop" : "static"
 		});
 	});
 	
@@ -189,10 +242,15 @@ $(document).ready(function(){
 		$("#impRate").val(numberWithCommas(_globalRate));
 	});
 	
+	// set start date focuse
+	$(document).on("click", "#imgSDate", function(){
+		$("#sDate").focus();
+	});
 	
-	
-	
-	
+	// set end date focuse
+	$(document).on("click", "#mgEDate", function(){
+		$("#eDate").focus();
+	});
 	
 	// get all product for set auto completed
 	function setAutoCompleteProduct(){
@@ -274,7 +332,8 @@ $(document).ready(function(){
 			changeYear: true,
 			dateFormat: "yy-mm-dd",
 			onClose: function( selectedDate ) {
-				//$("#eDate").datepicker("option", "minDate", selectedDate);
+				$("#eDate").datepicker("option", "minDate", selectedDate);
+				getAllCurrentObject(1);
 	      }
 		});
 		$("#eDate").datepicker({
@@ -283,10 +342,12 @@ $(document).ready(function(){
 			changeYear: true,
 			dateFormat: "yy-mm-dd",
 			onClose: function( selectedDate ) {
-				//$("#sDate").datepicker("option", "maxDate", selectedDate);
+				$("#sDate").datepicker("option", "maxDate", selectedDate);
+				getAllCurrentObject(1);
 	      }
 		});
 	$("#sDate").datepicker('setDate', moment().subtract(7, 'days').format('YYYY-MM-DD'));
 	$("#eDate").datepicker('setDate', moment().format('YYYY-MM-DD'));
 	}
+	
 });

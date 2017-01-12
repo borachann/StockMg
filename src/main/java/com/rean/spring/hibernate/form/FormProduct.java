@@ -10,6 +10,7 @@ public class FormProduct {
 	private BigDecimal costPrice;
 	private BigDecimal unitQty;
 	private BigDecimal totalAmount;
+	private BigDecimal impRate;
 	private int unitId;
 	private int catId;
 	private int proId;
@@ -102,4 +103,11 @@ public class FormProduct {
 	public void setTotalAmount(BigDecimal totalAmount) {
 		this.totalAmount = totalAmount;
 	}
+	public BigDecimal getImpRate() {
+		return impRate;
+	}
+	public void setImpRate(BigDecimal impRate) {
+		this.impRate = impRate;
+	}
+	
 }

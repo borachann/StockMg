@@ -1,18 +1,18 @@
 package com.rean.spring.hibernate.dao.impl;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
-import java.util.Map;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
+import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.rean.spring.hibernate.dao.ImportDao;
 import com.rean.spring.hibernate.entities.Import;
 import com.rean.spring.hibernate.entities.ImportDetail;
+import com.rean.spring.hibernate.entities.Pagination;
 import com.rean.spring.hibernate.entities.Product;
 import com.rean.spring.hibernate.form.FormProduct;
 
@@ -51,7 +51,7 @@ public class ImportDaoImpl implements ImportDao {
 			
 //			impAmount = impAmount.add((formProduct.get(i).getProQty()).multiply(formProduct.get(i).getCostPrice()));
 		}
-		
+		importPro.setImpRate(formProduct.get(0).getImpRate());
 		importPro.setImpAmount(formProduct.get(0).getTotalAmount());
 		sessionFactory.getCurrentSession().save(importPro);
 		return true;
@@ -62,9 +62,29 @@ public class ImportDaoImpl implements ImportDao {
 	}
 
 	@Override
-	public List<Import> getImportPro(String startDate, String endDate) {
+	public List<Import> getImportPro(Pagination pagination, String startDate, String endDate, boolean isPagination) {
 		// TODO Auto-generated method stub
-		return null;
+		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery("SELECT impid, impamount, to_char(impdate,'YYYY-MM-DD HH:MI AM') as impdate "
+				+ "FROM import WHERE to_char(impdate,'YYYY-MM-DD') >= '" + startDate + "' and to_char(impdate,'YYYY-MM-DD') <= '" + endDate +"' ORDER BY impdate DESC");
+		if(isPagination){
+			query.setFirstResult(pagination.offset());
+			query.setMaxResults(pagination.getPerPage());
+		}
+		query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
+		List<Import> importPro = query.list(); 
+		return importPro;
+	}
+
+	@Override
+	public List<ImportDetail> getImportDetail(String impId) {
+		// TODO Auto-generated method stub
+		
+		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery("select pro.proid, pro.proname, pro.currentcy, (impdet.unitprice * impdet.proqty) as total_amount, "
+				+ "uni.unitname, uni.qty as unitqty, impdet.impid, impdet.proqty, impdet.unitprice, imp.impamount, imp.imprate "
+				+ " FROM importdetail impdet INNER JOIN products pro on pro.proid = impdet.proid INNER JOIN unit uni ON pro.unitid = uni.unitid INNER JOIN import imp on imp.impid = impdet.impid WHERE impdet.impid = " + impId);
+		query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
+		List<ImportDetail> importDetail = query.list();
+		return importDetail;
 	}
 
 }
