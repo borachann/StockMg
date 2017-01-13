@@ -121,7 +121,7 @@ $(document).ready(function(){
 		$("#btnaddupdate").attr("id","btnadd");
 	});
 	
-	// delete import product
+	// remove product from import detail list
 	$(document).on("click","#btndelete", function(){
 		if(confirm("លោកអ្នក ពិតជាចង់លុបទំនិញនេះចេញវិញ?")){
 			if($(this).closest("tr").children().eq(4).find("span:last-child").text() == "ដុល្លារ"){

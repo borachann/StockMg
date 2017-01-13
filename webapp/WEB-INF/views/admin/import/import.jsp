@@ -92,11 +92,10 @@
 		<td style="width : 15%;"><span>{{= impamount}}</span><span class='pull-right'>ដុល្លារ</span></td>
 		<td class="text-center">
 			<a class="on-default edit-row" href="${baseUrl}/admin/importmg/showimport/{{= impid}}" id="btnUpdate" data-id="{{= impid}}"><i class="fa fa-pencil"></i></a>
-			| <a class="on-default edit-row" href="javascript:void(0)" id="btnImpDelete" data-id="{{= impid}}"><i class="fa fa-trash "></i></a>
 		</td>
 	</tr> 
 </script>
-
+<!-- | <a class="on-default edit-row" href="javascript:void(0)" id="btnImpDelete" data-id="{{= impid}}"><i class="fa fa-trash "></i></a> -->
 <!-- ================== script for list import detail ======================= -->
 <script id="tblListDetail" type="text/x-jquery-tmpl">
    	<tr>

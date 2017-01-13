@@ -137,7 +137,7 @@ $(document).ready(function(){
 	// save import 
 	$(document).on("click","#savebtn", function(){
 		if($("#tbllistimport tr").length == 0){
-			alert("លោកមិនមាន ទំនិញសំរាប់រក្សាទុកទេ");
+			alert("លោកអ្នកមិនមាន ទំនិញសំរាប់រក្សាទុកទេ");
 			return;
 		}
 		var importDetail = [];
