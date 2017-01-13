@@ -2,6 +2,7 @@ package com.rean.spring.hibernate.dao.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
@@ -25,12 +26,9 @@ public class ImportDaoImpl implements ImportDao {
 	@Override
 	public Boolean saveImportPro(List<FormProduct> formProduct) {
 		// TODO Auto-generated method stub
-//		BigDecimal impAmount = new BigDecimal('0');
 		try{
 		Import importPro = new Import(); 
 		importPro.setImpDate(new Date());
-		
-		System.out.println("size of import product: " + formProduct.size());
 		
 		for(int i=0; i<formProduct.size(); i++){
 			ImportDetail importDetail = new ImportDetail();
@@ -38,7 +36,6 @@ public class ImportDaoImpl implements ImportDao {
 
 			importDetail.setProduct(product);
 			importDetail.setImportProduct(importPro);
-//			importDetail.setProId(formProduct.get(i).getProId());
 			importDetail.setProQty(formProduct.get(i).getProQty());
 			importDetail.setUnitPrice(formProduct.get(i).getCostPrice());
 			
@@ -48,8 +45,6 @@ public class ImportDaoImpl implements ImportDao {
 			sessionFactory.getCurrentSession().update(product);
 			
 			importPro.getImportDetail().add(importDetail);
-			
-//			impAmount = impAmount.add((formProduct.get(i).getProQty()).multiply(formProduct.get(i).getCostPrice()));
 		}
 		importPro.setImpRate(formProduct.get(0).getImpRate());
 		importPro.setImpAmount(formProduct.get(0).getTotalAmount());
@@ -65,7 +60,7 @@ public class ImportDaoImpl implements ImportDao {
 	public List<Import> getImportPro(Pagination pagination, String startDate, String endDate, boolean isPagination) {
 		// TODO Auto-generated method stub
 		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery("SELECT impid, impamount, to_char(impdate,'YYYY-MM-DD HH:MI AM') as impdate "
-				+ "FROM import WHERE to_char(impdate,'YYYY-MM-DD') >= '" + startDate + "' and to_char(impdate,'YYYY-MM-DD') <= '" + endDate +"' ORDER BY impdate DESC");
+				+ "FROM import WHERE to_char(impdate,'YYYY-MM-DD') >= '" + startDate + "' and to_char(impdate,'YYYY-MM-DD') <= '" + endDate +"' ORDER BY import.impdate DESC");
 		if(isPagination){
 			query.setFirstResult(pagination.offset());
 			query.setMaxResults(pagination.getPerPage());
@@ -85,6 +80,60 @@ public class ImportDaoImpl implements ImportDao {
 		query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
 		List<ImportDetail> importDetail = query.list();
 		return importDetail;
+	}
+
+	@Override
+	public Boolean updateImportPro(List<FormProduct> formProducts, int impId) {
+		// TODO Auto-generated method stub
+		try{
+			// update total amount in import table
+			Import importProduct = sessionFactory.getCurrentSession().get(Import.class, impId);
+			importProduct.setImpAmount(formProducts.get(0).getTotalAmount());
+			Set<ImportDetail> importDetails = importProduct.getImportDetail();
+			
+			// update stock in product table
+			for(ImportDetail importDetail : importDetails){
+				//select product by id
+				Product product = sessionFactory.getCurrentSession().get(Product.class, importDetail.getProduct().getProId());
+				
+				//update qty in product table 
+				product.setProQty(product.getProQty().subtract(importDetail.getProQty().multiply(product.getUnit().getQty())));
+				sessionFactory.getCurrentSession().update(product);		
+			}
+			importProduct.getImportDetail().clear();
+			
+			sessionFactory.getCurrentSession().update(importProduct);
+			
+			sessionFactory.getCurrentSession().createSQLQuery("delete from importdetail where impid = " + impId).executeUpdate();
+			
+			for(FormProduct formProduct : formProducts){
+				ImportDetail importDetail = new ImportDetail(); 
+				Product product = sessionFactory.getCurrentSession().get(Product.class, formProduct.getProId());
+				
+				importDetail.setImportProduct(importProduct);
+				importDetail.setProduct(product);
+				importDetail.setUnitPrice(formProduct.getCostPrice());
+				importDetail.setProQty(formProduct.getProQty());
+				
+				product.setCostPrice(formProduct.getCostPrice());
+				product.setProQty(product.getProQty().add(formProduct.getProQty().multiply(formProduct.getUnitQty())));
+				
+				sessionFactory.getCurrentSession().flush();
+				sessionFactory.getCurrentSession().clear();
+				sessionFactory.getCurrentSession().update(product);
+			
+				importProduct.getImportDetail().add(importDetail); 
+				 
+			}
+			sessionFactory.getCurrentSession().update(importProduct);
+			return true;
+			
+		}catch(Exception ex){
+			System.out.println("Error message: " + ex.getMessage());
+			ex.getStackTrace();
+		}
+		
+		return false;
 	}
 
 }

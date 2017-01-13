@@ -73,4 +73,14 @@ public class ImportController {
 		model.addAttribute("impId", impId);
 		return "admin/import/editimport";
 	}
+	
+	// update import product
+	@RequestMapping(value="/updateimport/{impId}", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> updateImport(@RequestBody List<FormProduct> formProduct, @PathVariable("impId") int impId){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("importproduct", importService.updateImportPro(formProduct, impId));
+		return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
+	}
+	
 }

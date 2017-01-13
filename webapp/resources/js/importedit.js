@@ -48,12 +48,12 @@ $(document).ready(function(){
 		if($("#lblcurrency").attr("var") == "true"){
 			_moneyInDollar = Number(_moneyInDollar) + Number(subTotal);
 			$("#totalAmountIndollar").val(numberWithCommas(_moneyInDollar.toFixed(2)));
-			$("#totalAmountInreil").val(numberWithCommas(_moneyInDollar * _globalRate));
+			$("#totalAmountInreil").val(numberWithCommas((_moneyInDollar * _globalRate).toFixed(0)));
 		}
 		else{
 			_moneyInRiel = Number(_moneyInRiel) + Number(subTotal);
 			$("#totalAmountIndollar").val(numberWithCommas((_moneyInRiel / _globalRate).toFixed(2)));
-			$("#totalAmountInreil").val(numberWithCommas(_moneyInRiel));
+			$("#totalAmountInreil").val(numberWithCommas(_moneyInRiel.toFixed(0)));
 		}
 		
 		$("#frmAdd").find("input:text").val('');
@@ -153,7 +153,7 @@ $(document).ready(function(){
 			importDetail.push(json);
 		});
 		$.ajax({
-			url: baseUrl + "/admin/importmg/saveimportpro",
+			url: baseUrl + "/admin/importmg/updateimport/" + $("#editImpId").val(),
 			type: "POST",
 			dataType: "JSON",
 			data: JSON.stringify(importDetail),
@@ -163,10 +163,11 @@ $(document).ready(function(){
 	        },
 	        success: function(data){
 				console.log(data);
-				if(data==true){
-					alert("ការនាំ ទំនិញចូលបានជោគជ័យ។");
+				if(data.importproduct==true){
+					alert("ការ កែប្រទំនិញនាំចូលបានជោគជ័យ។");
+					location.href = baseUrl + "/admin/importmg";
 				}else{
-					alert("ការនាំ ទំនិញចូលមិនបានជោគជ័យ។ សូមព្យាយាមម្តងទៀត");
+					alert("ការ កែប្រទំនិញនាំចូលមិនបានជោគជ័យ។ សូមព្យាយាមម្តងទៀត");
 				}
 	        },
 			error:function(data, status,er){

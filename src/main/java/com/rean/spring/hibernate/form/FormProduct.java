@@ -110,4 +110,5 @@ public class FormProduct {
 		this.impRate = impRate;
 	}
 	
+	
 }

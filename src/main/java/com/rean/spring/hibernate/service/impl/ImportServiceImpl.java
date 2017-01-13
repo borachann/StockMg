@@ -39,4 +39,11 @@ public class ImportServiceImpl implements ImportService {
 		return importDao.getImportDetail(impId);
 	}
 
+	@Override
+	@Transactional
+	public Boolean updateImportPro(List<FormProduct> formProduct, int impId) {
+		// TODO Auto-generated method stub
+		return importDao.updateImportPro(formProduct, impId);
+	}
+
 }
