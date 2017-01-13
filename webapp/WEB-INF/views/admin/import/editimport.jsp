@@ -92,15 +92,17 @@
 			
 <script id="tblListDetail" type="text/x-jquery-tmpl">
    	<tr>
+		<td class="hide">{{= proid}}</td>
 		<td style="width : 5%;">{{= order}}</td>
 		<td>{{= proname}}</td>
-		<td style="width : 15%;"><span>{{= proqty}}<span class='pull-right'>{{= unitname}}</span></td>
+		<td style="width : 15%;"><span>{{= proqty}}</span><span class='pull-right'>{{= unitname}}</span></td>
 		<td style="width : 15%;"><span>{{= unitprice}}</span><span class='pull-right'>{{if currentcy}}ដុល្លារ{{else}}រៀល{{/if}}</span></td>
 		<td style="width : 20%;"><span>{{= total_amount}}</span><span class='pull-right'>{{if currentcy}}ដុល្លារ{{else}}រៀល{{/if}}</span></td>
 		<td class="text-center">
 			<a class="on-default edit-row" href='javascript:;' id='btnedit' data-id="{{= impid}}"><i class="fa fa-pencil"></i></a>
 			| <a class="on-default edit-row" href="javascript:void(0)" id="btndelete" data-id="{{= impid}}"><i class="fa fa-trash "></i></a>
 		</td>
+		<td class="hide">{{= unitqty}}</td>
 	</tr> 
 </script>			
 	

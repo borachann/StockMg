@@ -182,6 +182,7 @@ $(document).ready(function(){
 				console.log(data);
 				if(data==true){
 					alert("ការនាំ ទំនិញចូលបានជោគជ័យ។");
+					location.href = baseUrl + "/admin/importmg";
 				}else{
 					alert("ការនាំ ទំនិញចូលមិនបានជោគជ័យ។ សូមព្យាយាមម្តងទៀត");
 				}
