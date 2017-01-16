@@ -26,7 +26,8 @@
 		<td class="hide" id="cusid">{{= cusid}}</td>
 		<td>{{= order}}</td>
 		<td>{{= cusname}}</td>
-		<td>{{= phone_number}}</td>
+		<td>{{= phone_numer}}</td>
+		<td>{{= address}}</td>
 		<td class="text-center">
 			<a class="on-default edit-row" href="${baseUrl}/admin/customermg/showcustomer/{{= cusid}}" id="btnUpdate" data-id="{{= cusid}}"><i class="fa fa-pencil"></i></a>
 			| <a class="on-default edit-row" href="javascript:void(0)" id="btnCusDelete" data-id="{{= cusid}}"><i class="fa fa-trash "></i></a>
@@ -35,5 +36,5 @@
 	</tr> 
 </script>
 
-<script src="${baseUrl}/resources/js/customer.js"></script>	
+<script src="${baseUrl}/resources/js/customer.js?<%=_sLocalTime%>"></script>	
 <%@ include file="../includes/footer.jsp" %>

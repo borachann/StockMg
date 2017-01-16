@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.rean.spring.hibernate.dao.CustomerDao;
 import com.rean.spring.hibernate.entities.Customer;
@@ -16,15 +17,17 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerDao customerDao;
 
 	@Override
+	@Transactional
 	public List<Customer> getCustomer(Pagination pagination, String str, boolean isPagination) {
 		// TODO Auto-generated method stub
-		return null;
+		return customerDao.getCustomer(pagination, str, isPagination);
 	}
 
 	@Override
+	@Transactional
 	public boolean saveCustomer(Customer customer) {
 		// TODO Auto-generated method stub
-		return false;
+		return customerDao.saveCustomer(customer);
 	}
 
 	@Override
