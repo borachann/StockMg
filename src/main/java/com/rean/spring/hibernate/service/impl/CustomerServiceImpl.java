@@ -31,21 +31,24 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
+	@Transactional
 	public boolean deleteCustomer(int cusId) {
 		// TODO Auto-generated method stub
-		return false;
+		return customerDao.deleteCustomer(cusId);
 	}
 
 	@Override
-	public boolean updateCustomer(Customer customer, int cusId) {
+	@Transactional
+	public boolean updateCustomer(Customer customer) {
 		// TODO Auto-generated method stub
-		return false;
+		return customerDao.updateCustomer(customer);
 	}
 
 	@Override
-	public boolean getDetailCustomer(int cusId) {
+	@Transactional
+	public Customer getDetailCustomer(int cusId) {
 		// TODO Auto-generated method stub
-		return false;
+		return customerDao.getDetailCustomer(cusId);
 	}
 
 }

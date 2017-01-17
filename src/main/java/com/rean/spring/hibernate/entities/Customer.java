@@ -30,6 +30,12 @@ public class Customer {
 	@Column(name="address")
 	private String Address;
 	
+	@Column(name="status")
+	private boolean status;
+	
+	@Column(name="img")
+	private String cusImg;
+	
 	@OneToMany(mappedBy="customer", cascade=CascadeType.ALL)
 	private List<OwedCustomer> owedCustomer = new ArrayList<OwedCustomer>();
 
@@ -64,4 +70,29 @@ public class Customer {
 	public void setAddress(String address) {
 		Address = address;
 	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	public String getCusImg() {
+		return cusImg;
+	}
+
+	public void setCusImg(String cusImg) {
+		this.cusImg = cusImg;
+	}
+
+	public List<OwedCustomer> getOwedCustomer() {
+		return owedCustomer;
+	}
+
+	public void setOwedCustomer(List<OwedCustomer> owedCustomer) {
+		this.owedCustomer = owedCustomer;
+	}
+	
 }

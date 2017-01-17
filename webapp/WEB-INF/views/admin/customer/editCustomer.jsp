@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../includes/header.jsp" %>
+<%@ include file="../includes/sidebar.jsp" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<h3 class="page-header">កែប្រែ អតិថិជន</h3>
+	
+					<form class="cmxform form-horizontal tasi-form" id="frmEditCustomer"	method="POST" action="#">
+						<div class="form-group ">
+							<span for="cusName" class="control-label col-lg-2">ឈ្មោះ *</span>
+							<div class="col-lg-10">
+								<input class=" form-control" id="cusName" name="cusName" value="${customer.cusName}" type="text">
+								<input type="hidden" id="cusId" value="${customer.cusId}">
+							</div>
+						</div>
+						<div class="form-group ">
+							<span for="cusPhone" class="control-label col-lg-2">លេខទូរស័ព្ទ </span>
+							<div class="col-lg-10">
+								<input class=" form-control numOnly" id="cusPhone" name="cusPhone" type="text" value="${customer.phoneNumber}">
+							</div>
+						</div>
+						<div class="form-group ">
+							<span for="cusAddress" class="control-label col-lg-2">ឤស័យដ្ឋាន </span>
+							<div class="col-lg-10">
+								<input class=" form-control" id="cusAddress" name="cusAddress" type="text" value="${customer.address}">
+							</div>
+						</div>
+						
+						<div class="form-group ">
+							<span for="imgurl" class="control-label col-lg-2">រូបភាព</span>
+							<div class="col-lg-10">
+								<input class=" form-control" id="imgurl" name="imgUrl" type="file">
+								<input type="hidden" id="image" name="image" /> 
+							
+								<c:choose>
+									<c:when test="${not empty customer.cusImg}">
+										<img src ="${baseUrl}/resources/images/products/${customer.cusImg}" id="images_sample" name="images_sample" class="img-thumbnail" style="width: 200px; height: 200px;">
+									</c:when>
+									<c:when test="${empty customer.cusImg}">
+										<img src ="" id="images_sample" name="images_sample" class="img-thumbnail" style="display:none; width: 200px; height: 200px;">
+									</c:when>
+								</c:choose>
+							</div>
+						</div>
+					
+						<div class="form-group">
+							<div class="col-lg-offset-2 col-lg-10">
+								<button class="btn btn-success waves-effect waves-light" type="button" id="btnCusAdd">រក្សាទុក</button>
+								<button class="btn btn-default waves-effect" type="button" id="btn_cancel">បោះបង់</button>
+							</div>
+						</div>
+					</form>
+
+
+<script src="${baseUrl}/resources/js/customeredit.js"></script>
+<%@ include file="../includes/footer.jsp" %>

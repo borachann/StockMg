@@ -20,7 +20,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public List<Customer> getCustomer(Pagination pagination, String str, boolean isPagination) {
 		// TODO Auto-generated method stub
-		SQLQuery query = sessionFacotry.getCurrentSession().createSQLQuery("select * from customer where cusname like '%" + str + "%' ORDER BY cusname");
+		SQLQuery query = sessionFacotry.getCurrentSession().createSQLQuery("select * from customer where cusname like '%" + str + "%' and status ='t' ORDER BY cusname");
 		if(isPagination){
 			query.setFirstResult(pagination.offset());
 			query.setMaxResults(pagination.getPerPage());
@@ -45,19 +45,32 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public boolean deleteCustomer(int cusId) {
 		// TODO Auto-generated method stub
+		try{
+			SQLQuery query = sessionFacotry.getCurrentSession().createSQLQuery("update customer set status ='f' where cusid = " + cusId);
+			query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE).executeUpdate();
+			return true;
+		}catch(Exception ex){
+			System.out.println("Error Message: " + ex.getMessage());
+		}
 		return false;
 	}
 
 	@Override
-	public boolean updateCustomer(Customer customer, int cusId) {
+	public boolean updateCustomer(Customer customer) {
 		// TODO Auto-generated method stub
+		try{
+			sessionFacotry.getCurrentSession().update(customer);
+			return true;
+		}catch(Exception ex){
+			System.out.println("Error Message: " + ex.getMessage());
+		}
 		return false;
 	}
 
 	@Override
-	public boolean getDetailCustomer(int cusId) {
+	public Customer getDetailCustomer(int cusId) {
 		// TODO Auto-generated method stub
-		return false;
+		return sessionFacotry.getCurrentSession().get(Customer.class, cusId);
 	}
 
 }

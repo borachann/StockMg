@@ -4,8 +4,9 @@ $(document).ready(function(){
 	$("#sideBarCategory").addClass("active");
 	
 	$("#btn_cancel").click(function(){
-		location.href = baseUrl + "/admin/categorymg";
+		location.href = baseUrl + "/admin/customermg";
 	});
+	 
 	$("#btnCatAdd").click(function(){
 		   var json = {
 				   "catName" : $("#catName").val(),
@@ -21,10 +22,10 @@ $(document).ready(function(){
 	          },
 	          success: function(data) {
 	        	  if(data){
-	        		  alert("កែប្រែ ប្រភេទទំនិញ បានជោគជ័យ។");
+	        		  alert("áž€áŸ‚áž”áŸ’ážšáŸ‚ áž”áŸ’ážšáž—áŸ�áž‘áž‘áŸ†áž“áž·áž‰ áž”áž¶áž“áž‡áŸ„áž‚áž‡áŸ�áž™áŸ”");
 	        		  location.href = baseUrl + "/admin/categorymg";
 	        	  }else{
-	        		  alert("កែប្រែ ប្រភេទទំនិញ មិនបានជោគជ័យ។");
+	        		  alert("áž€áŸ‚áž”áŸ’ážšáŸ‚ áž”áŸ’ážšáž—áŸ�áž‘áž‘áŸ†áž“áž·áž‰ áž˜áž·áž“áž”áž¶áž“áž‡áŸ„áž‚áž‡áŸ�áž™áŸ”");
 	        	  }
 	          },
 	          error: function(data, status, er){
@@ -32,6 +33,5 @@ $(document).ready(function(){
 	          }
 		   });
 	});
-	
 });
 

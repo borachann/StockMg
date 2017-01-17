@@ -7,6 +7,7 @@ $(document).ready(function(){
 	// List All Category
 	getAllCurrentObject(1);
 	
+	// save customer
 	$(document).on("click","#btnCusAdd", function(){
 		if($("#cusName").val() == ""){
 			alert("សូមបំពេញ ឈ្មោះអតិថិជន។");
@@ -15,7 +16,9 @@ $(document).ready(function(){
 		var json = {
 				"cusName" : $("#cusName").val(),
 				"phoneNumber" : $("#cusPhone").val(),
-				"address" : $("#cusAddress").val()
+				"address" : $("#cusAddress").val(),
+				"status" : true,
+				"cusImg" : $("#image").val()
 		}
 		$.ajax({
 			url: baseUrl + "/admin/customermg/savecustomer",
@@ -36,11 +39,32 @@ $(document).ready(function(){
             		
             },
             error : function(data, status, err){
-            	
+            	console.log("data: " + data + " status: " + "error: " + err );
             }
 		});
 	});
 	
-	
+	// image upload
+	 $("#imgurl").change(function(){
+			$("#frmAddCustomer").ajaxSubmit({
+				url: baseUrl + "/admin/fileupload/images",
+				dataType: 'JSON', 
+				type: 'POST',
+				success: function(data) { 
+					console.log(data);
+			        if(data){
+			        	$("#images_sample").attr("src", baseUrl + "/resources/images/products/"+data.IMAGE);
+			        	$("#images_sample").show();
+			        	$("#image").val(data.IMAGE);
+			        	//alert('YOU HAVE BEEN INSERTED SUCCESSFULLY.');
+			        }else{
+			        	//alert('YOU HAVE ERRORS WHEN INSERT NEW PRODUCT.');
+			        }
+			    },
+			    error:function(data,status,er) { 
+			        console.log("error: "+data+" status: "+status+" er:"+er);
+			    }
+			});
+		});
 	
 });

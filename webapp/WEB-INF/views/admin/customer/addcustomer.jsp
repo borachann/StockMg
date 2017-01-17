@@ -31,6 +31,14 @@
 								<input class=" form-control" id="cusAddress" name="cusAddress" type="text">
 							</div>
 						</div>
+						
+						<div class="form-group ">
+							<span for="imgurl" class="control-label col-lg-2">រូបភាព</span>
+							<div class="col-lg-10">
+								<input class=" form-control" id="imgurl" name="imgUrl" type="file">
+								<input type="hidden" id="image" name="image" /> <img src="" id="images_sample" name="images_sample" class="img-thumbnail" style="display: none; width: 200px; height: 200px;">
+							</div>
+						</div>
 					
 						<div class="form-group">
 							<div class="col-lg-offset-2 col-lg-10">
