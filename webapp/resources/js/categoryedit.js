@@ -4,7 +4,7 @@ $(document).ready(function(){
 	$("#sideBarCategory").addClass("active");
 	
 	$("#btn_cancel").click(function(){
-		location.href = baseUrl + "/admin/customermg";
+		location.href = baseUrl + "/admin/categorymg";
 	});
 	 
 	$("#btnCatAdd").click(function(){

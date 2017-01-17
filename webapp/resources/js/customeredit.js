@@ -1,9 +1,14 @@
 $(document).ready(function(){
 	
-	
+	// set class active
 	$("#sideBarCustomer").addClass("active");
 	
-		
+	// redirect to custom
+	$("#btn_cancel").click(function(){
+		location.href = baseUrl + "/admin/customermg";
+	});	
+	
+	// save update
 	$(document).on("click","#btnCusAdd", function(){
 		if($("#cusName").val() == ""){
 			alert("សូមបំពេញ ឈ្មោះអតិថិជន។");
@@ -15,7 +20,7 @@ $(document).ready(function(){
 				"phoneNumber" : $("#cusPhone").val(),
 				"address" : $("#cusAddress").val(),
 				"status" : true,
-				"cusImg" : ""
+				"cusImg" : $("#image").val()
 		}
 		$.ajax({
 			url: baseUrl + "/admin/customermg/updatecustomer",
@@ -28,7 +33,7 @@ $(document).ready(function(){
             success: function(data) {
             	if(data){
             		alert("ការកែប្រែ បានរក្សាទុកជោគជ័យ។");
-            		$("#frmAddCustomer").find("input:text").val("");
+            		location.href = baseUrl + "/admin/customermg";
             	}
             	else{
             		alert("ការកែប្រែ មិនបានរក្សាទុក។ សូមព្យាយមម្តងទៀត។");
@@ -41,6 +46,29 @@ $(document).ready(function(){
 		});
 	});
 	
+	// image upload
+	 $("#imgurl").change(function(){
+			$("#frmEditCustomer").ajaxSubmit({
+				url: baseUrl + "/admin/fileupload/images",
+				dataType: 'JSON', 
+				type: 'POST',
+				success: function(data) { 
+					console.log(data);
+			        if(data){
+			        	$("#images_sample").attr("src", baseUrl + "/resources/images/products/"+data.IMAGE);
+			        	$("#images_sample").show();
+			        	$("#image").val(data.IMAGE);
+			        	//alert('YOU HAVE BEEN INSERTED SUCCESSFULLY.');
+			        }else{
+			        	//alert('YOU HAVE ERRORS WHEN INSERT NEW PRODUCT.');
+			        }
+			    },
+			    error:function(data,status,er) { 
+			        console.log("error: "+data+" status: "+status+" er:"+er);
+			    }
+			});
+		});
 	
 	
+	 
 });

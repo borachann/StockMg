@@ -66,5 +66,24 @@ $(document).ready(function(){
 			    }
 			});
 		});
-	
+	 // delete customer
+	 $(document).on("click","#btnCusDelete", function(){
+		 if(confirm("តើលោកអ្នក ចង់លុបឈ្មោះអតិថិជននេះចេញវិញមែនទេ?")){
+			 $.ajax({
+				url : baseUrl + "/admin/customermg/deletecustomer/" + $(this).data("id"),
+				type: "GET",
+				success: function(data) { 
+			        if(data){
+			        	alert('លុបឈ្មោះអតិថិជនបាន ជោគជ័យ។');
+			        	location.href = baseUrl + "/admin/customermg";
+			        }else{
+			        	alert('លុបឈ្មោះអតិថិជនមិនបាន ជោគជ័យ។');
+			        }
+			    },
+			    error:function(data,status,er) { 
+			        console.log("error: "+data+" status: "+status+" er:"+er);
+			    }
+			 });
+		 }
+	 });
 });
