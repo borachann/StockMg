@@ -45,6 +45,15 @@ public class CustomerController {
 		
 	}
 	
+	// get all customer for set auto complete
+	@RequestMapping(value="/getCustomerSetAuto")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> getCustomerSetAuto(){
+		Map<String, Object> map = new HashMap<>();
+		map.put("customerAuto", customerService.getCustomer(null, "", false));
+		return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
+	}
+	
 	// save customer
 	@RequestMapping(value="/savecustomer", method = RequestMethod.POST)
 	@ResponseBody

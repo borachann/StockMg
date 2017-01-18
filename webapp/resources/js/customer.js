@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	url =  "/admin/customermg/getAllCustomer";
 	col = 5;
-	
+	var isAdded = false
 	$("#sideBarCustomer").addClass("active");
 	
 	// List All Category
@@ -11,6 +11,12 @@ $(document).ready(function(){
 	$(document).on("click","#btnCusAdd", function(){
 		if($("#cusName").val() == ""){
 			alert("សូមបំពេញ ឈ្មោះអតិថិជន។");
+			return;
+		}
+		
+		if(checkCustomerExsit($("#cusName").val())){
+			alert("ឈ្មោះអតិថិជន មានរួចហើយ។");
+			$("#cusName").focus();
 			return;
 		}
 		var json = {
@@ -31,12 +37,12 @@ $(document).ready(function(){
             success: function(data) {
             	if(data){
             		alert("ឈ្មោះអតិថិជនថ្មី បានរក្សាទុកជោគជ័យ។");
+            		isAdded = true;
             		$("#frmAddCustomer").find("input:text").val("");
             	}
             	else{
             		alert("ឈ្មោះអតិថិជនថ្មី មិនបានរក្សាទុក។ សូមព្យាយមម្តងទៀត។");
             	}
-            		
             },
             error : function(data, status, err){
             	console.log("data: " + data + " status: " + "error: " + err );
@@ -86,4 +92,34 @@ $(document).ready(function(){
 			 });
 		 }
 	 });
+	 
+	 // when close pop up
+	 $('#form_add').on('hidden.bs.modal', function(event) {
+		 			if(isAdded){
+						location.href = baseUrl + "/admin/customermg";
+						isAdded = false;
+		 			}
+				})
+	 
+	 // check if data exist
+	 function checkCustomerExsit(str){
+		 var isExist = false;
+		 $.ajax({
+			url: baseUrl + "/admin/customermg/getCustomerSetAuto",
+			type: "GET",
+			async : false,
+			success: function(data) { console.log(data);
+		        	for(i=0; i<data.customerAuto.length; i++){
+		        		if(data.customerAuto[i].cusname == str){
+		        			isExist = true;
+		        			break;
+		        		}
+		        	}
+		    },
+		    error:function(data,status,er) { 
+		        console.log("error: "+data+" status: "+status+" er:"+er);
+		    }
+		 });
+		 return isExist;
+	 }
 });
