@@ -2,17 +2,18 @@ package com.rean.spring.hibernate.entities;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name="expense_detail")
 public class ExpenseDetail {
 
 	@Id
@@ -24,24 +25,18 @@ public class ExpenseDetail {
 	private BigDecimal expQty;
 	private String descrition;
 	private BigDecimal unitPrice;
+	private Boolean currentcy;
 	
-	@OneToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="expId")
 	private Expense expense;
 	
-	public int getExpDetId() {
-		return expDetId;
-	}
 	public Expense getExpense() {
 		return expense;
 	}
 	public void setExpense(Expense expense) {
 		this.expense = expense;
 	}
-	public void setExpDetId(int expDetId) {
-		this.expDetId = expDetId;
-	}
-
 	public BigDecimal getExpQty() {
 		return expQty;
 	}
@@ -59,6 +54,18 @@ public class ExpenseDetail {
 	}
 	public void setUnitPrice(BigDecimal unitPrice) {
 		this.unitPrice = unitPrice;
+	}
+	public int getExpDetId() {
+		return expDetId;
+	}
+	public void setExpDetId(int expDetId) {
+		this.expDetId = expDetId;
+	}
+	public Boolean getCurrentcy() {
+		return currentcy;
+	}
+	public void setCurrentcy(Boolean currentcy) {
+		this.currentcy = currentcy;
 	}
 	
 	

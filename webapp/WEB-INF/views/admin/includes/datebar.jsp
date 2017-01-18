@@ -9,7 +9,7 @@
              <img style="width: 20px; height: 20px;" id="imgEDate" src="${pageContext.request.contextPath}/resources/img/ico_calendar.png">
          </div>
 		 <div class="col-md-2 pull-right" style="text-align: right;">
-            <button class="btn btn-success pull-right" id="popUpAddNew">នាំទំនិញចូល</button>
+            <button class="btn btn-success pull-right" id="popUpAddNew">បង្កើតថ្មី</button>
         </div>
 	</div>
 <br>

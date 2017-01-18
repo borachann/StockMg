@@ -1,14 +1,18 @@
 package com.rean.spring.hibernate.entities;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -25,13 +29,17 @@ public class Expense {
 	@Column(name="description")
 	private String description;	
 	private Date expDate;
-	@OneToOne(mappedBy="expense", cascade = CascadeType.ALL)
-	private ExpenseDetail expenseDetail;
+	private BigDecimal totalAmount;
+	private BigDecimal expRate;
 	
-	public ExpenseDetail getExpenseDetail() {
+	@OneToMany(mappedBy="expense", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private Set<ExpenseDetail> expenseDetail = new HashSet<ExpenseDetail>();
+	
+	
+	public Set<ExpenseDetail> getExpenseDetail() {
 		return expenseDetail;
 	}
-	public void setExpenseDetail(ExpenseDetail expenseDetail) {
+	public void setExpenseDetail(Set<ExpenseDetail> expenseDetail) {
 		this.expenseDetail = expenseDetail;
 	}
 	public int getExpId() {
@@ -51,6 +59,18 @@ public class Expense {
 	}
 	public void setExpDate(Date expDate) {
 		this.expDate = expDate;
+	}
+	public BigDecimal getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(BigDecimal totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+	public BigDecimal getExpRate() {
+		return expRate;
+	}
+	public void setExpRate(BigDecimal expRate) {
+		this.expRate = expRate;
 	}
 	
 }

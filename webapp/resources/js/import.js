@@ -57,7 +57,7 @@ $(document).ready(function(){
 		else{
 			_moneyInRiel = Number(_moneyInRiel) + Number(subTotal);
 			$("#totalAmountIndollar").val(numberWithCommas((_moneyInRiel / _globalRate).toFixed(2)));
-			$("#totalAmountInreil").val(numberWithCommas(_moneyInRiel));
+			$("#totalAmountInreil").val(numberWithCommas(_moneyInRiel.toFixed(0)));
 		}
 		
 		$("#frmAdd").find("input:text").val('');
