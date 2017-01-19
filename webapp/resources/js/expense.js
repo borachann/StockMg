@@ -51,12 +51,12 @@ $(document).ready(function(){
 		
 		if($("#currentcy").val() == "true"){
 			_moneyInDollar = Number(_moneyInDollar) + Number(subTotal);
-			$("#totalAmountIndollar").val(numberWithCommas(_moneyInDollar.toFixed(2)));
+			$("#totalAmountIndollar").val(numberWithCommas(_moneyInDollar.toFixed(3)));
 			$("#totalAmountInreil").val(numberWithCommas(_moneyInDollar * _globalRate));
 		}
 		else{
 			_moneyInRiel = Number(_moneyInRiel) + Number(subTotal);
-			$("#totalAmountIndollar").val(numberWithCommas((_moneyInRiel / _globalRate).toFixed(2)));
+			$("#totalAmountIndollar").val(numberWithCommas((_moneyInRiel / _globalRate).toFixed(3)));
 			$("#totalAmountInreil").val(numberWithCommas(_moneyInRiel));
 		}
 		
@@ -79,7 +79,7 @@ $(document).ready(function(){
 		_tempmoney = removeCommar($(this).closest("tr").children().eq(4).find("span:first-child").text()); // get the sub total
 		if(lblcurrency == "ដុល្លារ"){
 			$("#currentcy option[value='true']").prop("selected", "selected");
-			_oldSubTotal = Number(removeCommar($("#totalAmountIndollar").val())) - Number(_tempmoney);
+			_oldSubTotal = (Number(removeCommar($("#totalAmountIndollar").val())) - Number(_tempmoney)).toFixed(3);
 		}
 		else{
 			$("#currentcy option[value='false']").prop("selected", "selected");
@@ -108,14 +108,14 @@ $(document).ready(function(){
 		}
 		alert("_oldSubTotal in update mode1: " + _oldSubTotal);
 		
-		if($("#currentcy").val() == "true"){
 			totalMoney = Number(_oldSubTotal + Number(($("#costprice").val() * $("#proqty").val())));
-			$("#totalAmountIndollar").val(numberWithCommas(totalMoney.toFixed(2)));
+		if($("#currentcy").val() == "true"){
+			$("#totalAmountIndollar").val(numberWithCommas(totalMoney.toFixed(3)));
 			$("#totalAmountInreil").val(numberWithCommas(totalMoney * _globalRate));
 		}
 		else{
-			totalMoney = Number(removeCommar($("#totalAmountInreil").val())) - Number(_oldSubTotal) + Number(($("#costprice").val() * $("#proqty").val()));
-			$("#totalAmountIndollar").val(numberWithCommas((totalMoney / _globalRate).toFixed(2)));
+			//totalMoney = Number(removeCommar($("#totalAmountInreil").val())) - Number(_oldSubTotal) + Number(($("#costprice").val() * $("#proqty").val()));
+			$("#totalAmountIndollar").val(numberWithCommas((totalMoney / _globalRate).toFixed(3)));
 			$("#totalAmountInreil").val(numberWithCommas(totalMoney.toFixed(0)));
 		}
 		$("#frmAdd").find("input:text").val('');
