@@ -70,21 +70,22 @@ $(document).ready(function(){
 	$(document).on("click","#btnedit", function(){
 		_thisRow = $(this).closest("tr");
 		var lblcurrency;
+		lblcurrency = $(this).closest("tr").children().eq(4).find("span:last-child").text(); // get the currency type
+		$("#editcurrency").val(lblcurrency);
 		$("#proname").val($(this).closest("tr").children().eq(1).text());
 		$("#proqty").val(removeCommar($(this).closest("tr").children().eq(2).text()));
 		$("#costprice").val(removeCommar($(this).closest("tr").children().eq(3).find("span:first-child").text()));
 		
-		lblcurrency = $(this).closest("tr").children().eq(4).find("span:last-child").text();
-		_tempmoney = removeCommar($(this).closest("tr").children().eq(4).find("span:first-child").text()); 
+		_tempmoney = removeCommar($(this).closest("tr").children().eq(4).find("span:first-child").text()); // get the sub total
 		if(lblcurrency == "ដុល្លារ"){
-			$("#currentcy option[value='true']").attr("selected", "selected");
-			_oldSubTotal = Number($("#totalAmountIndollar").val()) - Number(_tempmoney);
+			$("#currentcy option[value='true']").prop("selected", "selected");
+			_oldSubTotal = Number(removeCommar($("#totalAmountIndollar").val())) - Number(_tempmoney);
 		}
 		else{
-			$("#currentcy option[value='false']").attr("selected", "selected");
-			_oldSubTotal = Number($("#totalAmountInreil").val()) - Number(_tempmoney);
+			$("#currentcy option[value='false']").prop("selected", "selected");
+			_oldSubTotal = Number(removeCommar($("#totalAmountInreil").val())) - Number(_tempmoney);
 		}
-		
+		alert("_oldSubTotal in edit mode: " + _oldSubTotal);
 		$("#btnadd").attr("id","btnaddupdate");
 	});
 	
@@ -97,6 +98,15 @@ $(document).ready(function(){
 		_thisRow.children().eq(2).html(numberWithCommas($("#proqty").val()));
 		_thisRow.children().eq(3).html("<span>" + numberWithCommas($("#costprice").val()) + "</span><span class='pull-right'>"+ $("#currentcy option:selected").text() + "</span>");
 		_thisRow.children().eq(4).html("<span>" + numberWithCommas(($("#costprice").val() * $("#proqty").val()).toFixed(2)) + "</span><span class='pull-right'>"+ $("#currentcy option:selected").text() + "</span>");
+		
+		if($("#editcurrency").val() != $("#currentcy option:selected").text()){
+			if($("#editcurrency").val() == "រៀល")
+				_oldSubTotal = Number(_oldSubTotal) / _globalRate ;
+			else
+				_oldSubTotal = Number(_oldSubTotal) * _globalRate ;
+			alert("_oldSubTotal in update mode: " + _oldSubTotal);
+		}
+		alert("_oldSubTotal in update mode1: " + _oldSubTotal);
 		
 		if($("#currentcy").val() == "true"){
 			totalMoney = Number(_oldSubTotal + Number(($("#costprice").val() * $("#proqty").val())));
