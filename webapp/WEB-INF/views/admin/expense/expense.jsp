@@ -86,10 +86,10 @@
    	<tr>
 		<td class="hide">{{= expid}}</td>
 		<td style="width : 5%;">{{= order}}</td>
-		<td class="tdhover" style="width : 40%;" id="tdimpdate">{{= impdate}}</td>
-		<td style="width : 15%;"><span>{{= impamount}}</span><span class='pull-right'>ដុល្លារ</span></td>
+		<td class="tdhover" style="width : 40%;" id="tdimpdate">{{= expdate}}</td>
+		<td style="width : 15%;"><span>{{= totalamount}}</span><span class='pull-right'>ដុល្លារ</span></td>
 		<td class="text-center">
-			<a class="on-default edit-row" href="${baseUrl}/admin/importmg/showimport/{{= expid}}" id="btnUpdate" data-id="{{= expid}}"><i class="fa fa-pencil"></i></a>
+			<a class="on-default edit-row" href="${baseUrl}/admin/expensemg/showexpense/{{= expid}}" id="btnUpdate" data-id="{{= expid}}"><i class="fa fa-pencil"></i></a>
 		</td>
 	</tr> 
 </script>
@@ -98,8 +98,8 @@
 <script id="tblListDetail" type="text/x-jquery-tmpl">
    	<tr>
 		<td style="width : 5%;">{{= order}}</td>
-		<td>{{= proname}}</td>
-		<td style="width : 15%;"><span>{{= proqty}}<span class='pull-right'>{{= unitname}}</span></td>
+		<td>{{= descrition}}</td>
+		<td style="width : 15%;">{{= expqty}}</td>
 		<td style="width : 15%;"><span>{{= unitprice}}</span><span class='pull-right'>{{if currentcy}}ដុល្លារ{{else}}រៀល{{/if}}</span></td>
 		<td style="width : 20%;"><span>{{= total_amount}}</span><span class='pull-right'>{{if currentcy}}ដុល្លារ{{else}}រៀល{{/if}}</span></td>
 	</tr> 

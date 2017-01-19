@@ -1,21 +1,17 @@
 $(document).ready(function(){
 	$("#sideBarExpense").addClass("active");
 
-	url = "/admin/expensemg/getExpense";
-	col = 4;
 	// get global rate
 	getGlobalRate();
+	
+	//get import detail 
+	getImportDetail();
 	
 	var _thisRow;
 	var _globalRate;
 	var _tempmoney;
 	var _oldSubTotal;
 	
-	// set calendar
-	setCalendar();
-	
-	// get import products
-	getAllCurrentObject(1);
 	
 	// add import list to temporary 
 	$(document).on("click","#btnadd", function(){
@@ -25,7 +21,7 @@ $(document).ready(function(){
 		var _currentcyType = $("#currentcy option:selected").text();
 		if(validationInput()) return;
 		
-		$("#tbllistimport tr").each(function(){
+		$("#tblexpensedetail tr").each(function(){
 			if($(this).find("td").eq(1).text() == $("#proname").val()){
 				alert("អ្នកបានបញ្ចូល ឈ្មោះទំនិញនេះម្តងរូចហើយ។");
 				$("#proname").focus();
@@ -38,7 +34,7 @@ $(document).ready(function(){
 		var st = "";
 		var subTotal = $("#costprice").val() * $("#proqty").val();
 		var totalMoney;
-		st += "<tr><td>" + ($("#tbllistimport tr").length + 1) +"</td>"; 
+		st += "<tr><td>" + ($("#tblexpensedetail tr").length + 1) +"</td>"; 
 		st += "<td>" + $("#proname").val() +"</td>";
 		st += "<td>" + numberWithCommas($("#proqty").val()) + "</td>";
 		st += "<td>" + "<span>" + numberWithCommas($("#costprice").val()) + "</span><span class='pull-right'>"+ _currentcyType + "</span>" +"</td>";
@@ -63,7 +59,7 @@ $(document).ready(function(){
 		$("#frmAdd").find("input:text").val('');
 		$("#frmAdd").find("input:hidden").val('');
 				
-		$("#tbllistimport").append(st);
+		$("#tblexpensedetail").append(st);
 	});
 	
 	// edit import product
@@ -195,41 +191,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	//get import detail 
-	$(document).on("click","#tdimpdate",function(){
-		var expId = $(this).parent().children().eq(0).text();
-		var json = {"expId" : expId};
-		$.ajax({
-			url: baseUrl + "/admin/expensemg/getexpensedetail",
-			type: "GET",
-			data: json,
-			beforeSend: function(xhr) {
-		            xhr.setRequestHeader("Accept", "application/json");
-		            xhr.setRequestHeader("Content-Type", "application/json");
-	        },
-	        success: function(data){console.log(data);
-	        	for(i = 0; i< data.expensedetail.length; i++){
-	        		data.expensedetail[i]["order"] = i + 1;
-	        		data.expensedetail[i]["expqty"] = numberWithCommas(data.expensedetail[i]["expqty"]);
-	        		data.expensedetail[i]["unitprice"] = numberWithCommas(data.expensedetail[i]["unitprice"]);
-	        		data.expensedetail[i]["total_amount"] = numberWithCommas(data.expensedetail[i]["total_amount"]);
-	        	}
-	        	$("#tblimportdetail").html("");
-	        	$("#tblListDetail").tmpl(data.expensedetail).appendTo("#tblexpensedetail");
-	        	$("#totalAmountDetailIndollar").val(numberWithCommas(data.expensedetail[0].expamount));
-	        	$("#totalAmountDetailInreil").val(numberWithCommas((data.expensedetail[0].expamount * data.expensedetail[0].exprate).toFixed(0)));
-	        	$("#impDetailRate").val(numberWithCommas(data.expensedetail[0].exprate));
-	        	
-	        },
-			error:function(data, status,er){
-				console.log("error: " + data + "status: " + status + "er: ");
-			}
-		});
-		
-		$('#form_detail').modal({
-			"backdrop" : "static"
-		});
-	});
+	
 	
 	// clear input text
 	$(document).on("click","#canceladd", function(){
@@ -238,23 +200,7 @@ $(document).ready(function(){
 		$("#btnaddupdate").attr("id","btnadd");
 	});
 	
-	// open popup for set auto complete
-	$("#popUpAddNew").click(function(){
-		_globalRate = $("#globalRate").val();
-		$("#impRate").val(numberWithCommas(_globalRate));
-	});
 	
-	// set start date focuse
-	$(document).on("click", "#imgSDate", function(){
-		$("#sDate").focus();
-	});
-	
-	// set end date focuse
-	$(document).on("click", "#mgEDate", function(){
-		$("#eDate").focus();
-	});
-	
-	 
 	// validation not empty data
 	function validationInput() {
 		if($("#proname").val() == ""){
@@ -276,30 +222,39 @@ $(document).ready(function(){
 		return false;
 	}
 	
-	// set Calendar
-	function setCalendar(){
-		$("#sDate").datepicker({
-			setDate: new Date(),
-			changeMonth: true,
-			changeYear: true,
-			dateFormat: "yy-mm-dd",
-			onClose: function( selectedDate ) {
-				$("#eDate").datepicker("option", "minDate", selectedDate);
-				getAllCurrentObject(1);
-	      }
+	//get import detail 
+	function getImportDetail(){
+		var expId = $("#editExpId").val();
+		var json = {"expId" : expId};
+		$.ajax({
+			url: baseUrl + "/admin/expensemg/getexpensedetail",
+			type: "GET",
+			data: json,
+			beforeSend: function(xhr) {
+		            xhr.setRequestHeader("Accept", "application/json");
+		            xhr.setRequestHeader("Content-Type", "application/json");
+	        },
+	        success: function(data){console.log(data);
+	        	for(i = 0; i< data.expensedetail.length; i++){
+	        		data.expensedetail[i]["order"] = i + 1;
+	        		data.expensedetail[i]["expqty"] = numberWithCommas(data.expensedetail[i]["expqty"]);
+	        		data.expensedetail[i]["unitprice"] = numberWithCommas(data.expensedetail[i]["unitprice"]);
+	        		data.expensedetail[i]["total_amount"] = numberWithCommas(data.expensedetail[i]["total_amount"]);
+	        	}
+	        	$("#tblexpensedetail").html("");
+	        	$("#tblListDetail").tmpl(data.expensedetail).appendTo("#tblexpensedetail");
+	        	$("#totalAmountIndollar").val(numberWithCommas(data.expensedetail[0].expamount));
+	        	$("#totalAmountInreil").val(numberWithCommas((data.expensedetail[0].expamount * data.expensedetail[0].exprate).toFixed(0)));
+	        	$("#impRate").val(numberWithCommas(data.expensedetail[0].exprate));
+	        	
+	        },
+			error:function(data, status,er){
+				console.log("error: " + data + "status: " + status + "er: ");
+			}
 		});
-		$("#eDate").datepicker({
-			setDate: new Date(),
-			changeMonth: true,
-			changeYear: true,
-			dateFormat: "yy-mm-dd",
-			onClose: function( selectedDate ) {
-				$("#sDate").datepicker("option", "maxDate", selectedDate);
-				getAllCurrentObject(1);
-	      }
+		
+		$('#form_detail').modal({
+			"backdrop" : "static"
 		});
-	$("#sDate").datepicker('setDate', moment().subtract(7, 'days').format('YYYY-MM-DD'));
-	$("#eDate").datepicker('setDate', moment().format('YYYY-MM-DD'));
 	}
-	
 });

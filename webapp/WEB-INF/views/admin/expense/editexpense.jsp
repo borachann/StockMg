@@ -2,9 +2,9 @@
 <%@ include file="../includes/header.jsp" %>
 <%@ include file="../includes/sidebar.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	<h3 class="page-header">កែប្រែ ទំនិញនាំចូល</h3>
+	<h3 class="page-header">កែប្រែ ការចំនាយ</h3>
 	
-<input type="hidden" value="${impId}" id="editImpId" >
+<input type="hidden" value="${expId}" id="editExpId" >
 
 				<div class=" form">
 					<form class="cmxform form-horizontal tasi-form" id="frmAdd"	method="POST" action="#" enctype="multipart/form-data">
@@ -12,24 +12,26 @@
 							<span for="proname" class="control-label col-md-2">ឈ្មោះទំនិញ *</span>
 							<div class="col-md-10">
 								<input class="form-control" id="proname" name="proname" type="text" required="required">
-								<input class="form-control" id="proid" name="proid" type="hidden" required="required">
-								<input class="form-control" id="unitQty" name="unitQty" type="hidden" required="required">
-								<input class="form-control" id="unitname" type="hidden" required="required">
 							</div>
 						</div>
 						<div class="form-group ">
 							<span for="proqty" class="control-label col-md-2">ចំនួន *</span>
-							<div class="col-md-8">
+							<div class="col-md-10">
 								<input class="form-control numOnly" id="proqty" name="proqty" type="text" required="required">
 							</div>
-							<span id="lblunitname" class="control-label col-md-2" style="text-align:left"></span>
 						</div>
 						<div class="form-group ">
-							<span for="costprice" class="control-label col-md-2">តំលៃដើម *</span>
+							<span for="costprice" class="control-label col-md-2">តំលៃ *</span>
 							<div class="col-md-8">
 								<input class="form-control numOnly" id="costprice" name="costprice" type="text" required="required">
 							</div>
-							<span id="lblcurrency" class="control-label col-md-2" style="text-align:left"></span>
+							<span class="col-md-2" style="text-align:left">
+								<select class="form-control" id="currentcy">
+							        <option value="true">ដុល្លារ</option>
+							        <option value="false">រៀល</option>
+						      	</select>
+							</span>
+							<input type="hidden" id="editcurrency">
 						</div>
 						<div class="form-group">
 							<div class="col-md-offset-2 col-md-10 text-right">
@@ -52,7 +54,7 @@
 										<th style="text-align: center;">កែប្រែ</th>
 									</tr>
 								</thead>
-								<tbody id="tbllistimport">
+								<tbody id="tblexpensedetail">
 
 								</tbody>
 							</table>
@@ -92,20 +94,19 @@
 			
 <script id="tblListDetail" type="text/x-jquery-tmpl">
    	<tr>
-		<td class="hide">{{= proid}}</td>
+		<td class="hide">{{= expdetid}}</td>
 		<td style="width : 5%;">{{= order}}</td>
-		<td>{{= proname}}</td>
-		<td style="width : 15%;"><span>{{= proqty}}</span><span class='pull-right'>{{= unitname}}</span></td>
+		<td>{{= descrition}}</td>
+		<td style="width : 15%;">{{= expqty}}</td>
 		<td style="width : 15%;"><span>{{= unitprice}}</span><span class='pull-right'>{{if currentcy}}ដុល្លារ{{else}}រៀល{{/if}}</span></td>
 		<td style="width : 20%;"><span>{{= total_amount}}</span><span class='pull-right'>{{if currentcy}}ដុល្លារ{{else}}រៀល{{/if}}</span></td>
 		<td class="text-center">
-			<a class="on-default edit-row" href='javascript:;' id='btnedit' data-id="{{= impid}}"><i class="fa fa-pencil"></i></a>
-			| <a class="on-default edit-row" href="javascript:void(0)" id="btndelete" data-id="{{= impid}}"><i class="fa fa-trash "></i></a>
+			<a class="on-default edit-row" href='javascript:;' id='btnedit' data-id="{{= expid}}"><i class="fa fa-pencil"></i></a>
+			| <a class="on-default edit-row" href="javascript:void(0)" id="btndelete" data-id="{{= expid}}"><i class="fa fa-trash "></i></a>
 		</td>
-		<td class="hide">{{= unitqty}}</td>
 	</tr> 
 </script>			
 	
 
-<script src="${baseUrl}/resources/js/importedit.js?<%=_sLocalTime%>"></script>
+<script src="${baseUrl}/resources/js/expenseedit.js?<%=_sLocalTime%>"></script>
 <%@ include file="../includes/footer.jsp" %>
