@@ -38,6 +38,9 @@
 	<script src="${pageContext.request.contextPath}/resources/js/lib/xregexp-all.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/numeral.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/datepicker.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/lib/grid.custom.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/lib/jgrid-1.4.1-min-utf8.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/lib/table.paging.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/include.js?<%=_sLocalTime%>"></script>
 	<title>Dashboard Admin</title>
 </head>

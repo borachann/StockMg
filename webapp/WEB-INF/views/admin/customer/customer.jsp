@@ -20,6 +20,7 @@
             </table>
           </div>
 <%@ include file="../includes/pagination.jsp" %>	
+<button type="button" class="btn btn-success" id="downloadExcel">Download</button>
 <%@ include file="addcustomer.jsp" %>
 <script id="tblListTem" type="text/x-jquery-tmpl">
    	<tr>
@@ -37,4 +38,5 @@
 </script>
 
 <script src="${baseUrl}/resources/js/customer.js?<%=_sLocalTime%>"></script>	
+<%-- <script src="${baseUrl}/resources/js/downloadExcel.js?<%=_sLocalTime%>"></script> --%>
 <%@ include file="../includes/footer.jsp" %>
