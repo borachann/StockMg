@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <ul class="nav nav-sidebar" id="leftSideBar">
-	<li id="sideBarDashBoard"><a href="${baseUrl}/">ផ្ទាំងគ្រប់គ្រង់ <span class="sr-only">(current)</span></a></li>
+	<li id="sideBarDashBoard"><a href="${baseUrl}/admin/dashboard">ផ្ទាំងគ្រប់គ្រង់ <span class="sr-only">(current)</span></a></li>
 	<li id="sideBarProduct"><a href="${baseUrl}/admin/productmg">គ្រប់គ្រង់ ទំនិញ</a></li>
 	<li id="sideBarCategory"><a href="${baseUrl}/admin/categorymg">ប្រភេទ ទំនិញ</a></li>
 	<li id="sideBarUnit"><a href="${baseUrl}/admin/unitmg">ប្រភេទ ឯកតា</a></li>

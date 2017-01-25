@@ -20,7 +20,7 @@ public class DashboardController {
 	@Autowired
 	private DashboardService dashboardService;
 
-	@RequestMapping(value="/")
+	@RequestMapping(value="admin/dashboard")
 	public String homeAdmin(){
 		
 		return "admin/dashboard/dashboard";
