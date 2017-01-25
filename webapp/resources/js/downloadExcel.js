@@ -11,7 +11,7 @@ $(document).ready(function(){
 	
 	$(document).on("click","#downloadExcel", function(){
 		
-	});
+	
 	
 	var headerName = [];
 	var headerId = [];
@@ -157,4 +157,5 @@ $(document).ready(function(){
 		
 	$("#_jexGridDownloadForm").find("#json").val( encodeURI(JSON.stringify(result)) );
 	$("#_jexGridDownloadForm").submit();
+});
 });

@@ -1,18 +1,14 @@
 $(document).ready(function(){
 	$("#sideBarExpense").addClass("active");
 
-	// get global rate
-	getGlobalRate();
-	
 	//get import detail 
 	getImportDetail();
 	
 	var _thisRow;
-	var _globalRate;
 	var _tempmoney;
 	var _oldSubTotal;
-	
-	
+	var _globalRate;
+
 	// add import list to temporary 
 	$(document).on("click","#btnadd", function(){
 		var _isExist = false;
@@ -81,7 +77,6 @@ $(document).ready(function(){
 			$("#currentcy option[value='false']").prop("selected", "selected");
 			_oldSubTotal = Number(removeCommar($("#totalAmountInreil").val())) - Number(_tempmoney);
 		}
-		alert("_oldSubTotal in edit mode: " + _oldSubTotal);
 		$("#btnadd").attr("id","btnaddupdate");
 	});
 	
@@ -93,16 +88,19 @@ $(document).ready(function(){
 		_thisRow.children().eq(1).html($("#proname").val());
 		_thisRow.children().eq(2).html(numberWithCommas($("#proqty").val()));
 		_thisRow.children().eq(3).html("<span>" + numberWithCommas($("#costprice").val()) + "</span><span class='pull-right'>"+ $("#currentcy option:selected").text() + "</span>");
-		_thisRow.children().eq(4).html("<span>" + numberWithCommas(($("#costprice").val() * $("#proqty").val()).toFixed(2)) + "</span><span class='pull-right'>"+ $("#currentcy option:selected").text() + "</span>");
+		if($("#currentcy").val() == "រៀល")
+			_thisRow.children().eq(4).html("<span>" + numberWithCommas(($("#costprice").val() * $("#proqty").val()).toFixed(0)) + "</span><span class='pull-right'>"+ $("#currentcy option:selected").text() + "</span>");
+		else
+			_thisRow.children().eq(4).html("<span>" + numberWithCommas(($("#costprice").val() * $("#proqty").val()).toFixed(2)) + "</span><span class='pull-right'>"+ $("#currentcy option:selected").text() + "</span>");
 		
 		if($("#editcurrency").val() != $("#currentcy option:selected").text()){
-			if($("#editcurrency").val() == "រៀល")
+			if($("#editcurrency").val() == "រៀល"){
 				_oldSubTotal = Number(_oldSubTotal) / _globalRate ;
-			else
+			}
+			else{
 				_oldSubTotal = Number(_oldSubTotal) * _globalRate ;
-			alert("_oldSubTotal in update mode: " + _oldSubTotal);
+			}
 		}
-		alert("_oldSubTotal in update mode1: " + _oldSubTotal);
 		
 			totalMoney = Number(_oldSubTotal + Number(($("#costprice").val() * $("#proqty").val())));
 		if($("#currentcy").val() == "true"){
@@ -126,7 +124,7 @@ $(document).ready(function(){
 				var totalAmountIndollar = Number(removeCommar($("#totalAmountIndollar").val())) - Number(removeCommar($(this).closest("tr").children().eq(4).find("span:first-child").text()));
 				
 				$("#totalAmountIndollar").val(numberWithCommas(totalAmountIndollar.toFixed(2)));
-				$("#totalAmountInreil").val((totalAmountIndollar * removeCommar($("#impRate").val())).toFixed(0));
+				$("#totalAmountInreil").val(numberWithCommas((totalAmountIndollar * removeCommar($("#impRate").val())).toFixed(0)));
 			}else{
 				var totalAmountInreil = Number(removeCommar($("#totalAmountInreil").val())) - Number(removeCommar($(this).closest("tr").children().eq(4).find("span:first-child").text()));
 				$("#totalAmountIndollar").val(numberWithCommas((totalAmountInreil / removeCommar($("#impRate").val())).toFixed(2)));
@@ -139,24 +137,21 @@ $(document).ready(function(){
 	// cancel import list
 	$(document).on("click","#cencelBtn", function(){
 		if($("#tbllistimport tr").length != 0){
-			if(confirm("លោកអ្នក ពិតជាចង់លុបចោលនៃការនាំទំនិញនេះ?")){
-				$("#tbllistimport").html("");
-				$('#form_add').modal('hide');
+			if(confirm("លោកអ្នក ពិតជាចង់បោះបង់នៃការចំនាយនេះ?")){
+				location.href = baseUrl + "/admin/expensemg";
 			}
-		}else{
-			$('#form_add').modal('hide');
 		}
 			
 	});
 	
 	// save import 
 	$(document).on("click","#savebtn", function(){
-		if($("#tbllistimport tr").length == 0){
-			alert("លោកមិនមាន ទំនិញសំរាប់រក្សាទុកទេ");
+		if($("#tblexpensedetail tr").length == 0){
+			alert("លោកអ្នកមិនមាន ទំនិញសំរាប់រក្សាទុកទេ");
 			return;
 		}
 		var importDetail = [];
-		$("#tbllistimport tr").each(function(){
+		$("#tblexpensedetail tr").each(function(){
 			json = {
 					"expQty": removeCommar($(this).find("td").eq(2).text()),
 					"unitPrice": removeCommar($(this).find("td").eq(3).find("span:first-child").text()),
@@ -169,7 +164,7 @@ $(document).ready(function(){
 			importDetail.push(json);
 		});
 		$.ajax({
-			url: baseUrl + "/admin/expensemg/saveExpense",
+			url: baseUrl + "/admin/expensemg/updateexpense/" + $("#editExpId").val(),
 			type: "POST",
 			dataType: "JSON",
 			data: JSON.stringify(importDetail),
@@ -246,7 +241,7 @@ $(document).ready(function(){
 	        	$("#totalAmountIndollar").val(numberWithCommas(data.expensedetail[0].expamount));
 	        	$("#totalAmountInreil").val(numberWithCommas((data.expensedetail[0].expamount * data.expensedetail[0].exprate).toFixed(0)));
 	        	$("#impRate").val(numberWithCommas(data.expensedetail[0].exprate));
-	        	
+	        	_globalRate = removeCommar($("#impRate").val());
 	        },
 			error:function(data, status,er){
 				console.log("error: " + data + "status: " + status + "er: ");

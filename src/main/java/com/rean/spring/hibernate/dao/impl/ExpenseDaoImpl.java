@@ -3,11 +3,13 @@ package com.rean.spring.hibernate.dao.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
 
 import com.rean.spring.hibernate.dao.ExpenseDao;
 import com.rean.spring.hibernate.entities.Expense;
@@ -50,7 +52,29 @@ public class ExpenseDaoImpl implements ExpenseDao {
 	@Override
 	public Boolean updateExpense(List<ExpenseForm> expenseForm, int expId) {
 		// TODO Auto-generated method stub
-		return null;
+		try{
+			Query query = sessionFactory.getCurrentSession().createSQLQuery("delete from expense_detail where expid =?");
+			query.setParameter(0, expId);
+			query.executeUpdate();
+			
+			Expense expense = sessionFactory.getCurrentSession().get(Expense.class, expId);
+			expense.getExpenseDetail().clear();
+			expense.setTotalAmount(expenseForm.get(0).getTotalAmount());
+			for(int i=0; i<expenseForm.size(); i++){
+				ExpenseDetail expensedetail = new ExpenseDetail();
+				expensedetail.setDescrition(expenseForm.get(i).getProName());
+				expensedetail.setExpQty(expenseForm.get(0).getExpQty());
+				expensedetail.setUnitPrice(expenseForm.get(0).getUnitPrice());
+				expensedetail.setCurrentcy(expenseForm.get(0).getCurrentcy());
+				expense.getExpenseDetail().add(expensedetail);
+				expensedetail.setExpense(expense);
+			}
+			sessionFactory.getCurrentSession().update(expense);
+			return true;
+		}catch(Exception ex){
+			System.out.println("Error message: " + ex.getMessage());
+		}
+		return false;
 	}
 
 	@Override

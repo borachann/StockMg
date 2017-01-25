@@ -94,7 +94,6 @@
 			
 <script id="tblListDetail" type="text/x-jquery-tmpl">
    	<tr>
-		<td class="hide">{{= expdetid}}</td>
 		<td style="width : 5%;">{{= order}}</td>
 		<td>{{= descrition}}</td>
 		<td style="width : 15%;">{{= expqty}}</td>

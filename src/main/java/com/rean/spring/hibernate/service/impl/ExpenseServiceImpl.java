@@ -29,7 +29,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 	@Transactional
 	public Boolean updateExpense(List<ExpenseForm> expenseForm, int expId) {
 		// TODO Auto-generated method stub
-		return null;
+		return expenseDao.updateExpense(expenseForm, expId);
 	}
 
 	@Override

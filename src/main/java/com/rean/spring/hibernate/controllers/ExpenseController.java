@@ -71,12 +71,11 @@ public class ExpenseController {
 	}
 
 	
-	/*// update expense
-		@RequestMapping(value="/updateimport/{impId}", method = RequestMethod.POST)
+	// update expense
+		@RequestMapping(value="/updateexpense/{expId}", method = RequestMethod.POST)
 		@ResponseBody
-		public ResponseEntity<Map<String, Object>> updateImport(@RequestBody List<FormProduct> formProduct, @PathVariable("impId") int impId){
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("importproduct", importService.updateImportPro(formProduct, impId));
-			return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
-		}*/
+		public Boolean updateExpens(@RequestBody List<ExpenseForm> expenseForm, @PathVariable("expId") int expId){
+
+			return expenseService.updateExpense(expenseForm, expId);
+		}
 }
