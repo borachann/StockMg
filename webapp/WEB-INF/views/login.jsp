@@ -1,5 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
     <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+	Date dateobj = new Date();
+	String _sLocalTime = df.format(dateobj);
+%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -29,7 +40,7 @@ body {
   font-family: roboto;
 }
 
-.loginmodal-container input[type=submit] {
+.loginmodal-container input[type=submit], button {
   width: 100%;
   display: block;
   margin-bottom: 10px;
@@ -105,6 +116,9 @@ body {
   font-size: 12px;
 }
 </style>
+<script src="${pageContext.request.contextPath}/resources/js/lib/jquery-1.11.2.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/lib/jquery.form.js"></script>
+<script>var baseUrl = "${pageContext.request.contextPath}"</script>
     </head>
     <body>
         <div id="login-modal">
@@ -112,17 +126,17 @@ body {
                 <div class="loginmodal-container">
                     <h1>គ្រប់គ្រងការលក់ទំនិញ</h1>
                     <br>
-                    <form>
-                        <input type="text" name="user" placeholder="ឈ្មោះ">
-                        <input type="password" name="pass" placeholder="លេខសំងាត់">
-                        <input type="submit" name="login" class="login loginmodal-submit" value="ចូល ប្រើប្រោស់">
+                    <form method="GET" action="#">
+                        <input type="text" name="user" placeholder="ឈ្មោះ" id="user">
+                        <input type="password" name="pass" placeholder="លេខសំងាត់" id="pass">
+                        <button class="login loginmodal-submit" id="loginForm">ចូល ប្រើប្រោស់</button>
                     </form>
-                    <div class="login-help">
+                    <!-- <div class="login-help">
                         <a href="javascript:">Register</a> - <a href="javascript:">Forgot Password</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
+<script src="${pageContext.request.contextPath}/resources/js/login.js?<%=_sLocalTime%>"></script>
     </body>
-
     </html>
