@@ -9,6 +9,11 @@
 	DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
 	Date dateobj = new Date();
 	String _sLocalTime = df.format(dateobj);
+	
+	HttpSession sessionUser = request.getSession();
+	if(sessionUser.getAttribute("UserSession") == null){
+		response.sendRedirect(request.getContextPath() + "/");
+	}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,18 +61,21 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="${pageContext.request.contextPath}/">ការគ្រប់គ្រង់ ទំនិញ</a>
+				<a class="navbar-brand" href="${pageContext.request.contextPath}/admin/dashboard">ការគ្រប់គ្រង់ ទំនិញ</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
-				<!-- <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
+				<ul class="nav navbar-nav navbar-right">
+            <li><a href="${pageContext.request.contextPath}/logout">
+            		<span class="glyphicon glyphicon-log-out"></span> ចាកចេញ
+            	</a>
+            </li>
+            <!-- <li><a href="#">Settings</a></li>
             <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="#">Help</a></li> -->
           </ul>
-          <form class="navbar-form navbar-right">
+          <%-- <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
-          </form> -->
+          </form> --%>
 			</div>
 		</div>
 	</nav>

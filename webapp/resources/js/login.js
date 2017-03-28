@@ -24,7 +24,12 @@ $(document).ready(function(){
 		              xhr.setRequestHeader("Content-Type", "application/json");
 		          },
 				success: function(data) {
-					console.log(data);
+					console.log(data.allObject);
+					if(data.allObject == null){
+						
+					}else{
+						location.href = baseUrl + "/admin/dashboard";
+					}
 				},
 				error: function(data, status, er) {
 				    console.log("error: " , data + " status: " , status , " er:" , er);
