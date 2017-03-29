@@ -1,4 +1,4 @@
-package com.rean.spring.hibernate.controllers;
+package com.rean.spring.hibernate.admin.controllers;
 
 import java.math.BigDecimal;
 import java.util.HashMap;

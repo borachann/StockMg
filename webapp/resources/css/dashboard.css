@@ -117,3 +117,9 @@ a.glyphicon:hover{
 	color: #6495ED;
 	cursor: pointer;
 }
+.ellipsis{
+	white-space: nowrap; 
+    width: 80%; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}

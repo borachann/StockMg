@@ -1,4 +1,4 @@
-package com.rean.spring.hibernate.controllers;
+package com.rean.spring.hibernate.admin.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

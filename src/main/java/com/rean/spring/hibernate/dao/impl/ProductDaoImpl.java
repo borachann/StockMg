@@ -26,7 +26,7 @@ public class ProductDaoImpl implements ProductDao {
 		
 		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery("select " 
         + "pro.proId, pro.currentcy, pro.catId, pro.costPrice, pro.imgUrl, pro.proName, pro.proQty, pro.salePrice, pro.status, pro.unitId, pro.unitPrice," 
-        + " cat.catName, unit.convertTo, unit.qty, unit.unitName" 
+        + " cat.catName, unit.convertTo, unit.qty, unit.unitName, case pro.currentcy when 't' then '៛' when 'f' then '$' END as currentcyname" 
         + " from products pro left outer join Category cat on pro.catId=cat.catId left outer join unit unit on pro.unitId=unit.unitId where pro.proname like '%" + schStrName + "%' ORDER BY pro.status DESC, pro.proname");
 		if(isPagination){
 			query.setFirstResult(pagination.offset());

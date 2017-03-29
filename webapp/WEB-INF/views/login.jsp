@@ -45,6 +45,7 @@ body {
   display: block;
   margin-bottom: 10px;
   position: relative;
+  cursor : pointer;
 }
 
 .loginmodal-container input[type=text], input[type=password] {

@@ -1,14 +1,14 @@
-package com.rean.spring.hibernate.controllers;
+package com.rean.spring.hibernate.admin.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("admin/reportmg")
-public class ReportController {
+@RequestMapping("admin/debtermg")
+public class DebterController {
 
 	@RequestMapping(value="")
 	public String productAdmin(){
-		return "admin/report/report";
+		return "admin/debter/debter";
 	}
 }

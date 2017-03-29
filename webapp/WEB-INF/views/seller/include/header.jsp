@@ -32,6 +32,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui.css">
 	
 	<script>var baseUrl = "${pageContext.request.contextPath}"</script>
+	<script src="${pageContext.request.contextPath}/resources/js/lib/angular.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery-1.11.2.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery.form.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/bootstrap.min.js"></script>
@@ -61,7 +62,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="${pageContext.request.contextPath}/seller">ការលក់ ទំនិញ</a>
+				<a class="navbar-brand" href="${pageContext.request.contextPath}/admin/dashboard">ការគ្រប់គ្រង ទំនិញ</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -80,5 +81,5 @@
 		</div>
 	</nav>
 	<div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
+      <div class="row" style="margin: 0;">
+		
