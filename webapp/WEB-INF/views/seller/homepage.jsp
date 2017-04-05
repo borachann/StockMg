@@ -17,8 +17,6 @@
 				</li>
 			</c:forEach>
       </ul>
-		
-		
 	</div>
 	<div class="row placeholders">
 	

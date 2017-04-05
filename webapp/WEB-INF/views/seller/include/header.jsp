@@ -66,12 +66,12 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
+            <li><a href="#" style="top:-7px; padding-bottom: 0px;"><button type="button" class="btn btn-primary">ស្វែងរក</button></a></li>
             <li><a href="${pageContext.request.contextPath}/logout">
             		<span class="glyphicon glyphicon-log-out"></span> ចាកចេញ
             	</a>
             </li>
-            <!-- <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
+            <!--<li><a href="#">Profile</a></li>
             <li><a href="#">Help</a></li> -->
           </ul>
           <form class="navbar-form navbar-right">

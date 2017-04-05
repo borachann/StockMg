@@ -1,2 +1,3 @@
 eclipse.preferences.version=1
+encoding//src/main/java/com/rean/spring/hibernate/dao/impl/ProductDaoImpl.java=UTF-8
 encoding//webapp/WEB-INF/views/admin/includes/sidebar.jsp=UTF-8
