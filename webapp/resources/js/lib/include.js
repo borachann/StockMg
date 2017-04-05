@@ -147,3 +147,18 @@
 	function removeCommar(str){		
 		return str.replace(/,/g,"");
 	}
+
+	// fold and unfold
+	$(document).on("click","#fullscreen", function(){
+		$("#leftside").toggle();
+		if($(this).hasClass("lnb_unfold")){
+			$("#maincontain").removeClass("col-md-9 col-md-offset-3 col-sm-8 col-sm-offset-4");
+			$(this).removeClass("lnb_unfold");
+			$(this).addClass("lnb_fold");
+		}
+		else{
+			$("#maincontain").addClass("col-md-9 col-md-offset-3 col-sm-8 col-sm-offset-4");
+			$(this).removeClass("lnb_fold");
+			$(this).addClass("lnb_unfold");
+		}
+	});

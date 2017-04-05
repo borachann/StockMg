@@ -30,6 +30,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dashboard.css?<%=_sLocalTime%>">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-awesome/css/font-awesome.min.css"/>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/content.css?<%=_sLocalTime%>">
 	
 	<script>var baseUrl = "${pageContext.request.contextPath}"</script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/angular.min.js"></script>
@@ -66,7 +67,7 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-            <li><a href="#" style="top:-7px; padding-bottom: 0px;"><button type="button" class="btn btn-primary">ស្វែងរក</button></a></li>
+            <li><a href="#" style="top:-7px; padding-bottom: 0px;"><button type="button" class="btn btn-primary" id="btnsearch">ស្វែងរក</button></a></li>
             <li><a href="${pageContext.request.contextPath}/logout">
             		<span class="glyphicon glyphicon-log-out"></span> ចាកចេញ
             	</a>
@@ -75,11 +76,12 @@
             <li><a href="#">Help</a></li> -->
           </ul>
           <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="ស្វែងរក...">
+            <input type="text" class="form-control" placeholder="ស្វែងរក..." id="strPro">
           </form>
 			</div>
 		</div>
 	</nav>
 	<div class="container-fluid">
       <div class="row" style="margin: 0;">
-		
+		<div class="col-sm-4 col-md-3 sidebar" id="leftside" style="display:none;">
+		</div>

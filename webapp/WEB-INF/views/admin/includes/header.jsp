@@ -30,6 +30,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dashboard.css?<%=_sLocalTime%>">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-awesome/css/font-awesome.min.css"/>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/content.css?<%=_sLocalTime%>">
 	
 	<script>var baseUrl = "${pageContext.request.contextPath}"</script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery-1.11.2.min.js"></script>

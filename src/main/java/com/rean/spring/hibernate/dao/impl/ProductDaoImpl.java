@@ -86,4 +86,21 @@ public class ProductDaoImpl implements ProductDao {
 		
 		return sessionFactory.getCurrentSession().get(Product.class, proId);
 	}
+
+	@Override
+	public List<Product> searchProduct(String catId, String proName) {
+		// TODO Auto-generated method stub
+		String str = "";
+		if(!catId.equals("0")){
+			str = " and cat.catId = " + catId;
+		}
+		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery("select " 
+		        + "pro.proId, pro.currentcy, pro.catId, pro.costPrice, pro.imgUrl, pro.proName, pro.proQty, pro.salePrice, pro.status, pro.unitId, pro.unitPrice," 
+		        + " cat.catName, unit.convertTo, unit.qty, unit.unitName, case pro.currentcy when 'f' then '៛' when 't' then '$' END as currentcyname" 
+		        + " from products pro left outer join Category cat on pro.catId=cat.catId left outer join unit unit on pro.unitId=unit.unitId where pro.proname like '%" + proName + "%'" + str + " ORDER BY pro.status DESC, pro.proname");
+				
+				query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
+				List<Product> product = query.list(); 
+				return product;
+	}
 }

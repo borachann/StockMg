@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="include/header.jsp" %>
 
+<div class="" id="maincontain">
+<a style="z-index: 1;" href="javascript:" id="fullscreen" class="lnb_fold"></a>
 <div class="main" ng-app="">
 		
 		<ul id="myTab" class="nav nav-tabs nav-tabs-responsive" role="tablist">
-			<li role="presentation" class="active" value="">
+			<li role="presentation" class="active" value="" >
 					<a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
 						<span class="text"><i class="fa fa-home fa-lg" aria-hidden="true"></i></span>
 					 </a>
@@ -18,7 +20,7 @@
 			</c:forEach>
       </ul>
 	</div>
-	<div class="row placeholders">
+	<div class="row placeholders" id="container">
 	
 			<c:forEach items="${allProduct}" var="product">
 				<c:if test="${product.status == true }">
@@ -72,5 +74,6 @@
               <span class="text-muted">អត្រាបា្រក់</span>
             </div> --%>
      </div>
-
+</div>
+<script src="${baseUrl}/resources/js/sellerhomepage.js?<%=_sLocalTime%>"></script>
 <%@ include file="include/footer.jsp"%>

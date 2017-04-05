@@ -51,4 +51,11 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.showProduct(proId);
 	}
 
+	@Override
+	@Transactional
+	public List<Product> searchProduct(String catId, String proName) {
+		// TODO Auto-generated method stub
+		return productDao.searchProduct(catId, proName);
+	}
+
 }

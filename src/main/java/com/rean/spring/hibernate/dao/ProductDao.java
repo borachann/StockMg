@@ -12,4 +12,5 @@ public interface ProductDao {
 	public Boolean deleteProduct(int proId, Boolean status);
 	public Boolean editProduct(Product product);
 	public Product showProduct(int proId);
+	public List<Product> searchProduct(String catId, String proName);
 }
