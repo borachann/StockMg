@@ -25,7 +25,14 @@
 			<c:forEach items="${allProduct}" var="product">
 				<c:if test="${product.status == true }">
 					<div class="col-xs-6 col-sm-2 placeholder">
-						<img src="${baseUrl}/resources/img/total_stock.png" width="150" height="150" class="img-responsive imghover" alt="Generic placeholder thumbnail">
+						<c:choose>
+						    <c:when test="${product.imgurl == ''}">
+								<img src="${baseUrl}/resources/img/total_stock.png" style="width: 150px; height:150px; border:1px solid;" class="img-responsive imghover" alt="Generic placeholder thumbnail">
+						    </c:when>    
+						    <c:otherwise>
+						        <img src="${baseUrl}/resources/images/products/${product.imgurl}" style="width: 150px; height:150px !important; border:1px solid;" class="img-responsive imghover" alt="Generic placeholder thumbnail">
+						    </c:otherwise>
+						</c:choose>
 			            <div class="text-primary" id="productStock">${product.saleprice } ${product.currentcyname }</div>
 			            <div class="text-muted ellipsis"><span class="text-center">${product.proname }</span></div>
 					</div>
