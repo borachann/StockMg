@@ -1,0 +1,7 @@
+
+.lnb_fold,.lnb_unfold{display:block;position:absolute;top:0;width:11px;height:50px;font-size:0;line-height:0;background-color:#788496;background-image:url(img/ic_fold2.png);background-repeat:no-repeat;background-repeat:no-repeat;cursor:pointer;z-index:100000;overflow:hidden;}
+.lnb_fold:hover,
+.lnb_unfold:hover{background-color:#788496;}
+.lnb_fold{left:0;background-position:-2px 50%; top:50px;}
+.lnb_unfold{left:0;background-position:-17px 50%;}
+.lnb_unfold{left:-7px;}
