@@ -52,7 +52,6 @@
 </head>
 <body>
 	<c:set var="baseUrl" value="${pageContext.request.contextPath}"></c:set>
-	<input type="hidden" id="globalRate">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -75,13 +74,72 @@
             <!--<li><a href="#">Profile</a></li>
             <li><a href="#">Help</a></li> -->
           </ul>
-          <form class="navbar-form navbar-right">
+          <span class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="ស្វែងរក..." id="strPro">
-          </form>
+          </span>
 			</div>
 		</div>
 	</nav>
 	<div class="container-fluid">
       <div class="row" style="margin: 0;">
-		<div class="col-sm-4 col-md-3 sidebar" id="leftside" style="display:none;">
+		<div class="col-sm-4 col-md-3 sidebar" id="leftside" style="display:none; padding-left: 5px; padding-right: 0px;">
+			<div class="table-responsive">
+	            <table class="table table-striped">
+	              <thead>
+	                <tr>
+	                  <th class="text-center">#</th>
+	                  <th class="text-center">ឈ្មោះ</th>
+	                  <th class="text-center">ចំនួន</th>
+	                  <th class="text-center">តំលែ</th>
+	                  <th class="text-center">សរុប</th>
+	                  <th class="text-center">កែប្រែ</th>
+	                </tr>
+	              </thead>
+	              <tbody id="tblList" style="font-size: 12px;">
+	              	<tr><td colspan="6" class="text-center" id="noData">គ្មានទិន្ន័យ</td></tr>
+	              </tbody>
+	            </table><hr style="border-top:1px solid rgb(221, 221, 221);">
+	            <div class="form-horizontal" style="font-size: 12px;">
+		            <div class="form-group" style="margin-right: 0px;">
+						<span for="proQty" class="control-label col-md-6">ប្រាក់សរុប : </span>
+						<div class="col-md-6">
+							<input type="text" id="totalAmout" readonly="readonly" class=" form-control numOnly">
+						</div>
+					</div>
+					<div class="form-group" style="margin-right: 0px; margin-bottom: 5px;">
+						<span for="proQty" class="control-label col-md-3">ទទួលប្រាក់ ៛ : </span>
+						<div class="col-md-9">
+							<input type="text" id="totalAmout" class=" form-control numOnly">
+						</div>
+					</div>
+					<div class="form-group" style="margin-right: 0px; margin-bottom: 5px;">
+						<span for="proQty" class="control-label col-md-3">ទទួលប្រាក់ $ : </span>
+						<div class="col-md-9">
+							<input type="text" id="totalAmout" class=" form-control numOnly">
+						</div>
+					</div>
+					<div class="form-group" style="margin-right: 0px; margin-bottom: 5px;">
+						<span for="proQty" class="control-label col-md-3">អាប់ប្រាក់ ៛ : </span>
+						<div class="col-md-9">
+							<input type="text" id="totalAmout" readonly="readonly" class=" form-control numOnly">
+						</div>
+					</div>
+					<div class="form-group" style="margin-right: 0px; margin-bottom: 5px;">
+						<span for="proQty" class="control-label col-md-3">អាប់ប្រាក់ $ : </span>
+						<div class="col-md-9">
+							<input type="text" id="totalAmout" readonly="readonly" class=" form-control numOnly">
+						</div>
+					</div>
+					<div class="form-group" style="margin-right: 0px; margin-bottom: 5px;">
+						<span for="proQty" class="control-label col-md-3">អត្រាប្រាក់ : </span>
+						<div class="col-md-9">
+							<input type="text" id="globalRate" readonly="readonly" class=" form-control numOnly">
+						</div>
+					</div>
+					<div class="col-md-offset-6 col-md-6">
+						<button class="btn btn-success waves-effect waves-light" type="button" id="btn_add">រក្សាទុក</button>
+						<button class="btn btn-default waves-effect" type="button" id="btn_cancel_order">បោះបង់</button>
+					</div>
+				</div>
+	          </div>
 		</div>

@@ -5,3 +5,14 @@
 .lnb_fold{left:0;background-position:-2px 50%; top:50px;}
 .lnb_unfold{left:0;background-position:-17px 50%;}
 .lnb_unfold{left:-7px;}
+
+.max-ellipsis{
+	white-space: nowrap; 
+    max-width: 30px; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.fa:hover{
+	cursor: pointer;
+}

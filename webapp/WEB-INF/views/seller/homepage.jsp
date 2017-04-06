@@ -27,14 +27,14 @@
 					<div class="col-xs-6 col-sm-2 placeholder">
 						<c:choose>
 						    <c:when test="${product.imgurl == ''}">
-								<img src="${baseUrl}/resources/img/total_stock.png" style="width: 150px; height:150px; border:1px solid;" class="img-responsive imghover" alt="Generic placeholder thumbnail">
+								<img src="${baseUrl}/resources/img/total_stock.png" style="width: 150px; height:150px; border:1px solid;" class="img-responsive imghover" alt="Generic placeholder thumbnail" imgProId="${product.proid}">
 						    </c:when>    
 						    <c:otherwise>
-						        <img src="${baseUrl}/resources/images/products/${product.imgurl}" style="width: 150px; height:150px !important; border:1px solid;" class="img-responsive imghover" alt="Generic placeholder thumbnail">
+						        <img src="${baseUrl}/resources/images/products/${product.imgurl}" style="width: 150px; height:150px !important; border:1px solid;" class="img-responsive imghover" alt="Generic placeholder thumbnail" imgProId="${product.proid}">
 						    </c:otherwise>
 						</c:choose>
 			            <div class="text-primary" id="productStock">${product.saleprice } ${product.currentcyname }</div>
-			            <div class="text-muted ellipsis"><span class="text-center">${product.proname }</span></div>
+			            <div class="text-muted ellipsis"><span class="text-center" id="proName">${product.proname }</span></div>
 					</div>
 				</c:if>
 			</c:forEach>
@@ -75,5 +75,6 @@
             </div> --%>
      </div>
 </div>
+<%@ include file="popupInput.jsp" %>
 <script src="${baseUrl}/resources/js/sellerhomepage.js?<%=_sLocalTime%>"></script>
 <%@ include file="include/footer.jsp"%>
