@@ -12,16 +12,6 @@
               <span class="text-muted">ទំនិញក្នុង ស្តុក</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="${baseUrl}/resources/img/expense.png" width="150" height="150" class="img-responsive imghover" alt="Generic placeholder thumbnail">
-              <h4><b class="text-primary">30000 $</b></h4></br>
-              <span class="text-muted">ការចំនាយ</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="${baseUrl}/resources/img/debt.png" width="150" height="150" class="img-responsive imghover" alt="Generic placeholder thumbnail">
-              <h4><b class="text-primary">30000 $</b></h4></br>
-              <span class="text-muted">អ្នកជំពាក់</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
               <img src="${baseUrl}/resources/img/rate.png" width="150" height="150" class="img-responsive imghover" id="imgrate" alt="Generic placeholder thumbnail">
               <h4><b class="text-primary" id="rate"></b></h4></br>
               <input type="hidden" id="rateId">

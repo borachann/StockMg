@@ -64,7 +64,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter{
 		properties.put("hibernate.dialect","org.hibernate.dialect.PostgreSQLDialect");
 	    properties.put("hibernate.show_sql", "true");
 	    properties.put("hibernate.format_sql","true");
-	    properties.put("hibernate.hbm2ddl.auto", "update"); //how to creata auto?
+	    properties.put("hibernate.hbm2ddl.auto", "create"); //how to creata auto?
 	    return properties;
 	}
 	
